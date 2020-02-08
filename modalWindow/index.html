@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Modal window</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container-buttons">
+      <a data-mod="#mw1" class="buttons">Модальное окно 1</a>
+      <a data-mod="#mw2" class="buttons">Модальное окно 2</a>
+      <a data-mod="#mw3" class="buttons">Модальное окно 3</a>
+    </div>
+    <div class="container-window">
+      <div id="mw1" class="modal-window">
+        <h2>Модальное окно 1</h2>
+        <p>Содержимое модального окна</p>
+        <div>
+          <a title="Закрыть" class="close">Close</a>
+        </div>
+      </div>
+    </div>
+    <div class="container-window">
+      <div id="mw2" class="modal-window">
+        <h2>Модальное окно 2</h2>
+        <p>Содержимое модального окна</p>
+        <div>
+          <a href="#close" title="Закрыть" class="close">Close</a>
+        </div>
+      </div>
+    </div>
+    <div class="container-window">
+      <div id="mw3" class="modal-window">
+        <h2>Модальное окно 3</h2>
+        <p>Содержимое модального окна</p>
+        <div>
+          <a href="#close" title="Закрыть" class="close">Close</a>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

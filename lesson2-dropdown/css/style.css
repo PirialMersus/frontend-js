@@ -1,0 +1,131 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+body {
+  padding: 50px;
+}
+.dropdown {
+  position: relative;
+  margin-right: 30px;
+  display: inline-block;
+}
+.dropdown.active .drop-btn > img {
+  transform: rotate(180deg);
+}
+.dropdown.active .drop-menu {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+}
+.dropdown.active .drop-menu > ul > li {
+  position: relative;
+}
+.dropdown.active .drop-menu > ul > li.active2 > a > img {
+  transform: rotate(90deg);
+}
+.dropdown.active .drop-menu > ul > li.active2 .drop-menu-2 {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+}
+.dropdown .drop-btn {
+  display: inline-block;
+  background-color: #8e44ad;
+  padding: 12px 20px;
+  padding-right: 35px;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.dropdown .drop-btn > img {
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  top: 17px;
+  right: 15px;
+}
+.dropdown .drop-menu {
+  transition: all 0.3s ease;
+  transform: translateY(-15px);
+  opacity: 0;
+  visibility: hidden;
+  min-width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.dropdown .drop-menu > ul > li > a > span {
+  white-space: nowrap;
+}
+.dropdown .drop-menu > ul > li .drop-btn-2 {
+  display: inline-block;
+  background-color: #d67676;
+  padding: 5px 15px;
+  padding-right: 35px;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.dropdown .drop-menu > ul > li .drop-btn-2 > img {
+  transition: all 0.3s ease;
+  position: absolute;
+  width: 8px;
+  top: 10px;
+  right: 24px;
+  transform: rotate(-90deg);
+}
+.dropdown .drop-menu > ul > li .drop-menu-2 {
+  transition: all 0.3s ease;
+  transform: translateX(-15px);
+  opacity: 0;
+  visibility: hidden;
+  min-width: 100%;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.dropdown .drop-menu > ul > li:last-child > a {
+  border-bottom: none;
+}
+.dropdown .drop-menu > ul > li > a {
+  display: block;
+  padding: 5px 10px;
+  border-bottom: 1px solid #eee;
+}

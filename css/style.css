@@ -1,0 +1,101 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  font-family: "Roboto", "Montserrat","PT+Sans", "Kaushan+Script", sans-serif;
+}
+
+.links {
+  margin: 0 auto;
+  text-align: center;
+  list-style: none;
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.container {
+  width: 1200px;
+  
+  padding: 0;
+  background: burlywood;
+}
+.links-item {
+  display: inline-block;
+  font-family: 'Kaushan Script', cursive;
+  color: #333333;
+  font-size: 24px;
+  text-decoration: none;
+  margin-left: -30px;;
+  transition: all 0.2s linear;
+  
+}
+.links-odd {
+  animation: odd-appear 0.5s linear;
+}
+.links-even {
+  animation: even-appear 0.5s linear;
+}
+.links-item:hover {
+  color: black;
+  transform: scale(1.1);
+}
+
+.title {
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+  color: #333333;
+  margin-top: 100px;
+  margin-bottom: 30px;
+  transition: all 0.2s linear;
+  animation: title-appear 0.5s linear;
+}
+.title:hover {
+  color: black;
+  transform: scale(1.3);
+  font-family: 'Kaushan Script', cursive;
+}
+.links-item:hover .title {
+  color: rgb(192, 21, 21);
+}
+@keyframes title-appear {
+  0% {
+    transform: translateY(-200px);
+    color: white;
+  }
+  100% {
+    transform: translateY(0);
+    color: #333333;
+  }
+}
+@keyframes even-appear {
+  0% {
+    transform: translateX(600px);
+    color: white;
+  }
+  100% {
+    transform: translateX(0);
+    color: #333333;
+  }
+}
+@keyframes odd-appear {
+  
+  0% {
+    transform: translateX(-600px);
+    color: white;
+  }
+  100% {
+    transform: translateX(0);
+    color: #333333;
+  }
+}

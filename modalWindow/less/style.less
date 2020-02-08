@@ -1,0 +1,88 @@
+//out: ../css/style.css
+@primary: #8e44ad;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+h2 {
+  font-size: 20px;
+}
+body {
+  padding: 50px;
+}
+.container-buttons {
+  margin: 0 auto;
+  .buttons {
+    padding: 10px 20px;
+    display: inline-block;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+}
+.container-window {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .modal-window {
+    > p {
+      margin-bottom: 10px;
+    }
+    // max-width: 300px;
+    // max-height: 200px;
+    width: 100%;
+    max-width: 300px;
+    margin: 10% auto;
+    padding: 2%;
+    background: #fff;
+    border-radius: 3px;
+    > div {
+      text-align: center;
+      .close {
+        display: inline-block;
+        color: black;
+        background: #369;
+        padding: 5px 20px;
+        margin: 0 auto;
+        cursor: pointer;
+        border-radius: 3px;
+        &:hover {
+          background: #47a;
+        }
+      }
+    }
+  }
+}
