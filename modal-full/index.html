@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container-buttons">
+      <a data-mod="#mw1" class="button">Модальное 1</a>
+      <a data-mod="#mw2" class="button">Модальное 2</a>
+      <a data-mod="#mw3" class="button">Модальное 3</a>
+    </div>
+    <div id="mw1" class="container-modal-window">
+      <div data-mod="close" class="overlay"></div>
+      <div class="modal">
+        <p>Modal 1</p>
+        <a data-mod="close" class="button">Закрыть</a>
+      </div>
+    </div>
+    <div id="mw2" class="container-modal-window">
+      <div data-mod="close" class="overlay"></div>
+      <div class="modal">
+        <p>Modal 2</p>
+        <a data-mod="close" class="button">Закрыть</a>
+      </div>
+    </div>
+    <div id="mw3" class="container-modal-window">
+      <div data-mod="close" class="overlay"></div>
+      <div class="modal">
+        <p>Modal 3</p>
+        <a data-mod="close" class="button">Закрыть</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

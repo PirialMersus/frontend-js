@@ -1,11 +1,11 @@
-$('.container-buttons .buttons').click(function () {
+$('[data-mod]').click(function () {
 
     var target = $(this).attr('data-mod');
     console.log(target);
+    if (target == 'close') {
+        $('.container-window').removeClass('active');
+    } else {
+        $('.container-window' + target).addClass('active');
+    }
 
-    $('.container-window .modal-window' + target).parent().addClass('active');
-
-})
-$('.container-window .modal-window .close').click(function () {
-    $('.container-window').removeClass('active');
-})
+});

@@ -1,0 +1,97 @@
+// out: ../css/style.css
+@primary: #8e44ad;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+
+body {
+  padding: 100px;
+}
+.button {
+  display: inline-block; //??????????????????????????
+  background-color: @primary;
+  cursor: pointer;
+  font-size: 20px;
+  border: 1px solid green;
+  color: #fff;
+  border-radius: 7px;
+  padding: 12px 20px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.container-modal-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease; //???????????????????????
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    .modal {
+      transform: none;
+    }
+  }
+  .overlay {
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  .modal {
+    text-align: center;
+    p {
+      padding-top: 20px;
+      font-size: 20px;
+      margin-bottom: 20px;
+      line-height: 170%; //?????????????????
+    }
+
+    height: 150px;
+    width: 300px;
+    position: relative; //???????????????????????
+    transform: translateY(-50px);
+    transition: all 0.3s ease;
+    z-index: 2;
+    margin: 100px auto;
+    border: 1px solid rgb(128, 87, 0);
+    border-radius: 7px;
+    background: #88882e;
+    .close {
+      padding: 5px 10px;
+    }
+  }
+}
