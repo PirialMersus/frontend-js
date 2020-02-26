@@ -1,0 +1,69 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+.slider-container .slides-row {
+  transition: all 0.5s ease;
+  width: 10000px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.slider-container .slides-row .slide {
+  float: left;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.slider-container .arrows {
+  position: absolute;
+  top: 300px;
+  background-color: #8e44ad;
+  color: #fff;
+  padding: 15px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 3px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.slider-container .arrows.left {
+  left: 0px;
+}
+.slider-container .arrows.right {
+  right: 0px;
+}
