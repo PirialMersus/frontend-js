@@ -94,3 +94,6 @@ p {
 .pointers.active p {
   font-size: 18px;
 }
+.nav-item {
+  cursor: pointer;
+}

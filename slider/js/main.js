@@ -32,3 +32,10 @@ $arrowRight.click(function () {
     navigationController(slideCount);
 
 });
+
+$('.navigation .pointers .nav-item').click(function () {
+    var counter = $(this).parent().attr('id');
+    slidesController(counter - 1);
+    navigationController(counter - 1);
+    slideCount = counter - 1;
+});
