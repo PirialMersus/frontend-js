@@ -7,22 +7,28 @@ var windowWidth = $(window).width();
 
 var slideCount = 0;
 var slides = $('.slider-container .slides-row .slide').length;
-console.log(slides);
-$slidesRow.css('width', (slides * windowWidth + 100) + '0px');
+$slidesRow.css('width', (slides * windowWidth + 100) + 'px');
 
 function slidesController(slideCount) {
     var distance = slideCount * windowWidth * (-1);
     $slidesRow.css('transform', 'translateX(' + distance + 'px)');
 }
 
+function navigationController(slideCount) {
+    $('.navigation .pointers').removeClass('active');
+    $('.navigation .pointers' + '#' + (slideCount + 1)).addClass('active');
+}
+
 $arrowLeft.click(function () {
     slideCount--;
     if (slideCount < 0) slideCount = slides - 1;
     slidesController(slideCount);
+    navigationController(slideCount);
 });
 $arrowRight.click(function () {
     slideCount++;
     if (slideCount >= slides) slideCount = 0;
     slidesController(slideCount);
+    navigationController(slideCount);
 
 });
