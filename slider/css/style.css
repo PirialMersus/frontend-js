@@ -30,7 +30,7 @@ p {
 .slider-container {
   position: relative;
   overflow: hidden;
-  height: 90vh;
+  height: 100vh;
 }
 .slider-container .slides-row {
   transition: all 0.5s ease;
@@ -51,7 +51,7 @@ p {
 }
 .slider-container .arrows {
   position: absolute;
-  top: 300px;
+  top: 200px;
   background-color: #8e44ad;
   color: #fff;
   padding: 15px;
@@ -68,32 +68,34 @@ p {
 .slider-container .arrows.right {
   right: 0px;
 }
-.navigation {
+.slider-container .navigation {
+  color: blue;
   height: 40px;
-  margin: 0 auto;
-  margin-top: 10px;
-  width: 200px;
-}
-.pointers {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   text-align: center;
-  float: left;
+}
+.slider-container .navigation .pointers {
+  display: inline-block;
   height: 20px;
   width: 20px;
-  border-radius: 50%;
+  margin-right: 15px;
+  border-radius: 100%;
   background-color: #8e44ad;
-  margin: 0 auto;
-  margin-right: 10px;
   transition: all 0.5s ease;
+  cursor: pointer;
 }
-.pointers.active {
-  background-color: black;
+.slider-container .navigation .pointers p {
+  color: black;
+}
+.slider-container .navigation .pointers.active {
+  background-color: white;
   height: 25px;
   width: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.pointers.active p {
+.slider-container .navigation .pointers.active p {
   font-size: 18px;
-}
-.nav-item {
-  cursor: pointer;
 }

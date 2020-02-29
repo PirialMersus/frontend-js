@@ -2,6 +2,7 @@ var $sliderContainer = $('.slider-container');
 var $slidesRow = $('.slider-container .slides-row');
 var $arrowLeft = $('.slider-container .arrows.left');
 var $arrowRight = $('.slider-container .arrows.right');
+var $navPoint = $('.slider-container .navigation .pointers');
 
 var windowWidth = $(window).width();
 
@@ -15,8 +16,8 @@ function slidesController(slideCount) {
 }
 
 function navigationController(slideCount) {
-    $('.navigation .pointers').removeClass('active');
-    $('.navigation .pointers' + '#' + (slideCount + 1)).addClass('active');
+    $navPoint.removeClass('active');
+    $('.pointers[data-nav="' + (slideCount + 1) + '"]').addClass('active');
 }
 
 $arrowLeft.click(function () {
@@ -33,8 +34,8 @@ $arrowRight.click(function () {
 
 });
 
-$('.navigation .pointers .nav-item').click(function () {
-    var counter = $(this).parent().attr('id');
+$navPoint.click(function () {
+    var counter = parseFloat($(this).attr('data-nav'));
     slidesController(counter - 1);
     navigationController(counter - 1);
     slideCount = counter - 1;
