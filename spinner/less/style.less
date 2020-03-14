@@ -1,0 +1,255 @@
+// out: ../css/style.css
+@primary: #8e44ad;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+body {
+  padding: 100px;
+}
+.spinner {
+  margin-right: 10px;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 2px solid #eee;
+  background-color: #eee;
+  box-sizing: border-box;
+  position: relative;
+  top: -2px;
+  bottom: -2px;
+  left: -2px;
+  right: -2px;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+  }
+  &.v1 {
+    @keyframes border-rotate {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(45deg) scale(1.2);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+    &:after {
+      top: -4px;
+      bottom: -4px;
+      left: -4px;
+      right: -4px;
+      border-radius: 100%;
+      background-color: transparent;
+      border: 2px solid transparent;
+      border-left-color: @primary;
+      border-right-color: @primary;
+      animation: border-rotate 1.2s ease infinite;
+    }
+  }
+
+  &.v2 {
+    animation: rotate-balls 2.5s linear infinite;
+
+    @keyframes ball {
+      0% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(10px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes rotate-balls {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    &:before {
+      height: 10px;
+      width: 10px;
+      border-radius: 100%;
+      background-color: @primary;
+      top: 50%;
+      left: -12px;
+      animation: ball 1s linear infinite;
+    }
+    &:after {
+      height: 10px;
+      width: 10px;
+      border-radius: 100%;
+      background-color: @primary;
+      top: 50%;
+      right: -7px;
+      animation: ball 0.5s linear infinite;
+    }
+  }
+
+  &.v3 {
+    background-color: #fff;
+
+    @keyframes clock {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    &:after {
+      transform-origin: 0 50%;
+      top: 50%;
+      left: 50%;
+      height: 2px;
+      width: 30px;
+      background-color: @primary;
+      border-radius: 10px;
+      animation: clock 2s linear infinite;
+    }
+  }
+  &.v4 {
+    @keyframes pulse {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.2);
+        opacity: 0;
+      }
+    }
+    &:before,
+    &:after {
+      top: -2px;
+      bottom: -2px;
+      left: -2px;
+      right: -2px;
+      background-color: @primary;
+      border-radius: 100%;
+      animation: pulse 1.2s ease infinite;
+    }
+    &:after {
+      // animation-duration: 1.4s;
+      animation-delay: 0.2s;
+    }
+  }
+  &.v5 {
+    @keyframes balls-jumping {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    background-color: #fff;
+    border: none;
+    .balls {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      background-color: #a39c9c;
+      &.b1 {
+        top: 50%;
+        left: 10px;
+        animation: balls-jumping 1s linear infinite;
+      }
+      &.b2 {
+        top: 50%;
+        left: 25px;
+        animation: balls-jumping 1s linear infinite;
+        animation-delay: 0.2s;
+      }
+      &.b3 {
+        top: 50%;
+        left: 40px;
+        animation: balls-jumping 1s linear infinite;
+        animation-delay: 0.4s;
+      }
+    }
+  }
+  &.v6 {
+    @keyframes balls-jumping-color {
+      0% {
+        transform: translateY(0);
+        background-color: #a39c9c;
+      }
+      50% {
+        transform: translateY(-10px);
+        background-color: @primary;
+      }
+      100% {
+        transform: translateY(0);
+        background-color: #a39c9c;
+      }
+    }
+    background-color: #fff;
+    border: none;
+    .balls {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      background-color: #a39c9c;
+      &.b1 {
+        top: 50%;
+        left: 10px;
+        animation: balls-jumping-color 1s linear infinite;
+      }
+      &.b2 {
+        top: 50%;
+        left: 25px;
+        animation: balls-jumping-color 1s linear infinite;
+        animation-delay: 0.2s;
+      }
+      &.b3 {
+        top: 50%;
+        left: 40px;
+        animation: balls-jumping-color 1s linear infinite;
+        animation-delay: 0.4s;
+      }
+    }
+  }
+}

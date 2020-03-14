@@ -9,6 +9,10 @@ var action = false;
 var deg = 0;
 var intervalId = 0;
 
+function rotate(deg) {
+
+    $box.css('transform', 'rotateY(' + deg + 'deg)');
+}
 
 $start.click(function () {
     if (!action) {
@@ -18,11 +22,9 @@ $start.click(function () {
             if (deg >= 360) {
                 deg = 0;
             }
-            $box.css('transform', 'rotateY(' + deg + 'deg)');
+            rotate(deg);
         }, 17);
     }
-
-
 });
 
 $pause.click(function () {
@@ -33,6 +35,6 @@ $pause.click(function () {
 $stop.click(function () {
     clearInterval(intervalId);
     deg = 0;
-    $box.css('transform', 'rotateY(' + deg + 'deg)');
+    rotate(deg);
     action = false;
 });
