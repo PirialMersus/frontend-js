@@ -1,0 +1,86 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+body {
+  padding: 50px;
+}
+.button {
+  float: right;
+  cursor: pointer;
+  font-size: 30px;
+}
+.overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+.overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+.menu {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  transform: translateX(-200px);
+  transition: all 0.3s linear;
+  background-color: black;
+  background-image: url(../img/menu-background.jpg);
+  background-repeat: repeat-y;
+  background-origin: content-box;
+  background-clip: content-box;
+  text-align: center;
+}
+.menu h3 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.menu ul {
+  text-align: center;
+}
+.menu ul li {
+  margin-bottom: 2px;
+}
+.menu .menu-item {
+  cursor: pointer;
+  font-size: 22px;
+}
+.menu.active {
+  transform: translateX(0);
+}
