@@ -66,6 +66,12 @@ body {
   background-clip: content-box;
   text-align: center;
 }
+.menu p {
+  text-align: right;
+  margin-right: 10px;
+  color: white;
+  cursor: pointer;
+}
 .menu h3 {
   text-align: center;
   font-size: 30px;
