@@ -1,0 +1,68 @@
+// out: ../css/style.css
+@primary: #8e44ad;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+.btn {
+  background-color: rgb(123, 196, 199);
+  display: inline-block;
+  margin-top: 50px;
+  margin-left: 30px;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(138, 218, 221);
+  }
+}
+.paragraph_container {
+  border: 1px solid rgb(160, 157, 157);
+  background-color: cornsilk;
+  border-radius: 3px;
+
+  p {
+    transition: all 0.2s linear;
+    font-size: 0px;
+    width: 0px;
+    height: 0px;
+    &.active {
+      font-size: 15px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.circle {
+  background-color: red;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}

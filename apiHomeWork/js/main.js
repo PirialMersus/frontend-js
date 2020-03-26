@@ -1,7 +1,4 @@
 
-var city;
-
-
 $('.btn').click(function () {
     var zip = $('.data').val();
     getCityByZip(zip);
@@ -10,8 +7,10 @@ $('.btn').click(function () {
 function getCityByZip(zip) {
     $.getJSON('http://api.zippopotam.us/us/' + zip)
         .done(function (data) {
-            city = data.places[0]['place name'];
-            $('.city').html('искомый город - ' + city);
+            $('.city').html('искомый город - ' + data.places[0]['place name']);
+        })
+        .fail(function () {
+            $('.city').html('Введите корректный код города');
         });
 }
 
