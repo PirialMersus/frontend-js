@@ -136,7 +136,7 @@ img {
   margin-bottom: 8px;
   padding-left: 8px;
   height: 18px;
-  width: 140px;
+  width: 100%;
   line-height: 18px;
   border-radius: 2px;
   color: black;
@@ -178,23 +178,26 @@ img {
   font-size: 12px;
   margin-bottom: 8px;
 }
-.container_main .nav_bar .find_form div.input_and_button {
+.container_main .nav_bar .find_form .input_and_button {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.container_main .nav_bar .find_form div.input_and_button label input {
+.container_main .nav_bar .find_form .input_and_button label {
+  width: 70%;
+}
+.container_main .nav_bar .find_form .input_and_button label input {
   box-sizing: border-box;
   padding-left: 8px;
   height: 18px;
-  width: 90px;
   line-height: 18px;
   border-radius: 1px;
   border: none;
   color: black;
   font-size: 10px;
 }
-.container_main .nav_bar .find_form div.input_and_button button {
+.container_main .nav_bar .find_form .input_and_button button {
+  max-width: 30%;
   transition: all 0.3s linear;
   border: none;
   padding: 3px 6px 3px 6px;
@@ -203,7 +206,7 @@ img {
   border-radius: 1px;
   background-color: #f0f6f2;
 }
-.container_main .nav_bar .find_form div.input_and_button button:hover {
+.container_main .nav_bar .find_form .input_and_button button:hover {
   background-color: #d6d6d6;
 }
 .container_main .nav_bar .heading {
