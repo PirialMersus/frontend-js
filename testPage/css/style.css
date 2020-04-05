@@ -274,10 +274,19 @@ img {
     display: inline-block;
   }
   .container_main .articles {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   .container_main .nav_bar {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .container_header {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   .container_header nav {
     opacity: 0;
