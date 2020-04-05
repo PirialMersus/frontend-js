@@ -14,18 +14,18 @@ $.fn.dropdown = function (options) {
 
 
     // Init
-    $('.drop_menu').css('transition', 'all ' + params.speed + 'ms ease')
-    $('.list_item').css('color', params.itemsColor);
-    $('.list_item').css('background-color', params.backgroundItems);
+    $selector.find('.drop_menu').css('transition', 'all ' + params.speed + 'ms ease');
+    $selector.find('.list_item').css('color', params.itemsColor);
+    $selector.find('.list_item').css('background-color', params.backgroundItems);
 
     // Actions
     $('.dropdown .drop_btn').click(function () {
 
         if ($(this).parent().hasClass('active')) {
-            $('.dropdown').removeClass('active');
+            $selector.removeClass('active');
         }
         else {
-            $('.dropdown').removeClass('active');
+            $selector.removeClass('active');
             $(this).parent().addClass('active');
         }
     });

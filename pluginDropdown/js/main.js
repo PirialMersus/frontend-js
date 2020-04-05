@@ -1,5 +1,5 @@
 $('.dropdown').dropdown({
-    // speed: 500,
+    // speed: 1500,
     // itemsColor: 'blue',
     // backgroundItems: 'yellow',
 });

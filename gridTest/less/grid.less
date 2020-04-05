@@ -1,0 +1,46 @@
+// out: ../css/grid.css
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    .flex-col {
+      padding: 0 15px;
+      box-sizing: border-box;
+      width: 25%;
+    }
+  }
+}
+
+//xs
+@media (min-width: 0px) {
+  .flex-col.xs-1 {
+    width: 25%;
+  }
+  .flex-col.xs-2 {
+    width: 50%;
+  }
+  .flex-col.xs-3 {
+    width: 75%;
+  }
+  .flex-col.xs-4 {
+    width: 100%;
+  }
+}
+
+//sm
+@media (min-width: 600px) {
+}
+
+//md
+@media (min-width: 900px) {
+}
+
+//lg
+@media (min-width: 1200px) {
+}
