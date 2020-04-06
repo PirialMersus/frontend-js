@@ -187,6 +187,7 @@ img {
   width: 70%;
 }
 .container_main .nav_bar .find_form .input_and_button label input {
+  width: 90%;
   box-sizing: border-box;
   padding-left: 8px;
   height: 18px;
@@ -197,7 +198,7 @@ img {
   font-size: 10px;
 }
 .container_main .nav_bar .find_form .input_and_button button {
-  max-width: 30%;
+  width: 30%;
   transition: all 0.3s linear;
   border: none;
   padding: 3px 6px 3px 6px;
