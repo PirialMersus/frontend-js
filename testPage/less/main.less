@@ -67,6 +67,12 @@ img {
       }
     }
   }
+  img {
+    display: none;
+    width: 40px;
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 .container_main {
   display: flex;
@@ -74,6 +80,7 @@ img {
 
   .articles {
     width: 70%;
+    box-sizing: border-box;
     .card {
       box-sizing: border-box;
       padding-left: 5%;
@@ -308,8 +315,8 @@ img {
     }
   }
 }
-@media (max-width: 670px) {
-  .site-header {
+@media (max-width: 600px) {
+  .site_header {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
@@ -317,18 +324,25 @@ img {
       opacity: 0;
       visibility: hidden;
     }
+    img {
+      margin-right: 5%;
+      display: block;
+      visibility: visible;
+      opacity: 1;
+    }
   }
   .container_main {
     display: block;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     .articles {
-      width: 90%;
-      margin-left: 5%;
-      margin-right: 5%;
+      width: 100%;
+      padding-right: 5%;
     }
     .nav_bar {
-      width: 90%;
-      margin-left: 5%;
-      margin-right: 5%;
+      width: 100%;
+      padding-left: 5%;
     }
   }
 }

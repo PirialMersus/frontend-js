@@ -65,12 +65,19 @@ img {
   background-color: #eee;
   color: #34495e;
 }
+.site_header img {
+  display: none;
+  width: 40px;
+  visibility: hidden;
+  opacity: 0;
+}
 .container_main {
   display: flex;
   justify-content: space-between;
 }
 .container_main .articles {
   width: 70%;
+  box-sizing: border-box;
 }
 .container_main .articles .card {
   box-sizing: border-box;
@@ -279,27 +286,34 @@ img {
 .container_main .nav_bar .last_comments ul li a:hover {
   color: #dad5d5;
 }
-@media (max-width: 670px) {
-  .site-header {
+@media (max-width: 600px) {
+  .site_header {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
   }
-  .site-header nav {
+  .site_header nav {
     opacity: 0;
     visibility: hidden;
   }
+  .site_header img {
+    margin-right: 5%;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
   .container_main {
     display: block;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   .container_main .articles {
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+    width: 100%;
+    padding-right: 5%;
   }
   .container_main .nav_bar {
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+    width: 100%;
+    padding-left: 5%;
   }
 }
