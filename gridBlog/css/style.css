@@ -1,0 +1,292 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.site_header {
+  background-color: #34495e;
+  margin-bottom: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site_header h3 {
+  margin-left: 5%;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+.site_header nav {
+  padding-right: 5%;
+  width: 40%;
+}
+.site_header nav ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site_header nav ul a {
+  display: inline-block;
+  transition: all 0.3s linear;
+  font-size: 10px;
+  line-height: 18px;
+  color: #fff;
+  padding: 15px 8px 15px 8px;
+}
+.site_header nav ul a:hover {
+  background-color: #eee;
+  color: #34495e;
+}
+.site_header img {
+  display: none;
+}
+.card {
+  box-sizing: border-box;
+}
+.card img {
+  margin-bottom: 16px;
+}
+.card h4 {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.card .paragraph {
+  font-size: 10px;
+  margin-bottom: 14px;
+}
+.card .caption_plus_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+.card .caption_plus_button p {
+  font-size: 10px;
+}
+.card .caption_plus_button button {
+  transition: all 0.3s linear;
+  font-size: 10px;
+  cursor: pointer;
+  padding: 8px 10px 8px 10px;
+  border: none;
+  background-color: #374c61;
+  color: #fff;
+  border-radius: 3px;
+}
+.card .caption_plus_button button:hover {
+  background-color: #577696;
+}
+.card .line {
+  height: 2px;
+  background-color: #a8a8a8;
+  margin-bottom: 20px;
+}
+.nav_bar .authorization_form {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  padding: 14px;
+  background-color: #34495e;
+}
+.nav_bar .authorization_form h5 {
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.nav_bar .authorization_form label input {
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  padding-left: 8px;
+  height: 18px;
+  width: 100%;
+  line-height: 18px;
+  border-radius: 2px;
+  color: black;
+  font-size: 10px;
+  border: none;
+}
+.nav_bar .authorization_form .registration_and_enter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav_bar .authorization_form .registration_and_enter a {
+  transition: all 0.3s linear;
+  color: #fff;
+  font-size: 10px;
+}
+.nav_bar .authorization_form .registration_and_enter a:hover {
+  color: #dad5d5;
+}
+.nav_bar .authorization_form .registration_and_enter button {
+  transition: all 0.3s linear;
+  border: none;
+  padding: 3px 6px 3px 6px;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 1px;
+  background-color: #f0f6f2;
+}
+.nav_bar .authorization_form .registration_and_enter button:hover {
+  background-color: #d6d6d6;
+}
+.nav_bar .find_form {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  padding: 14px;
+  background-color: #34495e;
+}
+.nav_bar .find_form h5 {
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.nav_bar .find_form .input_and_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav_bar .find_form .input_and_button label {
+  width: 70%;
+}
+.nav_bar .find_form .input_and_button label input {
+  width: 90%;
+  box-sizing: border-box;
+  padding-left: 8px;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 1px;
+  border: none;
+  color: black;
+  font-size: 10px;
+}
+.nav_bar .find_form .input_and_button button {
+  width: 30%;
+  transition: all 0.3s linear;
+  border: none;
+  padding: 3px 6px 3px 6px;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 1px;
+  background-color: #f0f6f2;
+}
+.nav_bar .find_form .input_and_button button:hover {
+  background-color: #d6d6d6;
+}
+.nav_bar .heading {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  padding: 14px;
+  background-color: #34495e;
+}
+.nav_bar .heading h5 {
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.nav_bar .heading ul li li:not(:last-child) {
+  margin-bottom: -2px;
+}
+.nav_bar .heading ul li a {
+  transition: all 0.3s linear;
+  color: #fff;
+  font-size: 10px;
+  line-height: 10px;
+}
+.nav_bar .heading ul li a:hover {
+  color: #dad5d5;
+}
+.nav_bar .archive {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  padding: 14px;
+  background-color: #34495e;
+}
+.nav_bar .archive h5 {
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.nav_bar .archive ul li li:not(:last-child) {
+  margin-bottom: -2px;
+}
+.nav_bar .archive ul li a {
+  transition: all 0.3s linear;
+  color: #fff;
+  font-size: 10px;
+  line-height: 10px;
+}
+.nav_bar .archive ul li a:hover {
+  color: #dad5d5;
+}
+.nav_bar .last_comments {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  padding: 14px;
+  background-color: #34495e;
+}
+.nav_bar .last_comments h5 {
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.nav_bar .last_comments ul li li:not(:last-child) {
+  margin-bottom: -2px;
+}
+.nav_bar .last_comments ul li a {
+  transition: all 0.3s linear;
+  color: #fff;
+  font-size: 10px;
+  line-height: 10px;
+}
+.nav_bar .last_comments ul li a:hover {
+  color: #dad5d5;
+}
+@media (max-width: 600px) {
+  .site_header {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .site_header nav {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .site_header img {
+    margin-right: 5%;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    width: 40px;
+  }
+  .nav_bar {
+    padding-left: 15px;
+  }
+}

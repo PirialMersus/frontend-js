@@ -1,18 +1,14 @@
-.wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.wrapper .flex-row-4,
-.wrapper .flex-row-5,
-.wrapper .flex-row-12 {
+.flex-row-4,
+.flex-row-5,
+.flex-row-12 {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
 }
-.wrapper .flex-row-4 .flex-col,
-.wrapper .flex-row-5 .flex-col,
-.wrapper .flex-row-12 .flex-col {
+.flex-row-4 .flex-col,
+.flex-row-5 .flex-col,
+.flex-row-12 .flex-col {
   padding: 0 15px;
   box-sizing: border-box;
 }
