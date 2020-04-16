@@ -5,10 +5,10 @@ var $arrowRight = $('.slider-container .arrows.right');
 var $navPoint = $('.slider-container .navigation .pointers');
 
 var windowWidth = $(window).width();
-
 var slideCount = 0;
 var slides = $('.slider-container .slides-row .slide').length;
 $slidesRow.css('width', (slides * windowWidth + 100) + 'px');
+
 
 function slidesController(slideCount) {
     var distance = slideCount * windowWidth * (-1);

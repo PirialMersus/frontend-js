@@ -35,6 +35,11 @@ body {
   float: right;
   cursor: pointer;
   font-size: 30px;
+  padding: 10px 15px;
+  background-color: #85e6ed;
+  border-radius: 10px;
+  margin-right: 50px;
+  margin-top: 50px;
 }
 .overlay {
   z-index: 1;
@@ -59,7 +64,7 @@ body {
   left: 0;
   width: 200px;
   height: 100%;
-  transform: translateX(-200px);
+  transform: translateX(-100%);
   transition: all 0.3s linear;
   background-color: black;
   background-image: url(../img/menu-background.jpg);
@@ -68,7 +73,10 @@ body {
   background-clip: content-box;
   text-align: center;
   p {
-    text-align: right;
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
     margin-right: 10px;
     color: white;
     cursor: pointer;
@@ -77,6 +85,7 @@ body {
     text-align: center;
     font-size: 30px;
     margin-bottom: 10px;
+    color: #eee;
   }
   ul {
     text-align: center;
@@ -87,6 +96,7 @@ body {
   .menu-item {
     cursor: pointer;
     font-size: 22px;
+    color: #eee;
   }
   &.active {
     transform: translateX(0);
