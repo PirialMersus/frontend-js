@@ -41,6 +41,10 @@ p {
     bottom: 0;
     left: 0;
     right: 0;
+    &.disable-animation {
+      transition: all 0s ease;
+      transition-duration: 0s !important;
+    }
     .slide {
       float: left;
       width: 100vw;

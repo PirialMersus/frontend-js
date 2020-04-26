@@ -29,10 +29,10 @@ function slidesCopyingAtTheBeginning(zeroThirdcount, zeroSlideCount, zeroTempCou
     sliderItem.eq(sliderItem.length - 3).clone().prependTo($('.slides-row'));
 
 
-    setTimeout(function () {
-        $slidesRow.css('transition-duration', '0.3s');
+    // setTimeout(function () {
+    $slidesRow.css('transition-duration', '0.3s');
 
-    }, 50);
+    // }, 0);
 
 
 }
@@ -64,29 +64,40 @@ function navigationController(slideCount) {
 
 slidesCopyingAtTheBeginning(2, 3, 1);
 slidesCopyingAtTheEnd();
+console.log('при запуске');
+console.log('slidecount=', slideCount);
+console.log('tempCounter=', tempCounter);
 console.log('thirdcount=', thirdcount);
+console.log('при запуске');
 
 $arrowLeft.click(function () {
 
 
     slideCount--;
     tempCounter--;
-    if (tempCounter < 0) {
+    if (tempCounter < 1) {
         thirdcount = thirdcount - 1;
         tempCounter = 3;
     }
 
 
-    slidesController(slideCount);//
     if (slideCount < 3) {
         setTimeout(function () {
             slidesCopyingAtTheBeginning(2, 5, 3);
         }, 300);
     }
+    slidesController(slideCount);//
 
     navigationController(slideCount);
-    console.log(tempCounter);
-    console.log('thirdcount=', thirdcount);
+
+    setTimeout(function () {
+        console.log('ArrowLeft');
+        console.log('slidecount=', slideCount);
+        console.log('tempCounter=', tempCounter);
+        console.log('thirdcount=', thirdcount);
+        console.log('ArrowLeft');
+    }, 300);
+
 
 });
 $arrowRight.click(function () {
@@ -104,13 +115,18 @@ $arrowRight.click(function () {
 
 
     navigationController(slideCount);
-    console.log(tempCounter);
+    console.log('ArrowRight');
+    console.log('slidecount=', slideCount);
+    console.log('tempCounter=', tempCounter);
     console.log('thirdcount=', thirdcount);
+    console.log('ArrowRight');
 });
 
 $navPoint.click(function () {
 
     var counter = parseFloat($(this).attr('data-nav'));
+    console.log('NavPointClick');
+
     console.log('slideCount=', slideCount);
     console.log('(datanav) =', counter);
     console.log('thirdcount =', thirdcount);
@@ -120,4 +136,190 @@ $navPoint.click(function () {
     navigationController(thirdcount * 3 - 4 + counter);
     slideCount = thirdcount * 3 - 4 + counter;
     tempCounter = counter;
+});
+
+///////////
+
+
+
+var x1 = 0;
+var x2 = 0;
+var action = false;
+var savedPosition = 0;
+var distance = 0;
+//////////
+function slidesRowController(distance) {
+
+    $slidesRow.css('transform', 'translateX(' + (slideCount * windowWidth * (-1) + distance) + 'px)');
+}
+
+$(window).mousedown(function (e) {
+    $slidesRow.addClass('disable-animation');
+    x1 = e.pageX;
+    action = true;
+
+});
+
+$(window).mouseup(function (e) {
+    action = false;
+    $slidesRow.removeClass('disable-animation');
+
+    if (distance >= 150) {
+        slideCount--;
+        tempCounter--;
+
+        if (tempCounter < 1) {
+            thirdcount = thirdcount - 1;
+            tempCounter = 3;
+        }
+
+
+        if (slideCount < 3) {
+            setTimeout(function () {
+                slidesCopyingAtTheBeginning(2, 5, 3);
+            }, 300);
+        }
+        setTimeout(function () {
+            console.log('if slideCount--,tempCounter--;');
+            console.log('slidecount=', slideCount);
+            console.log('tempCounter=', tempCounter);
+            console.log('thirdcount=', thirdcount);
+            console.log('if slideCount--,tempCounter--;');
+        }, 300);
+
+
+
+        slidesController(slideCount);
+        navigationController(slideCount);
+
+
+    } else if (distance <= -150) {
+        slideCount++;
+        tempCounter++;
+
+        if (tempCounter > 3) {
+            thirdcount = thirdcount + 1;
+            tempCounter = 1;
+        }
+
+        if (endCount < slideCount) {
+            slidesCopyingAtTheEnd();
+        }
+        console.log('if slideCount++,tempCounter++;');
+        console.log('slidecount=', slideCount);
+        console.log('tempCounter=', tempCounter);
+        console.log('thirdcount=', thirdcount);
+        console.log('if slideCount++,tempCounter++;')
+        slidesController(slideCount);
+        navigationController(slideCount);
+    } else {
+        console.log('if distance is a too little');
+        console.log('slidecount=', slideCount);
+        console.log('tempCounter=', tempCounter);
+        console.log('thirdcount=', thirdcount);
+        console.log('if distance is a too little')
+        slidesController(slideCount);
+        navigationController(slideCount);
+    }
+    distance = 0;////////////////////////////
+});
+
+$(window).mousemove(function (e) {
+    if (action) {
+        x2 = e.pageX;
+
+        distance = x2 - x1;
+
+
+        // distance = savedPosition + (x2 - x1);
+
+        slidesRowController(distance);
+
+    }
+
+});
+
+
+///////////////////
+
+//mobile 
+
+///////7
+
+window.addEventListener('touchstart', function (e) {
+    x1 = e.touches[0].pageX;
+    $slidesRow.addClass('disable-animation');
+    action = true;
+});
+
+window.addEventListener('touchend', function (e) {
+    action = false;
+    $slidesRow.removeClass('disable-animation');
+    if (distance >= 150) {
+        slideCount--;
+        tempCounter--;
+
+        if (tempCounter < 1) {
+            thirdcount = thirdcount - 1;
+            tempCounter = 3;
+        }
+
+
+        if (slideCount < 3) {
+            setTimeout(function () {
+                slidesCopyingAtTheBeginning(2, 5, 3);
+            }, 300);
+        }
+        setTimeout(function () {
+            console.log('if slideCount--,tempCounter--;');
+            console.log('slidecount=', slideCount);
+            console.log('tempCounter=', tempCounter);
+            console.log('thirdcount=', thirdcount);
+            console.log('if slideCount--,tempCounter--;');
+        }, 300);
+
+
+
+        slidesController(slideCount);
+        navigationController(slideCount);
+
+
+    } else if (distance <= -150) {
+        slideCount++;
+        tempCounter++;
+
+        if (tempCounter > 3) {
+            thirdcount = thirdcount + 1;
+            tempCounter = 1;
+        }
+
+        if (endCount < slideCount) {
+            slidesCopyingAtTheEnd();
+        }
+        console.log('if slideCount++,tempCounter++;');
+        console.log('slidecount=', slideCount);
+        console.log('tempCounter=', tempCounter);
+        console.log('thirdcount=', thirdcount);
+        console.log('if slideCount++,tempCounter++;')
+        slidesController(slideCount);
+        navigationController(slideCount);
+    } else {
+        console.log('if distance is a too little');
+        console.log('slidecount=', slideCount);
+        console.log('tempCounter=', tempCounter);
+        console.log('thirdcount=', thirdcount);
+        console.log('if distance is a too little')
+        slidesController(slideCount);
+        navigationController(slideCount);
+    }
+    distance = 0;
+});
+
+window.addEventListener('touchmove', function (e) {
+    if (action) {
+
+        x2 = e.changedTouches[0].pageX;
+        distance = x2 - x1;
+        slidesRowController(distance);
+    }
 });

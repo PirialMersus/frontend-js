@@ -40,3 +40,5 @@ $navPoint.click(function () {
     navigationController(counter - 1);
     slideCount = counter - 1;
 });
+
+//////////////////

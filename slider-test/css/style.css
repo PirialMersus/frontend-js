@@ -40,6 +40,10 @@ p {
   left: 0;
   right: 0;
 }
+.slider-container .slides-row.disable-animation {
+  transition: all 0s ease;
+  transition-duration: 0s !important;
+}
 .slider-container .slides-row .slide {
   float: left;
   width: 100vw;
