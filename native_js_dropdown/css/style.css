@@ -1,0 +1,80 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+.dropdown {
+  margin: 50px 50px;
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+.dropdown.active .btn img {
+  transform: rotate(180deg);
+}
+.dropdown.active .drop-menu {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+}
+.dropdown .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  padding-right: 35px;
+  background-color: #eee;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  border-radius: 3px;
+}
+.dropdown .btn p {
+  font-size: 24px;
+}
+.dropdown .btn img {
+  width: 20px;
+  position: absolute;
+  right: 2px;
+  top: 17px;
+  transition: all 0.3s ease;
+}
+.dropdown .drop-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  text-align: center;
+  transition: all 0.3s ease;
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  min-width: 100%;
+  background-color: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.dropdown .drop-menu .menu-item a {
+  cursor: pointer;
+}

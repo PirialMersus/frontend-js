@@ -1,0 +1,24 @@
+.area {
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+.area .box {
+  width: 250px;
+  height: 250px;
+  background-color: #000000;
+  transition: all 0.3s ease;
+}
+.area .box.red {
+  background-color: #f00;
+}
+
+.btn-group {
+}
+.btn-group .btn {
+  display: inline-block;
+  cursor: pointer;
+  background-color: #000000;
+  color: #fff;
+  padding: 12px 25px;
+  user-select: none;
+}
