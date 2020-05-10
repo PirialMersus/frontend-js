@@ -40,12 +40,14 @@ var section_width = $('.wellcome').width();
 var container_width = $('.container').width();
 var section_text_procent = 0;
 var section_img_procent = 0;
-section_text_procent = (section_width / 100 * 40 - (section_width - container_width) / 2) * 100 / container_width;
-$('.our_services_text_column').css('max-width', section_text_procent + '%');
-$('.wellcome_text').css('max-width', section_text_procent + '%');
-$('.wellcome_img').css('max-width', (100 - section_text_procent) + '%');
-$('.our_projects_text').css('max-width', section_text_procent + '%');
-$('.our_projects_img').css('max-width', (100 - section_text_procent) + '%');
-console.log('section_width = ', section_width);
-console.log('container_width = ', container_width);
-console.log('section_text_procent = ', section_text_procent);
+if (section_width > 1200) {
+    section_text_procent = (section_width / 100 * 40 - (section_width - container_width) / 2) * 100 / container_width;
+    $('.our_services_text_column').css('max-width', section_text_procent + '%');
+    $('.wellcome_text').css('max-width', section_text_procent + '%');
+    $('.wellcome_img').css('max-width', (100 - section_text_procent) + '%');
+    $('.our_projects_text').css('max-width', section_text_procent + '%');
+    $('.our_projects_img').css('max-width', (100 - section_text_procent) + '%');
+    console.log('section_width = ', section_width);
+    console.log('container_width = ', container_width);
+    console.log('section_text_procent = ', section_text_procent);
+}

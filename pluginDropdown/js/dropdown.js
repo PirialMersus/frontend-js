@@ -1,6 +1,4 @@
-$.fn.dropdown = function (options) {
 
-}
 $.fn.dropdown = function (options) {
     // Vars
     var params = $.extend({
