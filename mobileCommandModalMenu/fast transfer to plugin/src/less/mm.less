@@ -1,0 +1,40 @@
+// out: ../css/mm.css
+
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+
+        .menu-bar {
+            transform: none;
+        }
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+    }
+    .menu-bar {
+        transform: translateX(-100%);
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 300px;
+        background-color: #fff;
+        z-index: 2;
+    }
+}
