@@ -711,6 +711,7 @@ footer {
       position: relative;
       width: 40px;
       height: 40px;
+      user-select: none;
       &.active {
         .click_menu_img {
           opacity: 0;
@@ -727,7 +728,7 @@ footer {
         opacity: 1;
         visibility: visible;
         width: 40px;
-        transition: all 0.3s ease;
+        transition: all 0.9s ease;
       }
       .click_menu_img_close {
         position: absolute;
@@ -735,7 +736,7 @@ footer {
         // bottom: 0;
         left: 7px;
         // right: 0;
-        transition: all 0.3s ease;
+        transition: all 0.9s ease;
         opacity: 0;
         visibility: hidden;
         width: 25px;
@@ -750,7 +751,32 @@ footer {
     max-width: 100%;
     // min-width: 425px;
   }
-
+  .our_services {
+    padding: 0px;
+    .container {
+      .our_services_text_column {
+        .our_services_text_column_inner_wrp {
+          h4 {
+            padding-left: 20px;
+          }
+          .related_links {
+            .our_services_link_wrp {
+              .our_services_link {
+                .p_number {
+                  padding-left: 20px;
+                  padding-right: 10px;
+                  font-size: 14px;
+                }
+                .p_text {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   .wellcome {
     .container {
       overflow: hidden;

@@ -548,6 +548,7 @@ footer .container .phone_mail_wrap .copyright_plus_insta a img {
     position: relative;
     width: 40px;
     height: 40px;
+    user-select: none;
   }
   .site_header .click_menu_wrp.active .click_menu_img {
     opacity: 0;
@@ -563,13 +564,13 @@ footer .container .phone_mail_wrap .copyright_plus_insta a img {
     opacity: 1;
     visibility: visible;
     width: 40px;
-    transition: all 0.3s ease;
+    transition: all 0.9s ease;
   }
   .site_header .click_menu_wrp .click_menu_img_close {
     position: absolute;
     top: 9px;
     left: 7px;
-    transition: all 0.3s ease;
+    transition: all 0.9s ease;
     opacity: 0;
     visibility: hidden;
     width: 25px;
@@ -579,6 +580,20 @@ footer .container .phone_mail_wrap .copyright_plus_insta a img {
   }
   .our_services_text_column {
     max-width: 100%;
+  }
+  .our_services {
+    padding: 0px;
+  }
+  .our_services .container .our_services_text_column .our_services_text_column_inner_wrp h4 {
+    padding-left: 20px;
+  }
+  .our_services .container .our_services_text_column .our_services_text_column_inner_wrp .related_links .our_services_link_wrp .our_services_link .p_number {
+    padding-left: 20px;
+    padding-right: 10px;
+    font-size: 14px;
+  }
+  .our_services .container .our_services_text_column .our_services_text_column_inner_wrp .related_links .our_services_link_wrp .our_services_link .p_text {
+    font-size: 14px;
   }
   .wellcome .container {
     overflow: hidden;

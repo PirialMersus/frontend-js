@@ -170,7 +170,7 @@ $.fn.slider = function (options) {
     $(window).mouseup(function (e) {
         action = false;
         $slidesRow.removeClass('disable_animation');
-        if (distance >= 150) {
+        if (distance >= 100) {
             slideCount--;
             tempCounter--;
             if (tempCounter < 1) {
@@ -191,7 +191,7 @@ $.fn.slider = function (options) {
             }, params.animationSpeed);
             slidesController(slideCount);
             navigationController(slideCount);
-        } else if (distance <= -150) {
+        } else if (distance <= -100) {
             slideCount++;
             tempCounter++;
             if (tempCounter > 3) {
@@ -237,7 +237,7 @@ $.fn.slider = function (options) {
     window.addEventListener('touchend', function (e) {
         action = false;
         $slidesRow.removeClass('disable_animation');
-        if (distance >= 150) {
+        if (distance >= 100) {
             slideCount--;
             tempCounter--;
             if (tempCounter < 1) {
@@ -258,7 +258,7 @@ $.fn.slider = function (options) {
             }, params.animationSpeed);
             slidesController(slideCount);
             navigationController(slideCount);
-        } else if (distance <= -150) {
+        } else if (distance <= -100) {
             slideCount++;
             tempCounter++;
             if (tempCounter > 3) {
