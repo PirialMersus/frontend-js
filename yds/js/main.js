@@ -54,7 +54,7 @@ if (section_width > 1200) {
     console.log('section_text_procent = ', section_text_procent);
 }
 
-$(document).on('mousedown touchstart', '.click_menu_wrp', function () {
+$('.click_menu_wrp').on('click touch', function () {
     if ($(this).hasClass('active')) {
         $(this).removeClass('active');
         $('.nav_bar').removeClass('active');
