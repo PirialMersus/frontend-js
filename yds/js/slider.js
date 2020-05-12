@@ -161,7 +161,7 @@ $.fn.slider = function (options) {
         tempCounter = counter;
     });
 
-    $(window).mousedown(function (e) {
+    $('.slider_container').mousedown(function (e) {
         $slidesRow.addClass('disable_animation');
         x1 = e.pageX;
         action = true;
