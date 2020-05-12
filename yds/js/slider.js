@@ -228,7 +228,7 @@ $.fn.slider = function (options) {
         }
     });
 
-    window.addEventListener('touchstart', function (e) {
+    document.querySelector('.slider_container').addEventListener('touchstart', function (e) {
         x1 = e.touches[0].pageX;
         $slidesRow.addClass('disable_animation');
         action = true;
