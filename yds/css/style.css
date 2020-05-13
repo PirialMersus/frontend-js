@@ -103,18 +103,18 @@ body {
   display: none;
 }
 .btn_consultation {
+  overflow: hidden;
   padding-left: 50px;
   padding-right: 50px;
   display: inline-block;
   cursor: pointer;
   background-color: #000;
   position: relative;
-  z-index: 5;
+  z-index: 4;
   transition: all 0.6s ease;
 }
 .btn_consultation:hover:after {
   content: "";
-  transition: all 0.6s ease;
   position: absolute;
   left: 0;
   top: 0;
@@ -124,6 +124,7 @@ body {
   transform: translateX(100%);
 }
 .btn_consultation:after {
+  transition: all 0.6s ease;
   content: "";
   position: absolute;
   left: 0;
@@ -134,8 +135,10 @@ body {
   z-index: 4;
 }
 .btn_consultation p {
+  position: relative;
   color: #ffffff;
   line-height: 60px;
+  z-index: 5;
 }
 .wellcome .container {
   margin-top: 50px;
