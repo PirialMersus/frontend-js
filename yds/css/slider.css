@@ -19,8 +19,7 @@
   z-index: 30;
 }
 .slider_container .wrp_text_appear #text_appear_1 {
-  font-family: sans-serif;
-  font-family: "Yoga", sans-serif;
+  font-family: "Yoga", truetype;
   padding-left: 70px;
   color: #00a8ff;
   font-weight: 700;
@@ -47,8 +46,8 @@
   opacity: 1;
 }
 .slider_container .wrp_text_appear #text_appear_2 {
-  font-family: sans-serif;
-  font-family: "Yoga", sans-serif;
+  font-family: truetype;
+  font-family: "Yoga", truetype;
   padding-left: 20px;
   color: #00a8ff;
   font-weight: 700;
@@ -75,7 +74,6 @@
   opacity: 1;
 }
 .slider_container .wrp_text_appear #text_appear_3 {
-  font-family: sans-serif;
   font-family: "Yoga", sans-serif;
   color: #00a8ff;
   user-select: none;
