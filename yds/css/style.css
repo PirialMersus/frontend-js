@@ -41,6 +41,139 @@ body {
 .nav_bar {
   display: none;
 }
+.drop_modal_form {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  background-image: url(../img/road.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  transition: all 0.6s ease;
+}
+.drop_modal_form.active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.drop_modal_form .close_wrp {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.drop_modal_form .close_wrp p {
+  display: inline-block;
+  color: #fff;
+  font-size: 16px;
+  text-shadow: 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000;
+  margin-right: 20px;
+}
+.drop_modal_form .close_wrp > img {
+  display: inline-block;
+  width: 30px;
+  cursor: pointer;
+}
+.drop_modal_form .container h3 {
+  text-align: center;
+  color: #fff;
+  font-size: 48px;
+  line-height: 1.2;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  text-shadow: 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000;
+}
+.drop_modal_form .container form .labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.drop_modal_form .container form .labels label > p {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 5px;
+  text-shadow: 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000;
+}
+.drop_modal_form .container form .labels label > input {
+  box-sizing: border-box;
+  line-height: 36px;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: #000;
+  border: 1px solid #e7e7e7;
+  border-radius: 2px;
+  background: #fff;
+  font-size: 16px;
+  width: 360px;
+}
+.drop_modal_form .container form .labels label textarea {
+  font-size: 16px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  box-sizing: border-box;
+  border: 1px solid #e7e7e7;
+  color: #000;
+  border-radius: 2px;
+  line-height: 36px;
+  width: 360px;
+}
+.drop_modal_form .container form .form_btn_wrp {
+  display: flex;
+  align-items: center;
+}
+.drop_modal_form .container form .form_btn_wrp .btn_consultation_send_data {
+  box-sizing: border-box;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  overflow: hidden;
+  padding-left: 50px;
+  padding-right: 50px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #000;
+  position: relative;
+  z-index: 4;
+  transition: all 0.6s ease;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.drop_modal_form .container form .form_btn_wrp .btn_consultation_send_data:hover:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #00a8ff;
+  transform: translateX(100%);
+}
+.drop_modal_form .container form .form_btn_wrp .btn_consultation_send_data:after {
+  transition: all 0.6s ease;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #00a8ff;
+  z-index: 4;
+}
+.drop_modal_form .container form .form_btn_wrp .btn_consultation_send_data p {
+  position: relative;
+  color: #ffffff;
+  line-height: 36px;
+  z-index: 5;
+  font-size: 16px;
+}
+.drop_modal_form .container form .form_btn_wrp .btn_consultation_send_data p:after {
+  content: "→";
+  position: absolute;
+  right: -30px;
+}
 .site_header {
   position: fixed;
   z-index: 999;

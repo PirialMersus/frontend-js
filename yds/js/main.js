@@ -63,3 +63,12 @@ $('.click_menu_wrp').on('click touch', function () {
         $('.nav_bar').addClass('active');
     }
 });
+
+$('.btn_consultation').click(function () {
+    $('.drop_modal_form').toggleClass('active');
+});
+$('.close_modal_form').click(function () {
+    $('.drop_modal_form').removeClass('active');
+});
+
+
