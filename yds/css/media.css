@@ -42,7 +42,7 @@
     transform: translateY(60px) rotate(360deg) scale(3.5);
   }
   .wellcome .container .wellcome_text {
-    max-width: 60%;
+    max-width: 100%;
     padding: 20px;
   }
   .wellcome .container .wellcome_text .wellcome_text_p {
@@ -54,6 +54,9 @@
   .wellcome .container .wellcome_img {
     padding: 20px;
     max-width: 100%;
+  }
+  .wellcome .container .wellcome_img img {
+    width: 100%;
   }
   .our_services {
     padding: 20px;
@@ -79,6 +82,9 @@
   }
   .our_projects .our_projects_img {
     max-width: 100%;
+  }
+  .our_projects .our_projects_img img {
+    width: 100%;
   }
 }
 @media (max-width: 900px) {
