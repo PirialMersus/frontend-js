@@ -186,6 +186,7 @@ body {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #5f5a5a;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .site_header.scroll {
   background-color: #000000;

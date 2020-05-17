@@ -7,65 +7,56 @@ $.fn.slider = function (options) {
     }, options);
 
     var $selector = this;
-    var $sliderContainer = $('.slider_container');
     var $slidesRow = $('.slider_container .slides_row');
     var $arrowLeft = $('.slider_container .arrows.left');
     var $arrowRight = $('.slider_container .arrows.right');
-    var $navPoint = $('.slider_container .navigation .pointers');
-    var endCount = 2;
-    var thirdcount = 0;
+    var activeSlideCounter = 0;
     var offset = 0;
     var windowWidth = $('.slider_container').width();
     var slides = $('.slider_container .slides_row .slide').length;
+    var endCount = slides - 1;
     var slideCount = slides;
     var tempCounter = 1;
-    // var possibility = true;
     var x1 = 0;
     var x2 = 0;
     var action = false;
-    // var savedPosition = 0;
     var distance = 0;
+    var content = '';
 
     // Controllers
 
-    function slidesCopyingAtTheBeginning(zeroThirdcount, zeroSlideCount, zeroTempCounter) {
-        thirdcount = zeroThirdcount;
+    function slidesCopyingAtTheBeginning(zeroActiveSlideCounter, zeroSlideCount, zeroTempCounter) {
+        activeSlideCounter = zeroActiveSlideCounter;
         slideCount = zeroSlideCount;
         tempCounter = zeroTempCounter;
         slidesController(slideCount);
-        console.log('slidescontroller из slidesCopyingAtTheBeginning - done');
         $slidesRow.css('transition-duration', '0s');
-        offset = offset + (3 * windowWidth);
+        offset = offset + (slides * windowWidth);
         $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
         var sliderItem = $('.slide');
-        sliderItem.eq(sliderItem.length - 1).clone().prependTo($('.slides_row'));
-        sliderItem.eq(sliderItem.length - 2).clone().prependTo($('.slides_row'));
-        sliderItem.eq(sliderItem.length - 3).clone().prependTo($('.slides_row'));
+        for (var i = 0; i < slides; i++) {
+            sliderItem.eq(sliderItem.length - (i + 1)).clone().prependTo($('.slides_row'));
+        }
         setTimeout(function () {
             $slidesRow.css('transition-duration', params.animationSpeed + 'ms');
         }, 50);
     }
     function slidesCopyingAtTheEnd() {
         var sliderItem = $('.slide');
-        sliderItem.eq(0).clone().appendTo($('.slides_row'));
-        sliderItem.eq(1).clone().appendTo($('.slides_row'));
-        sliderItem.eq(2).clone().appendTo($('.slides_row'));
-        offset = offset + (3 * windowWidth);
+        for (var i = 0; i < slides; i++) {
+            sliderItem.eq(i).clone().appendTo($('.slides_row'));
+        }
+        offset = offset + (slides * windowWidth);
         $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
-        endCount = endCount + 3;
+        endCount = endCount + slides;
     }
     function slidesController(slideCount) {
         var distance = slideCount * windowWidth * (-1);
         $slidesRow.css('transform', 'translateX(' + distance + 'px)');
-        console.log('slidescontroller - done');
     }
     function navigationController(slideCount) {
-        $navPoint.removeClass('active');
-        if (slideCount % 3 == 1)
-            $('.pointers[data_nav="2"]').addClass('active');
-        else if (slideCount % 3 == 2)
-            $('.pointers[data_nav="3"]').addClass('active');
-        else $('.pointers[data_nav="1"]').addClass('active');
+        $('.pointers').removeClass('active');
+        $('.pointers[data_nav="' + (slideCount % slides + 1) + '"]').addClass('active');
     }
     function slidesRowController(distance) {
         $slidesRow.css('transform', 'translateX(' + (slideCount * windowWidth * (-1) + distance) + 'px)');
@@ -76,65 +67,50 @@ $.fn.slider = function (options) {
     $slidesRow.css('transition-duration', params.animationSpeed + 'ms');
     $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');//??????????? do i need to set this parameter at the begining&
     $('.slide').css('width', windowWidth + 'px');
+    for (var i = 0; i < slides; i++) {
+        content += '<div data_nav=' + (i + 1) + ' class="pointers"><p>' + (i + 1) + '</p></div>';
+    }
+    $('.navigation').html(content);
+    $('.navigation .pointers[data_nav="1"]').addClass('active');
 
     //Actions
 
-    slidesCopyingAtTheBeginning(2, 3, 1);
+    slidesCopyingAtTheBeginning(2, slides, 1);
     slidesCopyingAtTheEnd();
-    console.log('при запуске');
-    console.log('slidecount=', slideCount);
-    console.log('tempCounter=', tempCounter);
-    console.log('thirdcount=', thirdcount);
-    console.log('при запуске');
 
     $arrowLeft.click(function () {
         slideCount--;
         tempCounter--;
         if (tempCounter < 1) {
-            thirdcount = thirdcount - 1;
-            tempCounter = 3;
+            activeSlideCounter = activeSlideCounter - 1;
+            tempCounter = slides;
 
         }
-        if (slideCount < 3) {
-            // setTimeout(function () {
-            //     slidesCopyingAtTheBeginning(2, 5, 3);
-            //     console.log('slides copiing at the begin done');
-            // }, params.animationSpeed);
+        if (slideCount < slides) {
             $slidesRow.css('transition-duration', '0ms');
-            slidesController(6);
+            slidesController((slides * 2));
             setTimeout(function () {
                 $slidesRow.css('transition-duration', params.animationSpeed + 'ms');
-                thirdcount = 2;
-                slideCount = 5;
-                tempCounter = 3;
+                activeSlideCounter = 2;
+                slideCount = ((slides * 2) - 1);
+                tempCounter = slides;
                 slidesController(slideCount);
                 navigationController(slideCount);
             }, 30);
-
-            // thirdcount = 2;
-            // slideCount = 5;
-            // tempCounter = 3;
-
         }
-        if (slideCount >= 3) {
+        if (slideCount >= slides) {
             slidesController(slideCount);
             navigationController(slideCount);
         }
-
         setTimeout(function () {
-            console.log('ArrowLeft');
-            console.log('slidecount=', slideCount);
-            console.log('tempCounter=', tempCounter);
-            console.log('thirdcount=', thirdcount);
-            console.log('ArrowLeft');
         }, params.animationSpeed);
     });
 
     $arrowRight.click(function () {
         slideCount++;
         tempCounter++;
-        if (tempCounter > 3) {
-            thirdcount = thirdcount + 1;
+        if (tempCounter > slides) {
+            activeSlideCounter = activeSlideCounter + 1;
             tempCounter = 1;
         }
         if (endCount < slideCount) {
@@ -142,22 +118,13 @@ $.fn.slider = function (options) {
         }
         slidesController(slideCount);
         navigationController(slideCount);
-        console.log('ArrowRight');
-        console.log('slidecount=', slideCount);
-        console.log('tempCounter=', tempCounter);
-        console.log('thirdcount=', thirdcount);
-        console.log('ArrowRight');
     });
 
-    $navPoint.click(function () {
+    $('.slider_container .navigation .pointers').click(function () {
         var counter = parseFloat($(this).attr('data_nav'));
-        console.log('NavPointClick');
-        console.log('slideCount=', slideCount);
-        console.log('(datanav) =', counter);
-        console.log('thirdcount =', thirdcount);
-        slidesController(thirdcount * 3 - 4 + counter);
-        navigationController(thirdcount * 3 - 4 + counter);
-        slideCount = thirdcount * 3 - 4 + counter;
+        slidesController(activeSlideCounter * slides - (slides + 1) + counter);
+        navigationController(activeSlideCounter * slides - (slides + 1) + counter);
+        slideCount = activeSlideCounter * slides - (slides + 1) + counter;
         tempCounter = counter;
     });
 
@@ -174,46 +141,29 @@ $.fn.slider = function (options) {
             slideCount--;
             tempCounter--;
             if (tempCounter < 1) {
-                thirdcount = thirdcount - 1;
-                tempCounter = 3;
+                activeSlideCounter = activeSlideCounter - 1;
+                tempCounter = slides;
             }
-            if (slideCount < 3) {
+            if (slideCount < slides) {
                 setTimeout(function () {
-                    slidesCopyingAtTheBeginning(2, 5, 3);
+                    slidesCopyingAtTheBeginning(2, (2 * slides - 1), slides);
                 }, params.animationSpeed);
             }
-            setTimeout(function () {
-                console.log('if slideCount--,tempCounter--;');
-                console.log('slidecount=', slideCount);
-                console.log('tempCounter=', tempCounter);
-                console.log('thirdcount=', thirdcount);
-                console.log('if slideCount--,tempCounter--;');
-            }, params.animationSpeed);
             slidesController(slideCount);
             navigationController(slideCount);
         } else if (distance <= -100) {
             slideCount++;
             tempCounter++;
-            if (tempCounter > 3) {
-                thirdcount = thirdcount + 1;
+            if (tempCounter > slides) {
+                activeSlideCounter = activeSlideCounter + 1;
                 tempCounter = 1;
             }
             if (endCount < slideCount) {
                 slidesCopyingAtTheEnd();
             }
-            console.log('if slideCount++,tempCounter++;');
-            console.log('slidecount=', slideCount);
-            console.log('tempCounter=', tempCounter);
-            console.log('thirdcount=', thirdcount);
-            console.log('if slideCount++,tempCounter++;')
             slidesController(slideCount);
             navigationController(slideCount);
         } else {
-            console.log('if distance is a too little');
-            console.log('slidecount=', slideCount);
-            console.log('tempCounter=', tempCounter);
-            console.log('thirdcount=', thirdcount);
-            console.log('if distance is a too little')
             slidesController(slideCount);
             navigationController(slideCount);
         }
@@ -241,46 +191,29 @@ $.fn.slider = function (options) {
             slideCount--;
             tempCounter--;
             if (tempCounter < 1) {
-                thirdcount = thirdcount - 1;
-                tempCounter = 3;
+                activeSlideCounter = activeSlideCounter - 1;
+                tempCounter = slides;
             }
-            if (slideCount < 3) {
+            if (slideCount < slides) {
                 setTimeout(function () {
-                    slidesCopyingAtTheBeginning(2, 5, 3);
+                    slidesCopyingAtTheBeginning(2, (2 * slides - 1), slides);
                 }, params.animationSpeed);
             }
-            setTimeout(function () {
-                console.log('if slideCount--,tempCounter--;');
-                console.log('slidecount=', slideCount);
-                console.log('tempCounter=', tempCounter);
-                console.log('thirdcount=', thirdcount);
-                console.log('if slideCount--,tempCounter--;');
-            }, params.animationSpeed);
             slidesController(slideCount);
             navigationController(slideCount);
         } else if (distance <= -100) {
             slideCount++;
             tempCounter++;
-            if (tempCounter > 3) {
-                thirdcount = thirdcount + 1;
+            if (tempCounter > slides) {
+                activeSlideCounter = activeSlideCounter + 1;
                 tempCounter = 1;
             }
             if (endCount < slideCount) {
                 slidesCopyingAtTheEnd();
             }
-            console.log('if slideCount++,tempCounter++;');
-            console.log('slidecount=', slideCount);
-            console.log('tempCounter=', tempCounter);
-            console.log('thirdcount=', thirdcount);
-            console.log('if slideCount++,tempCounter++;')
             slidesController(slideCount);
             navigationController(slideCount);
         } else {
-            console.log('if distance is a too little');
-            console.log('slidecount=', slideCount);
-            console.log('tempCounter=', tempCounter);
-            console.log('thirdcount=', thirdcount);
-            console.log('if distance is a too little')
             slidesController(slideCount);
             navigationController(slideCount);
         }

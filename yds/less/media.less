@@ -3,11 +3,7 @@
   //drop form
   .drop_modal_form {
     padding: 10px;
-    &.active {
-    }
     .close_wrp {
-      p {
-      }
       > img {
         width: 25px;
       }
@@ -23,8 +19,6 @@
           label {
             box-sizing: border-box;
             max-width: 28%;
-            > p {
-            }
             > input {
               padding-left: 10px;
               padding-right: 10px;
@@ -37,26 +31,10 @@
               max-width: 100%;
               font-size: 14px;
             }
-            .your_name {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-            .your_phone {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-            .your_message {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-
-            // }
           }
         }
         .form_btn_wrp {
           .btn_consultation_send_data {
-            &:hover {
-            }
             p {
               line-height: 34px;
             }
@@ -75,15 +53,11 @@
         margin-right: 10px;
       }
     }
-    .btn_consultation {
-    }
     .site_logo {
       margin-left: 5%;
       &:hover {
         transform: translateY(60px) rotate(360deg) scale(3.5);
       }
-    }
-    .om {
     }
   }
   .wellcome {
@@ -91,10 +65,6 @@
       .wellcome_text {
         max-width: 100%;
         padding: 20px;
-        h2 {
-          span {
-          }
-        }
         .wellcome_text_p {
           margin-bottom: 50px;
         }
@@ -126,21 +96,16 @@
   .related_links {
     overflow: hidden;
   }
-
   .our_projects {
     padding: 20px;
     .our_projects_text {
       max-width: 100%;
-      h2 {
-      }
-      .btn_consultation {
-        margin-bottom: 40px;
-        p {
-        }
-      }
+      padding: 20px;
+      margin-bottom: 20px;
     }
     .our_projects_img {
-      max-width: 100%;
+      width: 100%;
+      max-width: unset;
       img {
         width: 100%;
       }
@@ -151,17 +116,7 @@
 @media (max-width: 900px) {
   .drop_modal_form {
     padding: 20px;
-    &.active {
-    }
-    .close_wrp {
-      p {
-      }
-      > img {
-      }
-    }
     .container {
-      h3 {
-      }
       form {
         .labels {
           display: block;
@@ -176,37 +131,13 @@
             textarea {
               width: 100%;
             }
-            .your_name {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-            .your_phone {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-            .your_message {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-
-            // }
-          }
-        }
-        .form_btn_wrp {
-          .btn_consultation_send_data {
-            &:hover {
-            }
-            p {
-            }
           }
         }
       }
     }
   }
-  ///////////////////////////////////////////////////////////header
+  //header
   .site_header {
-    .site_logo {
-    }
     ul {
       li {
         margin-right: 7px;
@@ -222,12 +153,7 @@
         transform: translateY(40px) rotate(360deg) scale(3);
       }
     }
-    .om {
-    }
   }
-  .our_services_text_column {
-  }
-
   footer {
     padding: 20px;
     .container {
@@ -243,52 +169,24 @@
       }
       .nav_footer {
         margin-bottom: 20px;
-        > ul {
-          > li {
-            > a {
-              &:hover {
-              }
-            }
-          }
-          li:last-child {
-          }
-        }
       }
-
       .location {
         margin-bottom: 20px;
         padding-left: 50px;
-        ul {
-          li {
-            > p {
-            }
-            > img {
-            }
-          }
-        }
       }
       .phone_mail_wrap {
         .first_line {
           text-align: left;
           .phone {
             cursor: pointer;
-            &:hover {
-            }
           }
-          .slash {
-          }
-        }
-        .mail {
         }
         .copyright_plus_insta {
           display: flex;
           align-items: center;
           justify-content: space-between;
-
           p {
             display: block;
-            // color: rgb(149, 136, 136);
-            // font-size: 12px;
           }
           a {
             img {
@@ -306,14 +204,6 @@
   }
   .drop_modal_form {
     top: 40px;
-    &.active {
-    }
-    .close_wrp {
-      p {
-      }
-      > img {
-      }
-    }
     .container {
       h3 {
         margin-top: 30px;
@@ -323,8 +213,6 @@
       form {
         .labels {
           label {
-            > p {
-            }
             > input {
               line-height: 28px;
               font-size: 14px;
@@ -332,27 +220,11 @@
             textarea {
               line-height: 28px;
             }
-            .your_name {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-            .your_phone {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-            .your_message {
-              // font-size: 18px;
-              // color: #898a8c;
-            }
-
-            // }
           }
         }
         .form_btn_wrp {
           .btn_consultation_send_data {
             margin-bottom: 30px;
-            &:hover {
-            }
             p {
               line-height: 28px;
             }
@@ -361,7 +233,6 @@
       }
     }
   }
-
   .nav_bar {
     display: block;
     transition: all 0.6s ease;
@@ -394,11 +265,7 @@
         }
       }
     }
-    li:last-child {
-      //   border-top: 1px solid grey;
-    }
   }
-
   .site_header {
     background-color: #fff;
     ul {
@@ -450,9 +317,7 @@
       .click_menu_img_close {
         position: absolute;
         top: 9px;
-        // bottom: 0;
         left: 7px;
-        // right: 0;
         transition: all 0.9s ease;
         opacity: 0;
         visibility: hidden;
@@ -462,11 +327,9 @@
   }
   .container {
     max-width: 100%;
-    // min-width: 425px;
   }
   .our_services_text_column {
     max-width: 100%;
-    // min-width: 425px;
   }
   .our_services {
     padding: 0px;
@@ -475,7 +338,6 @@
         .our_services_text_column_inner_wrp {
           h4 {
             padding-left: 20px;
-            // margin-bottom: 0px;
           }
           .read_more {
             margin-bottom: 50px;
@@ -505,81 +367,44 @@
       overflow: hidden;
       .wellcome_text {
         max-width: 100%;
-        h2 {
-          span {
-          }
-        }
-        .wellcome_text_p {
-          // margin-bottom: 50px;
-        }
         .btn_consultation {
           p {
             line-height: 40px;
           }
         }
       }
-      .wellcome_img {
-      }
     }
   }
-
   .slider_container {
     .wrp_text_appear {
       left: 15%;
       #text_appear_1 {
         padding-left: 40px;
-        &:hover {
-        }
         > span {
           font-size: 38px;
-        }
-        .new {
-        }
-        .div_opacity {
         }
       }
       #text_appear_2 {
         padding-left: 13px;
-        &:hover {
-        }
         > span {
           font-size: 38px;
-        }
-        .new {
-        }
-        .div_opacity {
         }
       }
       #text_appear_3 {
-        &:hover {
-        }
         > span {
           font-size: 38px;
-        }
-        .new {
-        }
-        .div_opacity {
-        }
-      }
-      .copy_text {
-        &:hover {
         }
       }
     }
   }
   .our_projects {
     .our_projects_text {
-      h2 {
-      }
       .btn_consultation {
         padding-left: 20px;
         padding-right: 20px;
       }
     }
-    .our_projects_img {
-    }
   }
-
   footer {
     .container {
       .phone_mail_wrap {
@@ -587,8 +412,6 @@
           font-size: 30px;
           .phone {
             font-size: 30px;
-            &:hover {
-            }
           }
           .slash {
             font-size: 30px;
@@ -596,14 +419,6 @@
         }
         .mail {
           font-size: 18px;
-        }
-        .copyright_plus_insta {
-          p {
-          }
-          a {
-            img {
-            }
-          }
         }
       }
     }
