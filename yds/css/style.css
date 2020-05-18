@@ -148,7 +148,7 @@ body {
   top: 0;
   bottom: 0;
   right: 0;
-  background-color: #00a8ff;
+  background-color: #fb2f2f;
   transform: translateX(100%);
 }
 .drop_modal_form .container form .form_btn_wrp .btn_consultation_send_data:after {
@@ -159,7 +159,7 @@ body {
   top: 0;
   bottom: 0;
   right: 0;
-  background-color: #00a8ff;
+  background-color: #fb2f2f;
   z-index: 4;
 }
 .drop_modal_form .container form .form_btn_wrp .btn_consultation_send_data p {
@@ -190,7 +190,7 @@ body {
 }
 .site_header.scroll {
   background-color: #000000;
-  border-bottom: none;
+  border-bottom: 1px solid #000;
 }
 .site_header .site_logo {
   transition: all 1s ease;
@@ -211,7 +211,7 @@ body {
   color: #ffffff;
 }
 .site_header ul li a:hover {
-  color: #00a8ff;
+  color: #fb2f2f;
 }
 .site_header ul li:last-child {
   margin-right: 0px;
@@ -254,7 +254,7 @@ body {
   top: 0;
   bottom: 0;
   right: 0;
-  background-color: #00a8ff;
+  background-color: #fb2f2f;
   transform: translateX(100%);
 }
 .btn_consultation:after {
@@ -265,7 +265,7 @@ body {
   top: 0;
   bottom: 0;
   right: 0;
-  background-color: #00a8ff;
+  background-color: #fb2f2f;
   z-index: 4;
 }
 .btn_consultation p {
@@ -290,11 +290,11 @@ body {
 }
 .wellcome .container .wellcome_text h2:after {
   content: "//";
-  color: #00a8ff;
+  color: #fb2f2f;
   letter-spacing: -12px;
 }
 .wellcome .container .wellcome_text h2 span {
-  color: #00a8ff;
+  color: #fb2f2f;
 }
 .wellcome .container .wellcome_text .wellcome_text_p {
   max-width: 95%;
@@ -328,12 +328,12 @@ body {
 }
 .our_services .container .our_services_text_column .our_services_text_column_inner_wrp h4:after {
   content: "//";
-  color: #00a8ff;
+  color: #fb2f2f;
   letter-spacing: -6px;
   font-size: 36px;
 }
 .our_services .container .our_services_text_column .our_services_text_column_inner_wrp .read_more {
-  color: #00a8ff;
+  color: #fb2f2f;
   margin-left: 20px;
   font-weight: 700;
   font-size: 14px;
@@ -359,7 +359,7 @@ body {
   position: relative;
 }
 .our_services .container .our_services_text_column .our_services_text_column_inner_wrp .related_links .our_services_link_wrp:hover .our_services_link {
-  background-color: #00a8ff;
+  background-color: #fb2f2f;
 }
 .our_services .container .our_services_text_column .our_services_text_column_inner_wrp .related_links .our_services_link_wrp:hover .our_services_link .p_number {
   color: #fff;
@@ -419,7 +419,7 @@ body {
 }
 .our_projects .our_projects_text h2:after {
   content: "//";
-  color: #00a8ff;
+  color: #fb2f2f;
   letter-spacing: -12px;
 }
 .our_projects .our_projects_text .btn_consultation p {
@@ -457,7 +457,7 @@ footer .container .nav_footer > ul > li > a {
   color: #ffffff;
 }
 footer .container .nav_footer > ul > li > a:hover {
-  color: #00a8ff;
+  color: #fb2f2f;
 }
 footer .container .nav_footer > ul li:last-child {
   margin-bottom: 0px;
@@ -479,9 +479,9 @@ footer .container .location ul li > p {
 }
 footer .container .location ul li > img {
   position: absolute;
-  left: -50px;
-  width: 40px;
-  height: 40px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
 }
 footer .container .phone_mail_wrap {
   overflow: auto;
@@ -498,19 +498,19 @@ footer .container .phone_mail_wrap .first_line .phone {
   cursor: pointer;
 }
 footer .container .phone_mail_wrap .first_line .phone:hover {
-  color: #00a8ff;
+  color: #fb2f2f;
 }
 footer .container .phone_mail_wrap .first_line .slash {
   font-size: 38px;
   font-weight: 700;
   line-height: 1.2;
   display: inline-block;
-  color: #00a8ff;
+  color: #fb2f2f;
 }
 footer .container .phone_mail_wrap .mail {
   font-size: 20px;
   line-height: 1.2;
-  color: #00a8ff;
+  color: #fb2f2f;
   margin-bottom: 30px;
 }
 footer .container .phone_mail_wrap .copyright_plus_insta p {

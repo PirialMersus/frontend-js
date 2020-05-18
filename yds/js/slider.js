@@ -13,6 +13,11 @@ $.fn.slider = function (options) {
     var activeSlideCounter = 0;
     var offset = 0;
     var windowWidth = $('.slider_container').width();
+    console.log('window sizes', windowWidth);
+    window.addEventListener("resize", function () {
+        windowWidth = $('.slider_container').width();
+        console.log('achange window sizes', windowWidth);
+    }, false);
     var slides = $('.slider_container .slides_row .slide').length;
     var endCount = slides - 1;
     var slideCount = slides;
@@ -67,11 +72,11 @@ $.fn.slider = function (options) {
     $slidesRow.css('transition-duration', params.animationSpeed + 'ms');
     $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');//??????????? do i need to set this parameter at the begining&
     $('.slide').css('width', windowWidth + 'px');
-    for (var i = 0; i < slides; i++) {
-        content += '<div data_nav=' + (i + 1) + ' class="pointers"><p>' + (i + 1) + '</p></div>';
-    }
-    $('.navigation').html(content);
-    $('.navigation .pointers[data_nav="1"]').addClass('active');
+    // for (var i = 0; i < slides; i++) {
+    //     content += '<div data_nav=' + (i + 1) + ' class="pointers"><p>' + (i + 1) + '</p></div>';
+    // }
+    // $('.navigation').html(content);
+    // $('.navigation .pointers[data_nav="1"]').addClass('active');
 
     //Actions
 

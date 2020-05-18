@@ -13,26 +13,28 @@
 }
 .slider_container .wrp_text_appear {
   position: absolute;
-  max-width: 300px;
-  top: 30%;
-  left: 10%;
+  max-width: 100%;
+  top: 15%;
+  left: 0;
+  right: 0;
   z-index: 30;
 }
 .slider_container .wrp_text_appear #text_appear_1 {
   font-family: "Yoga", truetype;
-  padding-left: 70px;
-  color: #00a8ff;
+  position: absolute;
+  left: 10%;
+  color: #fb2f2f;
   font-weight: 700;
   font-size: 70px;
   transition: all 0.6s ease;
   display: none;
   text-transform: uppercase;
-  text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5;
+  text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 10px #fab1a0, 0px 0px 10px #fab1a0, 0px 0px 20px #ff7675, 0px 0px 20px #ff7675, 0px 0px 30px #d63031, 0px 0px 43px #d63031;
   user-select: none;
 }
 .slider_container .wrp_text_appear #text_appear_1:hover {
   color: #fff;
-  text-shadow: 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5, 0px 0px 40px #fff, 0px 0px 40px #fff, 0px 0px 40px #fff;
+  text-shadow: none;
 }
 .slider_container .wrp_text_appear #text_appear_1 .new {
   opacity: 0;
@@ -46,21 +48,22 @@
   opacity: 1;
 }
 .slider_container .wrp_text_appear #text_appear_2 {
+  position: absolute;
+  left: 40%;
   font-family: truetype;
   font-family: "Yoga", truetype;
-  padding-left: 20px;
-  color: #00a8ff;
+  color: #fb2f2f;
   font-weight: 700;
   font-size: 70px;
   transition: all 0.6s ease;
   display: none;
   user-select: none;
   text-transform: uppercase;
-  text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5;
+  text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 10px #fab1a0, 0px 0px 10px #fab1a0, 0px 0px 20px #ff7675, 0px 0px 20px #ff7675, 0px 0px 30px #d63031, 0px 0px 43px #d63031;
 }
 .slider_container .wrp_text_appear #text_appear_2:hover {
   color: #fff;
-  text-shadow: 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5, 0px 0px 40px #fff, 0px 0px 40px #fff, 0px 0px 40px #fff;
+  text-shadow: none;
 }
 .slider_container .wrp_text_appear #text_appear_2 .new {
   opacity: 0;
@@ -74,19 +77,21 @@
   opacity: 1;
 }
 .slider_container .wrp_text_appear #text_appear_3 {
+  position: absolute;
+  left: 65%;
   font-family: "Yoga", sans-serif;
-  color: #00a8ff;
+  color: #fb2f2f;
   user-select: none;
   font-weight: 700;
   font-size: 70px;
   transition: all 0.6s ease;
   display: none;
   text-transform: uppercase;
-  text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5;
+  text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 10px #fab1a0, 0px 0px 10px #fab1a0, 0px 0px 20px #ff7675, 0px 0px 20px #ff7675, 0px 0px 30px #d63031, 0px 0px 43px #d63031;
 }
 .slider_container .wrp_text_appear #text_appear_3:hover {
   color: #fff;
-  text-shadow: 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5, 0px 0px 40px #fff, 0px 0px 40px #fff, 0px 0px 40px #fff;
+  text-shadow: none;
 }
 .slider_container .wrp_text_appear #text_appear_3 .new {
   opacity: 0;
@@ -109,7 +114,7 @@
   left: 0;
   right: 0;
   text-transform: uppercase;
-  color: #00a8ff;
+  color: #fb2f2f;
   font-weight: 700;
   font-size: 70px;
   opacity: 1;
@@ -162,13 +167,13 @@
   transform: rotate(180deg);
 }
 .slider_container .arrows:hover {
-  border-color: #00a8ff;
+  border-color: #fb2f2f;
 }
 .slider_container .arrows > img {
   width: 10px;
 }
 .slider_container .navigation {
-  color: #00a8ff;
+  color: #fb2f2f;
   height: 40px;
   position: absolute;
   bottom: 0;
@@ -182,12 +187,12 @@
   width: 20px;
   margin-right: 15px;
   border-radius: 100%;
-  background-color: #00a8ff;
+  background-color: #fb2f2f;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 .slider_container .navigation .pointers p {
-  color: black;
+  color: #fff;
 }
 .slider_container .navigation .pointers.active {
   background-color: white;
@@ -197,4 +202,5 @@
 }
 .slider_container .navigation .pointers.active p {
   font-size: 18px;
+  color: #000;
 }

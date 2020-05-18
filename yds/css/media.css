@@ -29,9 +29,6 @@
   .drop_modal_form .container form .form_btn_wrp .btn_consultation_send_data p {
     line-height: 34px;
   }
-  .site_header.scroll {
-    border-bottom: 1px solid grey;
-  }
   .site_header ul li {
     margin-right: 10px;
   }
@@ -76,12 +73,12 @@
   }
   .our_projects .our_projects_text {
     max-width: 100%;
-  }
-  .our_projects .our_projects_text .btn_consultation {
-    margin-bottom: 40px;
+    padding: 20px;
+    margin-bottom: 20px;
   }
   .our_projects .our_projects_img {
-    max-width: 100%;
+    width: 100%;
+    max-width: unset;
   }
   .our_projects .our_projects_img img {
     width: 100%;
@@ -137,7 +134,7 @@
   }
   footer .container .location {
     margin-bottom: 20px;
-    padding-left: 50px;
+    padding-left: 38px;
   }
   footer .container .phone_mail_wrap .first_line {
     text-align: left;

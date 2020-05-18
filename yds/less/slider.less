@@ -1,5 +1,5 @@
 // out: ../css/slider.css
-
+@btns_color: #fb2f2f;
 @font-face {
   font-family: "Yoga";
   src: url("../fonts/fonts/Yoga.eot");
@@ -17,29 +17,30 @@
   height: 90vh;
   .wrp_text_appear {
     position: absolute;
-    max-width: 300px;
-    top: 30%;
-    left: 10%;
+    max-width: 100%;
+    top: 15%;
+    left: 0;
+    right: 0;
     z-index: 30;
     #text_appear_1 {
       // font-family: sans-serif;
       font-family: "Yoga", truetype;
-      padding-left: 70px;
-      color: #00a8ff;
+      position: absolute;
+      left: 10%;
+      // padding-left: 70px;
+      color: @btns_color;
       font-weight: 700;
       font-size: 70px;
       transition: all 0.6s ease;
       display: none;
       text-transform: uppercase;
-      text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 20px #3eede5,
-        0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5;
+      text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 10px #fab1a0,
+        0px 0px 10px #fab1a0, 0px 0px 20px #ff7675, 0px 0px 20px #ff7675,
+        0px 0px 30px #d63031, 0px 0px 43px #d63031;
       user-select: none;
       &:hover {
         color: #fff;
-        text-shadow: 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000,
-          0px 0px 20px #000, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5,
-          0px 0px 30px #3eede5, 0px 0px 40px #fff, 0px 0px 40px #fff,
-          0px 0px 40px #fff;
+        text-shadow: none;
       }
       > span {
       }
@@ -56,24 +57,24 @@
       }
     }
     #text_appear_2 {
+      position: absolute;
+      left: 40%;
       font-family: truetype;
       font-family: "Yoga", truetype;
-      padding-left: 20px;
-      color: #00a8ff;
+      // padding-left: 20px;
+      color: @btns_color;
       font-weight: 700;
       font-size: 70px;
       transition: all 0.6s ease;
       display: none;
       user-select: none;
       text-transform: uppercase;
-      text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 20px #3eede5,
-        0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5;
+      text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 10px #fab1a0,
+        0px 0px 10px #fab1a0, 0px 0px 20px #ff7675, 0px 0px 20px #ff7675,
+        0px 0px 30px #d63031, 0px 0px 43px #d63031;
       &:hover {
         color: #fff;
-        text-shadow: 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000,
-          0px 0px 20px #000, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5,
-          0px 0px 30px #3eede5, 0px 0px 40px #fff, 0px 0px 40px #fff,
-          0px 0px 40px #fff;
+        text-shadow: none;
       }
       > span {
       }
@@ -91,22 +92,22 @@
     }
     #text_appear_3 {
       // font-family: sans-serif;
+      position: absolute;
+      left: 65%;
       font-family: "Yoga", sans-serif;
-      color: #00a8ff;
+      color: @btns_color;
       user-select: none;
       font-weight: 700;
       font-size: 70px;
       transition: all 0.6s ease;
       display: none;
       text-transform: uppercase;
-      text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 20px #3eede5,
-        0px 0px 20px #3eede5, 0px 0px 20px #3eede5, 0px 0px 20px #3eede5;
+      text-shadow: 0px 0px 1px #fff, 0px 0px 2px #fff, 0px 0px 10px #fab1a0,
+        0px 0px 10px #fab1a0, 0px 0px 20px #ff7675, 0px 0px 20px #ff7675,
+        0px 0px 30px #d63031, 0px 0px 43px #d63031;
       &:hover {
         color: #fff;
-        text-shadow: 0px 0px 20px #000, 0px 0px 20px #000, 0px 0px 20px #000,
-          0px 0px 20px #000, 0px 0px 30px #3eede5, 0px 0px 30px #3eede5,
-          0px 0px 30px #3eede5, 0px 0px 40px #fff, 0px 0px 40px #fff,
-          0px 0px 40px #fff;
+        text-shadow: none;
       }
       > span {
       }
@@ -132,7 +133,7 @@
       left: 0;
       right: 0;
       text-transform: uppercase;
-      color: #00a8ff;
+      color: @btns_color;
       font-weight: 700;
       font-size: 70px;
       opacity: 1;
@@ -187,7 +188,7 @@
       }
     }
     &:hover {
-      border-color: #00a8ff;
+      border-color: @btns_color;
       // > img svg {
       //   fill: #00a8ff;
       // }
@@ -197,7 +198,7 @@
     }
   }
   .navigation {
-    color: #00a8ff;
+    color: @btns_color;
 
     height: 40px;
     position: absolute;
@@ -212,12 +213,12 @@
       width: 20px;
       margin-right: 15px;
       border-radius: 100%;
-      background-color: #00a8ff;
+      background-color: @btns_color;
       transition: all 0.3s ease;
       cursor: pointer;
 
       p {
-        color: black;
+        color: #fff;
       }
       &.active {
         background-color: white;
@@ -227,6 +228,7 @@
 
         p {
           font-size: 18px;
+          color: #000;
         }
       }
     }
