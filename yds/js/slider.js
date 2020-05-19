@@ -14,10 +14,6 @@ $.fn.slider = function (options) {
     var offset = 0;
     var windowWidth = $('.slider_container').width();
     console.log('window sizes', windowWidth);
-    window.addEventListener("resize", function () {
-        windowWidth = $('.slider_container').width();
-        console.log('achange window sizes', windowWidth);
-    }, false);
     var slides = $('.slider_container .slides_row .slide').length;
     var endCount = slides - 1;
     var slideCount = slides;
@@ -36,12 +32,13 @@ $.fn.slider = function (options) {
         tempCounter = zeroTempCounter;
         slidesController(slideCount);
         $slidesRow.css('transition-duration', '0s');
-        offset = offset + (slides * windowWidth);
-        $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
+        // offset = offset + (slides * windowWidth);
+        // $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
         var sliderItem = $('.slide');
         for (var i = 0; i < slides; i++) {
             sliderItem.eq(sliderItem.length - (i + 1)).clone().prependTo($('.slides_row'));
         }
+        $slidesRow.css('width', (windowWidth * ($('.slider_container .slides_row .slide').length) + 100) + 'px');
         setTimeout(function () {
             $slidesRow.css('transition-duration', params.animationSpeed + 'ms');
         }, 50);
@@ -51,8 +48,10 @@ $.fn.slider = function (options) {
         for (var i = 0; i < slides; i++) {
             sliderItem.eq(i).clone().appendTo($('.slides_row'));
         }
-        offset = offset + (slides * windowWidth);
-        $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
+        $slidesRow.css('width', (windowWidth * ($('.slider_container .slides_row .slide').length) + 100) + 'px');
+
+        // offset = offset + (slides * windowWidth);
+        // $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
         endCount = endCount + slides;
     }
     function slidesController(slideCount) {
@@ -72,11 +71,27 @@ $.fn.slider = function (options) {
     $slidesRow.css('transition-duration', params.animationSpeed + 'ms');
     $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');//??????????? do i need to set this parameter at the begining&
     $('.slide').css('width', windowWidth + 'px');
-    // for (var i = 0; i < slides; i++) {
-    //     content += '<div data_nav=' + (i + 1) + ' class="pointers"><p>' + (i + 1) + '</p></div>';
-    // }
-    // $('.navigation').html(content);
-    // $('.navigation .pointers[data_nav="1"]').addClass('active');
+
+    //drawing navs
+
+    for (var i = 0; i < slides; i++) {
+        content += '<div data_nav=' + (i + 1) + ' class="pointers"><p>' + (i + 1) + '</p></div>';
+    }
+    $('.navigation').html(content);
+    $('.navigation .pointers[data_nav="1"]').addClass('active');
+
+    //  
+    window.addEventListener("resize", function () {
+        // console.log(slideCount, windowWidth, (slideCount * windowWidth * (-1) + distance));
+        windowWidth = $('.slider_container').width();
+        // $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
+
+        $('.slide').css('width', windowWidth + 'px');
+        $slidesRow.css('width', (windowWidth * ($('.slider_container .slides_row .slide').length) + 100) + 'px');
+
+        slidesController(slideCount);
+        console.log(slideCount, windowWidth);
+    }, false);
 
     //Actions
 
