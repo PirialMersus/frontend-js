@@ -2,30 +2,31 @@ $('.background_slider').slider({
     animationSpeed: 900
 });
 
-$(document).ready(function () {
-    $.fn.animate_Text = function () {
-        var string = this.text();
-        return this.each(function () {
-            var $this = $(this);
-            $this.html(string.replace(/./g, '<span class="new">$&</span>'));
-            $this.find('span.new').each(function (i, el) {
-                setTimeout(function () { $(el).addClass('div_opacity'); }, 400 * i);
-            });
-        });
-    };
-    setTimeout(function () {
-        $('#text_appear_1').show();
-        $('#text_appear_1').animate_Text();
-        setTimeout(function () {
-            $('#text_appear_2').show();
-            $('#text_appear_2').animate_Text();
-        }, 1700);
-        setTimeout(function () {
-            $('#text_appear_3').show();
-            $('#text_appear_3').animate_Text();
-        }, 4200);
-    }, 3000);
-});
+// client is thinking. To do this feature or not to do?
+// $(document).ready(function () {
+//     $.fn.animate_Text = function () {
+//         var string = this.text();
+//         return this.each(function () {
+//             var $this = $(this);
+//             $this.html(string.replace(/./g, '<span class="new">$&</span>'));
+//             $this.find('span.new').each(function (i, el) {
+//                 setTimeout(function () { $(el).addClass('div_opacity'); }, 400 * i);
+//             });
+//         });
+//     };
+//     setTimeout(function () {
+//         $('#text_appear_1').show();
+//         $('#text_appear_1').animate_Text();
+//         setTimeout(function () {
+//             $('#text_appear_2').show();
+//             $('#text_appear_2').animate_Text();
+//         }, 1700);
+//         setTimeout(function () {
+//             $('#text_appear_3').show();
+//             $('#text_appear_3').animate_Text();
+//         }, 4200);
+//     }, 3000);
+// });
 
 $(document).on("scroll", window, function () {
     if (section_width > 600) {

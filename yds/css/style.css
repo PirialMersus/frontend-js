@@ -43,6 +43,7 @@ body {
 }
 .drop_modal_form {
   position: fixed;
+  overflow-y: auto;
   top: 60px;
   left: 0;
   right: 0;

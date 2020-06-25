@@ -32,8 +32,6 @@ $.fn.slider = function (options) {
         tempCounter = zeroTempCounter;
         slidesController(slideCount);
         $slidesRow.css('transition-duration', '0s');
-        // offset = offset + (slides * windowWidth);
-        // $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
         var sliderItem = $('.slide');
         for (var i = 0; i < slides; i++) {
             sliderItem.eq(sliderItem.length - (i + 1)).clone().prependTo($('.slides_row'));
@@ -49,9 +47,6 @@ $.fn.slider = function (options) {
             sliderItem.eq(i).clone().appendTo($('.slides_row'));
         }
         $slidesRow.css('width', (windowWidth * ($('.slider_container .slides_row .slide').length) + 100) + 'px');
-
-        // offset = offset + (slides * windowWidth);
-        // $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');
         endCount = endCount + slides;
     }
     function slidesController(slideCount) {
@@ -69,7 +64,6 @@ $.fn.slider = function (options) {
     // Init
 
     $slidesRow.css('transition-duration', params.animationSpeed + 'ms');
-    $slidesRow.css('width', (slides * windowWidth + 100 + offset) + 'px');//??????????? do i need to set this parameter at the begining&
     $('.slide').css('width', windowWidth + 'px');
 
     //drawing navs
