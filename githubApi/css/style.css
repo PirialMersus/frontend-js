@@ -49,11 +49,17 @@ input {
   border-radius: 2px;
   transition: all 0.3s ease;
 }
+input:focus {
+  outline: 3px solid #669ad3;
+}
 input:hover {
   background-color: #e0ebf7;
 }
 button:hover {
   background-color: #669ad3;
+}
+button:focus {
+  outline: 3px solid #669ad3;
 }
 
 button {
@@ -70,6 +76,12 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  opacity: 0;
+  visibility: hidden;
+}
+.user.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .nickNameLink {

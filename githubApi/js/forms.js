@@ -1,49 +1,42 @@
-const form = document.querySelector("form"),
-  input = document.querySelector("input"),
-  div = document.querySelector("div");
+const form = document.getElementById("formId"),
+  input = document.getElementById("inputData"),
+  div = document.getElementsByClassName("user"),
+  user = {};
+// console.log(div[0]);
 
 form.addEventListener("submit", (e) => {
-  let nickName = input.value;
-  render(nickName);
   e.preventDefault();
+
+  div[0].innerHTML = "";
+  div[0].classList.add("active");
+  // findUserData(input.value);
+  renderUser(input.value);
+  input.value = "";
 });
 
-function getDataByNickName(nickName) {
-  $.getJSON("https://api.github.com/users/" + nickName)
-    .done(function (data) {
-      div.insertAdjacentHTML(
-        "beforeend",
-        "<a href=" +
-          data.html_url +
-          " class='nickNameLink'>Ссылка на страничку акаунта</a>"
-      );
-
-      div.insertAdjacentHTML(
-        "beforeend",
-        "<img src=" + data.avatar_url + "alt='ava' width='110px'/>"
-      );
-
-      div.insertAdjacentHTML(
-        "beforeend",
-        '<a href="https://github.com/' +
-          nickName +
-          '?tab=repositories" class="taskLink">Репозитории пользователя (' +
-          data.public_repos +
-          ")</a>"
-      );
-
-      div.insertAdjacentHTML(
-        "beforeend",
-        "<h4> Последняя активность: " + data.updated_at + "</h4>"
-      );
+const renderUser = (nickName) => {
+  fetch(`https://api.github.com/users/${nickName}`)
+    .then((response) => response.json())
+    .then((result) => {
+      div[0].innerHTML = `
+        <a href="${result.html_url}" class="nickNameLink">Ссылка на страничку акаунта</a>
+        <img src="${result.avatar_url}"alt="ava" width="110px"/>
+        <a href="https://github.com/${nickName}?tab=repositories"
+           class="taskLink">Репозитории пользователя (${result.public_repos})</a>
+        <h4> Последняя активность: ${result.updated_at}</h4>
+      `;
     })
-    .fail(function () {
-      $(".user").html("Искомый пользователь не найден");
+    .catch((err) => {
+      div[0].innerHTML = `${err}`;
     });
-}
+  // .fail(function () {
+  //   $(".user").html("Искомый пользователь не найден");
+  // });
+};
 
-function render(nickName) {
-  div.innerHTML = "";
-  getDataByNickName(nickName);
-  input.value = "";
+function findUserData(nickName) {
+  user = fetch(`https://api.github.com/users/${nickName}`).then((response) =>
+    response.json()
+  );
+  return user;
 }
