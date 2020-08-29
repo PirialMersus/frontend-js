@@ -18,7 +18,7 @@ p {
   /* margin: 0;
   padding: 0;
   font-family: "Tahoma"; */
-  /* font-size: 14px; */
+  font-size: 16px;
   /* color: #000000;
   font-weight: 400; */
   /* list-style: none;
@@ -30,6 +30,22 @@ body {
   margin: 0 auto;
   max-width: 80%;
   padding: 20px;
+}
+a {
+  padding: 6px;
+  color: #b3b7bf;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid #e0ebf7;
+  border-radius: 10px;
+}
+a:hover {
+  color: #e0ebf7;
+  background-color: #669ad3;
+  color: #000;
+}
+.sectionFindUser {
+  position: relative;
 }
 .form {
   display: flex;
@@ -73,11 +89,20 @@ button {
 }
 
 .user {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   opacity: 0;
   visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 450px;
+  max-width: 100%;
+  height: auto;
+  background-color: #231e39;
+  text-align: center;
+  padding: 20px;
+  border-radius: 30px;
 }
 .user.active {
   opacity: 1;
@@ -85,64 +110,42 @@ button {
 }
 
 .nickNameLink {
-  animation: nick_appear 1.5s ease;
+  animation: form_appear 1.5s ease;
+  display: block;
+  margin-bottom: 20px;
 }
 
 img {
   animation: form_appear 1.5s ease;
+  display: block;
+  margin: 0 auto;
+
+  margin-bottom: 20px;
+  border-radius: 50%;
+  padding: 3px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 0 7px #231e39, 0 0 0 8px #ddd;
 }
 
 .taskLink {
-  animation: task_appear 1.5s ease;
+  animation: form_appear 1.5s ease;
+  display: block;
 }
 h4 {
-  animation: h4_appear 1.5s ease;
+  animation: form_appear 1.5s ease;
+  display: block;
+  color: #b3b7bf;
+  font-size: 16px;
 }
 
 @keyframes form_appear {
   0% {
-    transform: translateY(200px) rotate(360deg);
+    /* transform: translateY(200px) rotate(360deg); */
     /* transform: rotate(360deg); */
     opacity: 0;
   }
   100% {
-    transform: translateY(0) rotate(0deg);
-    /* transform: rotate(0deg); */
-    opacity: 1;
-  }
-}
-@keyframes nick_appear {
-  0% {
-    transform: translateX(-200px) rotate(360deg);
-    /* transform: rotate(360deg); */
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0) rotate(0deg);
-    /* transform: rotate(0deg); */
-    opacity: 1;
-  }
-}
-@keyframes task_appear {
-  0% {
-    transform: translateX(200px) rotate(360deg);
-    /* transform: rotate(360deg); */
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0) rotate(0deg);
-    /* transform: rotate(0deg); */
-    opacity: 1;
-  }
-}
-@keyframes h4_appear {
-  0% {
-    transform: translateX(-200px) rotate(360deg);
-    /* transform: rotate(360deg); */
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0) rotate(0deg);
+    /* transform: translateY(0) rotate(0deg); */
     /* transform: rotate(0deg); */
     opacity: 1;
   }
