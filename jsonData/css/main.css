@@ -1,0 +1,96 @@
+html,
+body {
+  margin: 0;
+  font-family: "Tahoma";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+a,
+div,
+p {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
+}
+.wrapper {
+  margin: 0 auto;
+  padding: 30px 0;
+  max-width: 800px;
+  background-color: rgba(233, 227, 248, 0.8);
+}
+.wrapper h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+.wrapper form {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.wrapper .tableWrapper {
+  margin: 0 auto;
+}
+.wrapper .tableWrapper .generalTable {
+  margin: 0 auto;
+  margin-bottom: 50px;
+  border: none;
+  box-shadow: 3px 3px 13px #000000;
+}
+.wrapper .tableWrapper .generalTable caption {
+  font-size: 26px;
+  font-weight: 600;
+  padding: 20px;
+}
+.wrapper .tableWrapper .generalTable tr {
+  transition: all 0.3s ease;
+}
+.wrapper .tableWrapper .generalTable tr th {
+  padding: 20px;
+  font-size: 20px;
+}
+.wrapper .tableWrapper .generalTable tr .lastTd {
+  display: flex;
+  justify-content: space-between;
+}
+.wrapper .tableWrapper .generalTable tr .lastTd .pen {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  visibility: hidden;
+  background-image: url(../img/pen.svg);
+  transition: all 0.3s ease;
+}
+.wrapper .tableWrapper .generalTable tr td {
+  padding: 10px;
+}
+.wrapper .tableWrapper .generalTable tr:not(:first-child) {
+  cursor: pointer;
+}
+.wrapper .tableWrapper .generalTable tr:hover:not(:first-child) {
+  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  background-color: rgba(51, 51, 0, 0.2);
+}
+.wrapper .tableWrapper .generalTable tr:hover:not(:first-child) .lastTd .pen {
+  visibility: visible;
+  opacity: 0.7;
+  transform: scale(1.5);
+}
+.wrapper .tableWrapper .generalTable tr:hover:not(:first-child) .lastTd .pen:hover {
+  transform: scale(2);
+}
