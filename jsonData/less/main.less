@@ -46,93 +46,136 @@ p {
         margin-bottom: 30px;
     }
 
-    .tableWrapper {
-        // position: relative;
+    .generalTable {
         margin: 0 auto;
+        margin-bottom: 50px;
+        border: none;
+        box-shadow: 3px 3px 13px rgba(0, 0, 0, 1);
 
-        .generalTable {
-            margin: 0 auto;
-            margin-bottom: 50px;
-            border: none;
-            box-shadow: 3px 3px 13px rgba(0, 0, 0, 1);
+        caption {
+            font-size: 26px;
+            font-weight: 600;
+            padding: 20px;
+        }
 
-            caption {
-                font-size: 26px;
-                font-weight: 600;
+        tr {
+            transition: all 0.3s ease;
+
+
+            th {
                 padding: 20px;
+                font-size: 20px;
             }
 
-            tr {
-                transition: all 0.3s ease;
+            .lastTd {
+                display: flex;
+                justify-content: space-between;
 
-                th {
-                    padding: 20px;
-                    font-size: 20px;
+                .pen {
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    opacity: 0;
+                    visibility: hidden;
+                    background-image: url(../img/pen.svg);
+                    transition: all 0.3s ease;
                 }
+            }
 
-                .lastTd {
+            td {
+                padding: 10px;
+                position: relative;
+
+                form {
                     display: flex;
                     justify-content: space-between;
+                    position: absolute;
 
-                    .pen {
-                        display: block;
-                        width: 20px;
-                        height: 20px;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        opacity: 0;
-                        visibility: hidden;
-                        background-image: url(../img/pen.svg);
-                        transition: all 0.3s ease;
+                    top: 0;
+                    left: 0;
+                    z-index: 1;
+                    border: none;
 
+                    .wrapperIcons {
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        bottom: 0;
+                        display: flex;
+                        vertical-align: center;
 
-                    }
-                }
+                        .iconsGeneralRulls {
+                            display: block;
+                            width: 25px;
+                            height: 25px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            // opacity: 0;
+                            // visibility: hidden;
 
-                td {
-                    padding: 10px;
-                }
-            }
+                            transition: all 0.3s ease;
+                        }
 
-            tr:not(:first-child) {
-                cursor: pointer;
-            }
+                        .saveIcon {
+                            background-image: url(../img/save.svg);
+                        }
 
-            tr:hover:not(:first-child) {
-
-                box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
-                    0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-                background-color: rgba(51, 51, 0, 0.2);
-
-                .lastTd {
-                    .pen {
-                        visibility: visible;
-                        opacity: 0.7;
-                        transform: scale(1.5);
-
-                        &:hover {
-                            transform: scale(2);
+                        .cancelIcon {
+                            background-image: url(../img/cancel.svg);
                         }
                     }
                 }
             }
 
+            #selectedTd {}
+
 
         }
 
-        #dataTable {
-            // opacity: 0;
-            // visibility: hidden;
+        .selected {
+            color: red;
         }
 
-        // #copyTable {
-        //     position: absolute;
-        //     top: 0;
-        //     bottom: 0;
-        //     left: 0;
-        //     right: 0;
-        //     opacity: 0;
-        //     visibility: hidden;
-        // }
+        tr:not(:first-child) {
+            cursor: pointer;
+        }
+
+        tr:hover:not(:first-child) {
+
+            box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
+                0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+            background-color: rgba(51, 51, 0, 0.2);
+
+            .lastTd {
+                .pen {
+                    visibility: visible;
+                    opacity: 0.7;
+                    transform: scale(1.5);
+
+                    &:hover {
+                        transform: scale(2);
+                    }
+                }
+            }
+        }
+
+
     }
+
+    #dataTable {
+        // opacity: 0;
+        // visibility: hidden;
+    }
+
+    // #copyTable {
+    //     position: absolute;
+    //     top: 0;
+    //     bottom: 0;
+    //     left: 0;
+    //     right: 0;
+    //     opacity: 0;
+    //     visibility: hidden;
+    // }
 }

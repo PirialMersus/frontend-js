@@ -1,0 +1,124 @@
+<body>
+  <div class="wrapper">
+    <h1>Working with Json Data</h1>
+    <form action="#">
+      <input id="inputFile" type="file" multiple="" />
+    </form>
+    <table class="generalTable" border="1" id="dataTable">
+      <caption>
+        Данные из файла
+      </caption>
+      <tbody>
+        <tr>
+          <th>candidateName</th>
+          <th>candidateStatus</th>
+          <th>candidateNeedOffer</th>
+        </tr>
+        <!-- // -->
+        <tr
+          class="selected"
+          style="height: 42px; width: 658px; position: relative"
+        >
+          <td>
+            <form
+              id="formReductRow"
+              action="#"
+              style="height: 42px; width: 656px"
+            >
+              <input
+                type="text"
+                class="inputFormReduct"
+                value="Roman Romanov"
+                style="width: 197px"
+              /><input
+                type="text"
+                class="inputFormReduct"
+                value="oninterview"
+                style="width: 203px"
+              /><input
+                type="text"
+                class="inputFormReduct"
+                value="2400"
+                style="width: 241px"
+              />
+            </form>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <!-- // -->
+        <tr>
+          <td data-row="1" data-col="0">Ivan Ivanov</td>
+          <td data-row="1" data-col="1">pending</td>
+          <td class="lastTd" data-row="1" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="2" data-col="0">Roman Romanov</td>
+          <td data-row="2" data-col="1">oninterview</td>
+          <td class="lastTd" data-row="2" data-col="2">
+            2400
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="3" data-col="0">Konstantin Fesenko</td>
+          <td data-row="3" data-col="1">on_test_perdiod</td>
+          <td class="lastTd" data-row="3" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="4" data-col="0">Roman Konstantinov</td>
+          <td data-row="4" data-col="1">on_test_perdiod</td>
+          <td class="lastTd" data-row="4" data-col="2">
+            123456
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="5" data-col="0">Konstantin Konstantinov</td>
+          <td data-row="5" data-col="1">on_test_perdiod</td>
+          <td class="lastTd" data-row="5" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="6" data-col="0">Optre Hgterrw</td>
+          <td data-row="6" data-col="1">on_test_perdiod</td>
+          <td class="lastTd" data-row="6" data-col="2">
+            5678
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="7" data-col="0">Omg Ksdsfnov</td>
+          <td data-row="7" data-col="1">on_prison</td>
+          <td class="lastTd" data-row="7" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="8" data-col="0">Naz Rtu</td>
+          <td data-row="8" data-col="1">validate</td>
+          <td class="lastTd" data-row="8" data-col="2">
+            200
+            <div class="pen"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <form id="formReductRow" action="#">${row}
+    <div class="wrapperIcons">
+      <div class="iconsGeneralRulls saveIcon"><div/>
+      <div class="iconsGeneralRulls cancelIcon"><div/>
+    <div/>
+</form>
+  <script src="js/main.js"></script>
+</body>

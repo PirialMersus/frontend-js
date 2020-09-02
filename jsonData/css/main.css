@@ -40,32 +40,29 @@ p {
   text-align: center;
   margin-bottom: 30px;
 }
-.wrapper .tableWrapper {
-  margin: 0 auto;
-}
-.wrapper .tableWrapper .generalTable {
+.wrapper .generalTable {
   margin: 0 auto;
   margin-bottom: 50px;
   border: none;
   box-shadow: 3px 3px 13px #000000;
 }
-.wrapper .tableWrapper .generalTable caption {
+.wrapper .generalTable caption {
   font-size: 26px;
   font-weight: 600;
   padding: 20px;
 }
-.wrapper .tableWrapper .generalTable tr {
+.wrapper .generalTable tr {
   transition: all 0.3s ease;
 }
-.wrapper .tableWrapper .generalTable tr th {
+.wrapper .generalTable tr th {
   padding: 20px;
   font-size: 20px;
 }
-.wrapper .tableWrapper .generalTable tr .lastTd {
+.wrapper .generalTable tr .lastTd {
   display: flex;
   justify-content: space-between;
 }
-.wrapper .tableWrapper .generalTable tr .lastTd .pen {
+.wrapper .generalTable tr .lastTd .pen {
   display: block;
   width: 20px;
   height: 20px;
@@ -76,21 +73,56 @@ p {
   background-image: url(../img/pen.svg);
   transition: all 0.3s ease;
 }
-.wrapper .tableWrapper .generalTable tr td {
+.wrapper .generalTable tr td {
   padding: 10px;
+  position: relative;
 }
-.wrapper .tableWrapper .generalTable tr:not(:first-child) {
+.wrapper .generalTable tr td form {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border: none;
+}
+.wrapper .generalTable tr td form .wrapperIcons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  vertical-align: center;
+}
+.wrapper .generalTable tr td form .wrapperIcons .iconsGeneralRulls {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.3s ease;
+}
+.wrapper .generalTable tr td form .wrapperIcons .saveIcon {
+  background-image: url(../img/save.svg);
+}
+.wrapper .generalTable tr td form .wrapperIcons .cancelIcon {
+  background-image: url(../img/cancel.svg);
+}
+.wrapper .generalTable .selected {
+  color: red;
+}
+.wrapper .generalTable tr:not(:first-child) {
   cursor: pointer;
 }
-.wrapper .tableWrapper .generalTable tr:hover:not(:first-child) {
+.wrapper .generalTable tr:hover:not(:first-child) {
   box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
   background-color: rgba(51, 51, 0, 0.2);
 }
-.wrapper .tableWrapper .generalTable tr:hover:not(:first-child) .lastTd .pen {
+.wrapper .generalTable tr:hover:not(:first-child) .lastTd .pen {
   visibility: visible;
   opacity: 0.7;
   transform: scale(1.5);
 }
-.wrapper .tableWrapper .generalTable tr:hover:not(:first-child) .lastTd .pen:hover {
+.wrapper .generalTable tr:hover:not(:first-child) .lastTd .pen:hover {
   transform: scale(2);
 }

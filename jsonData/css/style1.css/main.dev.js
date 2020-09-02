@@ -1,8 +1,10 @@
 "use strict";
 
 var input = document.getElementById("inputFile");
-var dataTable = document.getElementById("dataTable");
-var copyTable = document.getElementById("copyTable"); // let dataJSON;
+var dataTable = document.getElementById("dataTable"); // let copyTable = document.getElementById("copyTable");
+
+var selectedRow = ""; // copyTable.classList.remove("selected");
+// let dataJSON;
 // input.addEventListener(
 //   "change",
 //   function (event) {
@@ -63,7 +65,7 @@ function renderJSON(data) {
       tableForRender = "";
 
   for (var j = 0; j < jsonKeys.length; j++) {
-    tableForRender += "<th>".concat(jsonKeys[j], "</th>");
+    tableForRender += "<th data-number>".concat(jsonKeys[j], "</th>");
   }
 
   dataForRender = "<tr>".concat(tableForRender, "</tr>");
@@ -121,11 +123,45 @@ function renderCopyTable(data) {
 renderJSON(data); // renderCopyTable(data);
 
 dataTable.onclick = function (event) {
+  var jsonKeys = Object.keys(data[0]);
+  var thAll = document.querySelectorAll("th[data-number]");
+  var numberOfCols = 0;
   var td = event.target.closest("td"); // (1)
 
   if (!td) return; // (2)
 
   if (!dataTable.contains(td)) return; // (3)
 
-  console.log(td);
+  if (selectedRow) {
+    selectedRow.classList.remove("selected");
+  }
+
+  var height = td.parentNode.clientHeight;
+  var width = td.parentNode.clientWidth;
+  selectedRow = td.parentNode;
+  var rowAttribute = td.getAttribute("data-row");
+  selectedRow.classList.add("selected");
+  selectedRow.style.height = height + "px";
+  selectedRow.style.width = width + "px";
+  selectedRow.style.position = "relative"; // <form action="">
+  //   <input type="text" value="${data[rowAttribute][jsonKeys[j]]}" />
+  // </form>;
+
+  var row = "";
+
+  for (var j = 0; j < jsonKeys.length; j++) {
+    row += "<input type=\"text\" class=\"inputFormReduct\" value=\"".concat(data[rowAttribute][jsonKeys[j]], "\"/>");
+    numberOfCols = j;
+  }
+
+  var dataForInputRow = "<td>\n    <form id=\"formReductRow\" action=\"#\">".concat(row, "\n        <div class=\"wrapperIcons\">\n          <div class=\"iconsGeneralRulls saveIcon\"></div>\n          <div class=\"iconsGeneralRulls cancelIcon\"></div>\n        </div>\n    </form>\n  </td>\n  <td></td>\n  <td></td>");
+  selectedRow.innerHTML = dataForInputRow;
+  document.getElementById("formReductRow").style.height = height + "px";
+  document.getElementById("formReductRow").style.width = width - numberOfCols + "px";
+  var inputs = document.getElementsByClassName("inputFormReduct");
+
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].style.width = thAll[i].clientWidth - 1 + "px";
+  } // console.log();
+
 };
