@@ -1,7 +1,8 @@
 "use strict";
 
 var input = document.getElementById("inputFile");
-var dataTable = document.getElementById("dataTable"); // let copyTable = document.getElementById("copyTable");
+var dataTable = document.getElementById("dataTable");
+var isFormToReductDataOpen = false; // let copyTable = document.getElementById("copyTable");
 
 var selectedRow = ""; // copyTable.classList.remove("selected");
 // let dataJSON;
@@ -90,39 +91,11 @@ function renderJSON(data) {
   dataTable.innerHTML = dataForRender; // console.log(dataForRender);
 }
 
-function renderCopyTable(data) {
-  var jsonKeys = Object.keys(data[0]);
-  var dataForRender,
-      tableForRender = "";
-
-  for (var j = 0; j < jsonKeys.length; j++) {
-    tableForRender += "<th>".concat(jsonKeys[j], "</th>");
-  }
-
-  dataForRender = "<tr>".concat(tableForRender, "</tr>");
-  tableForRender = "";
-
-  for (var i = 0; i < data.length; i++) {
-    var tempLine = "";
-
-    for (var _j2 = 0; _j2 < jsonKeys.length; _j2++) {
-      if (_j2 === jsonKeys.length - 1) {
-        tempLine += "<td class=\"lastTd\">".concat(data[i][jsonKeys[_j2]], "<div class=\"pen\"></div></td>");
-      } else {
-        tempLine += "<td>".concat(data[i][jsonKeys[_j2]], "</td>");
-      }
-    }
-
-    tableForRender += "<tr>".concat(tempLine, "</tr>");
-  }
-
-  dataForRender = "\n      <caption>\n        \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n      </caption>\n      ".concat(dataForRender, "\n      ").concat(tableForRender, "\n    ");
-  copyTable.innerHTML = dataForRender; // console.log(dataForRender);
-}
-
 renderJSON(data); // renderCopyTable(data);
 
 dataTable.onclick = function (event) {
+  if (isFormToReductDataOpen) return;
+  isFormToReductDataOpen = true;
   var jsonKeys = Object.keys(data[0]);
   var thAll = document.querySelectorAll("th[data-number]");
   var numberOfCols = 0;
@@ -154,7 +127,7 @@ dataTable.onclick = function (event) {
     numberOfCols = j;
   }
 
-  var dataForInputRow = "<td>\n    <form id=\"formReductRow\" action=\"#\">".concat(row, "\n        <div class=\"wrapperIcons\">\n          <div class=\"iconsGeneralRulls saveIcon\"></div>\n          <div class=\"iconsGeneralRulls cancelIcon\"></div>\n        </div>\n    </form>\n  </td>\n  <td></td>\n  <td></td>");
+  var dataForInputRow = "<td>\n    <form id=\"formReductRow\" action=\"#\">".concat(row, "\n    <div class=\"wrapperButtons\">\n          <button type=\"submit\" class=\"iconsGeneralRulls saveIcon\"></button>\n          <button class=\"iconsGeneralRulls cancelIcon\"></button>\n        </div>\n    </form>\n  </td>\n  <td></td>\n  <td></td>");
   selectedRow.innerHTML = dataForInputRow;
   document.getElementById("formReductRow").style.height = height + "px";
   document.getElementById("formReductRow").style.width = width - numberOfCols + "px";
@@ -162,6 +135,10 @@ dataTable.onclick = function (event) {
 
   for (var i = 0; i < inputs.length; i++) {
     inputs[i].style.width = thAll[i].clientWidth - 1 + "px";
-  } // console.log();
-
+  }
 };
+
+document.getElementById("formReductRow").addEventListener("submit", function (e) {
+  e.preventDefault();
+  console.log("working");
+});

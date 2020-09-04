@@ -36,7 +36,7 @@ p {
   font-size: 28px;
   margin-bottom: 30px;
 }
-.wrapper form {
+.wrapper > form {
   text-align: center;
   margin-bottom: 30px;
 }
@@ -86,26 +86,32 @@ p {
   z-index: 1;
   border: none;
 }
-.wrapper .generalTable tr td form .wrapperIcons {
+.wrapper .generalTable tr td form .wrapperButtons {
   position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
   display: flex;
-  vertical-align: center;
+  align-items: center;
 }
-.wrapper .generalTable tr td form .wrapperIcons .iconsGeneralRulls {
+.wrapper .generalTable tr td form .wrapperButtons .iconsGeneralRulls {
+  background-color: rgba(255, 255, 255, 0);
   display: block;
   width: 25px;
   height: 25px;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
+  margin-right: 10px;
+  border: none;
 }
-.wrapper .generalTable tr td form .wrapperIcons .saveIcon {
+.wrapper .generalTable tr td form .wrapperButtons .iconsGeneralRulls:hover {
+  transform: scale(1.9);
+}
+.wrapper .generalTable tr td form .wrapperButtons .saveIcon {
   background-image: url(../img/save.svg);
 }
-.wrapper .generalTable tr td form .wrapperIcons .cancelIcon {
+.wrapper .generalTable tr td form .wrapperButtons .cancelIcon {
   background-image: url(../img/cancel.svg);
 }
 .wrapper .generalTable .selected {
@@ -125,4 +131,10 @@ p {
 }
 .wrapper .generalTable tr:hover:not(:first-child) .lastTd .pen:hover {
   transform: scale(2);
+}
+.wrapper .plug form {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+  height: 0;
 }

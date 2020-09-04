@@ -1,5 +1,6 @@
 let input = document.getElementById("inputFile");
 let dataTable = document.getElementById("dataTable");
+let isFormToReductDataOpen = false;
 // let copyTable = document.getElementById("copyTable");
 let selectedRow = "";
 // copyTable.classList.remove("selected");
@@ -104,44 +105,12 @@ function renderJSON(data) {
   // console.log(dataForRender);
 }
 
-function renderCopyTable(data) {
-  const jsonKeys = Object.keys(data[0]);
-  let dataForRender,
-    tableForRender = "";
-  for (let j = 0; j < jsonKeys.length; j++) {
-    tableForRender += `<th>${jsonKeys[j]}</th>`;
-  }
-  dataForRender = `<tr>${tableForRender}</tr>`;
-  tableForRender = "";
-
-  for (let i = 0; i < data.length; i++) {
-    let tempLine = "";
-    for (let j = 0; j < jsonKeys.length; j++) {
-      if (j === jsonKeys.length - 1) {
-        tempLine += `<td class="lastTd">${
-          data[i][jsonKeys[j]]
-        }<div class="pen"></div></td>`;
-      } else {
-        tempLine += `<td>${data[i][jsonKeys[j]]}</td>`;
-      }
-    }
-    tableForRender += `<tr>${tempLine}</tr>`;
-  }
-  dataForRender = `
-      <caption>
-        Данные из файла
-      </caption>
-      ${dataForRender}
-      ${tableForRender}
-    `;
-  copyTable.innerHTML = dataForRender;
-  // console.log(dataForRender);
-}
-
 renderJSON(data);
 // renderCopyTable(data);
 
 dataTable.onclick = function (event) {
+  if (isFormToReductDataOpen) return;
+  isFormToReductDataOpen = true;
   const jsonKeys = Object.keys(data[0]);
   const thAll = document.querySelectorAll("th[data-number]");
   let numberOfCols = 0;
@@ -177,9 +146,9 @@ dataTable.onclick = function (event) {
   }
   const dataForInputRow = `<td>
     <form id="formReductRow" action="#">${row}
-        <div class="wrapperIcons">
-          <div class="iconsGeneralRulls saveIcon"></div>
-          <div class="iconsGeneralRulls cancelIcon"></div>
+    <div class="wrapperButtons">
+          <button type="submit" class="iconsGeneralRulls saveIcon"></button>
+          <button class="iconsGeneralRulls cancelIcon"></button>
         </div>
     </form>
   </td>
@@ -195,6 +164,9 @@ dataTable.onclick = function (event) {
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].style.width = thAll[i].clientWidth - 1 + "px";
   }
-
-  // console.log();
 };
+
+document.getElementById("formReductRow").addEventListener("submit", (e) => {
+  e.preventDefault();
+  console.log("working");
+});

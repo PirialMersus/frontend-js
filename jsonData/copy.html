@@ -10,11 +10,26 @@
       </caption>
       <tbody>
         <tr>
-          <th>candidateName</th>
-          <th>candidateStatus</th>
-          <th>candidateNeedOffer</th>
+          <th data-number="">candidateName</th>
+          <th data-number="">candidateStatus</th>
+          <th data-number="">candidateNeedOffer</th>
         </tr>
-        <!-- // -->
+        <tr>
+          <td data-row="0" data-col="0">Peter Petrov</td>
+          <td data-row="0" data-col="1">pending</td>
+          <td class="lastTd" data-row="0" data-col="2">
+            1800
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="1" data-col="0">Ivan Ivanov</td>
+          <td data-row="1" data-col="1">pending</td>
+          <td class="lastTd" data-row="1" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
         <tr
           class="selected"
           style="height: 42px; width: 658px; position: relative"
@@ -41,27 +56,14 @@
                 value="2400"
                 style="width: 241px"
               />
+              <div class="wrapperButtons">
+                <div class="iconsGeneralRulls saveIcon"></div>
+                <div class="iconsGeneralRulls cancelIcon"></div>
+              </div>
             </form>
           </td>
           <td></td>
           <td></td>
-        </tr>
-        <!-- // -->
-        <tr>
-          <td data-row="1" data-col="0">Ivan Ivanov</td>
-          <td data-row="1" data-col="1">pending</td>
-          <td class="lastTd" data-row="1" data-col="2">
-            3000
-            <div class="pen"></div>
-          </td>
-        </tr>
-        <tr>
-          <td data-row="2" data-col="0">Roman Romanov</td>
-          <td data-row="2" data-col="1">oninterview</td>
-          <td class="lastTd" data-row="2" data-col="2">
-            2400
-            <div class="pen"></div>
-          </td>
         </tr>
         <tr>
           <td data-row="3" data-col="0">Konstantin Fesenko</td>
@@ -114,11 +116,39 @@
       </tbody>
     </table>
   </div>
-  <form id="formReductRow" action="#">${row}
-    <div class="wrapperIcons">
-      <div class="iconsGeneralRulls saveIcon"><div/>
-      <div class="iconsGeneralRulls cancelIcon"><div/>
-    <div/>
-</form>
   <script src="js/main.js"></script>
 </body>
+
+<!-- function renderCopyTable(data) {
+  const jsonKeys = Object.keys(data[0]);
+  let dataForRender,
+    tableForRender = "";
+  for (let j = 0; j < jsonKeys.length; j++) {
+    tableForRender += `<th>${jsonKeys[j]}</th>`;
+  }
+  dataForRender = `<tr>${tableForRender}</tr>`;
+  tableForRender = "";
+
+  for (let i = 0; i < data.length; i++) {
+    let tempLine = "";
+    for (let j = 0; j < jsonKeys.length; j++) {
+      if (j === jsonKeys.length - 1) {
+        tempLine += `<td class="lastTd">${
+          data[i][jsonKeys[j]]
+        }<div class="pen"></div></td>`;
+      } else {
+        tempLine += `<td>${data[i][jsonKeys[j]]}</td>`;
+      }
+    }
+    tableForRender += `<tr>${tempLine}</tr>`;
+  }
+  dataForRender = `
+      <caption>
+        Данные из файла
+      </caption>
+      ${dataForRender}
+      ${tableForRender}
+    `;
+  copyTable.innerHTML = dataForRender;
+  // console.log(dataForRender);
+} -->
