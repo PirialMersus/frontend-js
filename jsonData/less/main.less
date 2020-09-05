@@ -4,6 +4,7 @@ html,
 body {
     margin: 0;
     font-family: "Tahoma";
+    text-align: center;
 }
 
 h1,
@@ -30,9 +31,10 @@ p {
 }
 
 .wrapper {
+    display: inline-block;
     margin: 0 auto;
-    padding: 30px 0;
-    max-width: 1000px;
+    padding: 30px 30px;
+    min-width: 800px;
     background-color: rgba(233, 227, 248, 0.8);
 
     h1 {
@@ -88,6 +90,7 @@ p {
             .lastTd {
                 display: flex;
                 justify-content: space-between;
+                height: 100%;
 
                 .pen {
                     display: block;

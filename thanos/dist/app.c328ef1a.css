@@ -1,0 +1,18 @@
+body {
+  font-family: "Comic Sans MS", sans-serif;
+}
+.sr {
+  max-width: 600px;
+  margin: 30px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.sr h2 {
+  margin: 0;
+}
+canvas {
+  margin: 30px;
+}
+
+
+/*# sourceMappingURL=/app.c328ef1a.css.map */

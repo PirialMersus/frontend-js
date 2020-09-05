@@ -93,17 +93,18 @@ dataTable.onclick = function (event) {
     }"/>`;
     numberOfCols = j;
   }
-  const dataForInputRow = `<td>
-    <form id="formReductRow" action="#">${row}
-    <div class="wrapperButtons">
+  const dataForInputRow = `<form id="formReductRow" action="#">${row}
+        <div class="wrapperButtons">
           <button type="submit" class="iconsGeneralRulls saveIcon"></button>
           <button type="reset" class="iconsGeneralRulls cancelIcon"></button>
         </div>
     </form>
-  </td>
   `;
 
-  selectedRow.innerHTML = dataForInputRow;
+  selectedRow.firstElementChild.insertAdjacentHTML(
+    "beforeEnd",
+    dataForInputRow
+  );
   selectedRow.style.height = height + "px";
   selectedRow.style.width = width + "px";
   document.getElementById("formReductRow").style.height = height + "px";

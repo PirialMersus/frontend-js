@@ -85,8 +85,8 @@ dataTable.onclick = function (event) {
     numberOfCols = j;
   }
 
-  var dataForInputRow = "<td>\n    <form id=\"formReductRow\" action=\"#\">".concat(row, "\n    <div class=\"wrapperButtons\">\n          <button type=\"submit\" class=\"iconsGeneralRulls saveIcon\"></button>\n          <button type=\"reset\" class=\"iconsGeneralRulls cancelIcon\"></button>\n        </div>\n    </form>\n  </td>\n  ");
-  selectedRow.innerHTML = dataForInputRow;
+  var dataForInputRow = "<form id=\"formReductRow\" action=\"#\">".concat(row, "\n        <div class=\"wrapperButtons\">\n          <button type=\"submit\" class=\"iconsGeneralRulls saveIcon\"></button>\n          <button type=\"reset\" class=\"iconsGeneralRulls cancelIcon\"></button>\n        </div>\n    </form>\n  ");
+  selectedRow.firstElementChild.insertAdjacentHTML("beforeEnd", dataForInputRow);
   selectedRow.style.height = height + "px";
   selectedRow.style.width = width + "px";
   document.getElementById("formReductRow").style.height = height + "px";
