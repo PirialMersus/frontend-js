@@ -32,7 +32,7 @@ p {
 .wrapper {
     margin: 0 auto;
     padding: 30px 0;
-    max-width: 800px;
+    max-width: 1000px;
     background-color: rgba(233, 227, 248, 0.8);
 
     h1 {
@@ -44,6 +44,22 @@ p {
     >form {
         text-align: center;
         margin-bottom: 30px;
+
+        label {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: rgb(168, 138, 245);
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: rgb(132, 86, 248);
+            }
+        }
+
+        input {
+            display: none;
+        }
     }
 
     .generalTable {
@@ -51,6 +67,9 @@ p {
         margin-bottom: 50px;
         border: none;
         box-shadow: 3px 3px 13px rgba(0, 0, 0, 1);
+        table-layout: fixed;
+        max-width: 90%;
+        text-align: left;
 
         caption {
             font-size: 26px;
@@ -86,6 +105,7 @@ p {
             td {
                 padding: 10px;
                 position: relative;
+                word-wrap: break-word;
 
                 form {
                     display: flex;
@@ -114,6 +134,7 @@ p {
                             transition: all 0.3s ease;
                             margin-right: 10px;
                             border: none;
+                            cursor: pointer;
 
 
                             &:hover {
@@ -131,14 +152,6 @@ p {
                     }
                 }
             }
-
-            #selectedTd {}
-
-
-        }
-
-        .selected {
-            color: red;
         }
 
         tr:not(:first-child) {
@@ -147,8 +160,7 @@ p {
 
         tr:hover:not(:first-child) {
 
-            box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
-                0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+
             background-color: rgba(51, 51, 0, 0.2);
 
             .lastTd {
@@ -163,8 +175,6 @@ p {
                 }
             }
         }
-
-
     }
 
     #dataTable {
@@ -172,21 +182,19 @@ p {
         // visibility: hidden;
     }
 
-    // #copyTable {
-    //     position: absolute;
-    //     top: 0;
-    //     bottom: 0;
-    //     left: 0;
-    //     right: 0;
-    //     opacity: 0;
-    //     visibility: hidden;
-    // }
-    .plug {
-        form {
-            opacity: 0;
-            visibility: hidden;
-            width: 0;
-            height: 0;
+    #save {
+        // display: block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: rgb(168, 138, 245);
+        cursor: pointer;
+        margin-right: 30px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: rgb(132, 86, 248);
         }
     }
+
+    text-align: right;
 }
