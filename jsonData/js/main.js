@@ -47,7 +47,7 @@ function renderJSON(data) {
     tableForRender += `<tr>${tempLine}</tr>`;
   }
   dataForRender = `
-  <caption>
+  <caption id="capture">
   Данные из файла
   </caption>
   ${dataForRender}
@@ -64,6 +64,9 @@ input.addEventListener(
     reader.onload = function (event) {
       data = JSON.parse(reader.result);
       jsonKeys = Object.keys(data[0]);
+      dataTable.style.display = "block";
+      dataTable.style.transform = "scale(" + 1 + ")";
+      dataTable.style.opacity = 1;
       renderJSON(data);
     };
     reader.readAsText(file); //????????????зачем эта строка
@@ -132,9 +135,80 @@ dataTable.onclick = function (event) {
   });
 };
 
+//////////////////////// click SAVE
+
 document.getElementById("save").onclick = function () {
-  let text = JSON.stringify(data);
-  this.href = "data:attachment/text," + encodeURI(text);
-  this.target = "_blank";
-  this.download = "filename.json";
+  if (data) {
+    let text = JSON.stringify(data);
+    this.href = "data:attachment/text," + encodeURI(text);
+    this.target = "_blank";
+    this.download = "filename.json";
+  } else alert("Download file first");
 };
+
+//////////////////////// click RESET
+
+document.getElementById("reset").onclick = function () {
+  dataTable.style.transform = "scale(" + 0.00001 + ")";
+  dataTable.style.opacity = 0;
+  setTimeout(() => {
+    dataTable.style.display = "none";
+  }, 2000);
+  setTimeout(() => {
+    dataTable.style.display = "none";
+  }, 2000);
+  // if (true) {
+  //   html2canvas(document.querySelector("#capture")).then((canvas) => {
+  //     let width = canvas.width;
+  //     let height = canvas.height;
+  //     let ctx = canvas.getContext("2d");
+  //     let idata = ctx.getImageData(0, 0, width, height);
+  //     let datums = [];
+
+  //     for (let i = 0; i < 36; i++) {
+  //       datums.push(ctx.createImageData(width, height));
+  //       // datums.push(idata);
+  //     }
+
+  //     for (let f = 0; f < width; f++) {
+  //       for (let k = 0; k < height; k++) {
+  //         for (let l = 0; l < 2; l++) {
+  //           let n = 4 * (k * width + f);
+  //           let m = Math.floor((36 * (Math.random() + (2 * f) / width)) / 3);
+  //           for (let p = 0; p < 4; p++) {
+  //             // console.log(idata.data[n]);
+  //             datums[m].data[n + p] = idata.data[n + p];
+  //           }
+  //         }
+  //       }
+  //     }
+
+  //     datums.forEach((imagedata, i) => {
+  //       let cloned = canvas.cloneNode();
+
+  //       cloned.style.transition = "all 1.5s ease-out " + (1.5 * i) / 36 + "s";
+
+  //       cloned.getContext("2d").putImageData(imagedata, 0, 0);
+  //       document.body.appendChild(cloned);
+
+  //       setTimeout(() => {
+  //         let angle = (Math.random() - 0.5) * 2 * Math.PI;
+  //         let rotateAngle = 15 * (Math.random() - 0.5);
+  //         cloned.style.transform =
+  //           "rotate(" +
+  //           rotateAngle +
+  //           "deg) translate(" +
+  //           60 * Math.cos(angle) +
+  //           "px," +
+  //           60 * Math.sin(angle) +
+  //           "px) rotate(" +
+  //           rotateAngle +
+  //           "deg)";
+  //         cloned.style.opacity = 0;
+  //       });
+  //     });
+  //   });
+  // } else alert("Table is Empty");
+};
+
+///////////

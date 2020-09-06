@@ -16,15 +16,39 @@ html2canvas(document.querySelector("#capture")).then((canvas) => {
 
   for (let f = 0; f < width; f++) {
     for (let k = 0; k < height; k++) {
-      let n = 4 * (k * width + f);
-      console.log(idata.data[n]);
+      for (let l = 0; l < 2; l++) {
+        let n = 4 * (k * width + f);
+        let m = Math.floor((36 * (Math.random() + (2 * f) / width)) / 3);
+        for (let p = 0; p < 4; p++) {
+          // console.log(idata.data[n]);
+          datums[m].data[n + p] = idata.data[n + p];
+        }
+      }
     }
   }
 
-  datums.forEach((imagedata) => {
+  datums.forEach((imagedata, i) => {
     let cloned = canvas.cloneNode();
+
+    cloned.style.transition = "all 1.5s ease-out " + (1.5 * i) / 36 + "s";
 
     cloned.getContext("2d").putImageData(imagedata, 0, 0);
     document.body.appendChild(cloned);
+
+    setTimeout(() => {
+      let angle = (Math.random() - 0.5) * 2 * Math.PI;
+      let rotateAngle = 15 * (Math.random() - 0.5);
+      cloned.style.transform =
+        "rotate(" +
+        rotateAngle +
+        "deg) translate(" +
+        60 * Math.cos(angle) +
+        "px," +
+        60 * Math.sin(angle) +
+        "px) rotate(" +
+        rotateAngle +
+        "deg)";
+      cloned.style.opacity = 0;
+    });
   });
 });

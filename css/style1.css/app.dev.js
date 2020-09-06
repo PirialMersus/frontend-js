@@ -20,14 +20,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
   for (var f = 0; f < width; f++) {
     for (var k = 0; k < height; k++) {
-      var n = 4 * (k * width + f);
-      console.log(idata.data[n]);
+      for (var l = 0; l < 2; l++) {
+        var n = 4 * (k * width + f);
+        var m = Math.floor(36 * (Math.random() + 2 * f / width) / 3);
+
+        for (var p = 0; p < 4; p++) {
+          // console.log(idata.data[n]);
+          datums[m].data[n + p] = idata.data[n + p];
+        }
+      }
     }
   }
 
-  datums.forEach(function (imagedata) {
+  datums.forEach(function (imagedata, i) {
     var cloned = canvas.cloneNode();
+    cloned.style.transition = "all 1.5s ease-out " + 1.5 * i / 36 + "s";
     cloned.getContext("2d").putImageData(imagedata, 0, 0);
     document.body.appendChild(cloned);
+    setTimeout(function () {
+      var angle = (Math.random() - 0.5) * 2 * Math.PI;
+      var rotateAngle = 15 * (Math.random() - 0.5);
+      cloned.style.transform = "rotate(" + rotateAngle + "deg) translate(" + 60 * Math.cos(angle) + "px," + 60 * Math.sin(angle) + "px) rotate(" + rotateAngle + "deg)";
+      cloned.style.opacity = 0;
+    });
   });
 });
