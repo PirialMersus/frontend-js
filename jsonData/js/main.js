@@ -64,10 +64,12 @@ input.addEventListener(
     reader.onload = function (event) {
       data = JSON.parse(reader.result);
       jsonKeys = Object.keys(data[0]);
-      dataTable.style.display = "block";
-      dataTable.style.transform = "scale(" + 1 + ")";
-      dataTable.style.opacity = 1;
       renderJSON(data);
+      setTimeout(() => {
+        // dataTable.style.display = "auto";
+        dataTable.style.transform = "scale(" + 1 + ")";
+        dataTable.style.opacity = 1;
+      }, 100);
     };
     reader.readAsText(file); //????????????зачем эта строка
   },
@@ -149,14 +151,8 @@ document.getElementById("save").onclick = function () {
 //////////////////////// click RESET
 
 document.getElementById("reset").onclick = function () {
-  dataTable.style.transform = "scale(" + 0.00001 + ")";
-  dataTable.style.opacity = 0;
-  setTimeout(() => {
-    dataTable.style.display = "none";
-  }, 2000);
-  setTimeout(() => {
-    dataTable.style.display = "none";
-  }, 2000);
+  // dataTable.style.transform = "scale(" + 0.01 + ")";
+  // dataTable.style.opacity = 0;
   // if (true) {
   //   html2canvas(document.querySelector("#capture")).then((canvas) => {
   //     let width = canvas.width;
@@ -164,12 +160,10 @@ document.getElementById("reset").onclick = function () {
   //     let ctx = canvas.getContext("2d");
   //     let idata = ctx.getImageData(0, 0, width, height);
   //     let datums = [];
-
   //     for (let i = 0; i < 36; i++) {
   //       datums.push(ctx.createImageData(width, height));
   //       // datums.push(idata);
   //     }
-
   //     for (let f = 0; f < width; f++) {
   //       for (let k = 0; k < height; k++) {
   //         for (let l = 0; l < 2; l++) {
@@ -182,15 +176,11 @@ document.getElementById("reset").onclick = function () {
   //         }
   //       }
   //     }
-
   //     datums.forEach((imagedata, i) => {
   //       let cloned = canvas.cloneNode();
-
   //       cloned.style.transition = "all 1.5s ease-out " + (1.5 * i) / 36 + "s";
-
   //       cloned.getContext("2d").putImageData(imagedata, 0, 0);
   //       document.body.appendChild(cloned);
-
   //       setTimeout(() => {
   //         let angle = (Math.random() - 0.5) * 2 * Math.PI;
   //         let rotateAngle = 15 * (Math.random() - 0.5);

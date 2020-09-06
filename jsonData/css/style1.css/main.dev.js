@@ -59,10 +59,12 @@ input.addEventListener("change", function (event) {
   reader.onload = function (event) {
     data = JSON.parse(reader.result);
     jsonKeys = Object.keys(data[0]);
-    dataTable.style.display = "block";
-    dataTable.style.transform = "scale(" + 1 + ")";
-    dataTable.style.opacity = 1;
     renderJSON(data);
+    setTimeout(function () {
+      // dataTable.style.display = "auto";
+      dataTable.style.transform = "scale(" + 1 + ")";
+      dataTable.style.opacity = 1;
+    }, 100);
   };
 
   reader.readAsText(file); //????????????зачем эта строка
@@ -127,15 +129,9 @@ document.getElementById("save").onclick = function () {
 }; //////////////////////// click RESET
 
 
-document.getElementById("reset").onclick = function () {
-  dataTable.style.transform = "scale(" + 0.00001 + ")";
-  dataTable.style.opacity = 0;
-  setTimeout(function () {
-    dataTable.style.display = "none";
-  }, 2000);
-  setTimeout(function () {
-    dataTable.style.display = "none";
-  }, 2000); // if (true) {
+document.getElementById("reset").onclick = function () {// dataTable.style.transform = "scale(" + 0.01 + ")";
+  // dataTable.style.opacity = 0;
+  // if (true) {
   //   html2canvas(document.querySelector("#capture")).then((canvas) => {
   //     let width = canvas.width;
   //     let height = canvas.height;
