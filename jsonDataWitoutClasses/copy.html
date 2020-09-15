@@ -1,0 +1,169 @@
+<body>
+  <div class="wrapper">
+    <h1>Working with Json Data</h1>
+    <form action="#">
+      <input id="inputFile" type="file" multiple="" />
+    </form>
+    <table class="generalTable" border="1" id="dataTable">
+      <caption>
+        Данные из файла
+      </caption>
+      <tbody>
+        <tr>
+          <th data-number="">candidateName</th>
+          <th data-number="">candidateStatus</th>
+          <th data-number="">candidateNeedOffer</th>
+        </tr>
+        <tr>
+          <td data-row="0" data-col="0">Peter Petrov</td>
+          <td data-row="0" data-col="1">pending</td>
+          <td class="lastTd" data-row="0" data-col="2">
+            1800
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="1" data-col="0">Ivan Ivanov</td>
+          <td data-row="1" data-col="1">pending</td>
+          <td class="lastTd" data-row="1" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr
+          class="selected"
+          style="height: 42px; width: 658px; position: relative"
+        >
+          <td>
+            <form
+              id="formReductRow"
+              action="#"
+              style="height: 42px; width: 656px"
+            >
+              <input
+                type="text"
+                class="inputFormReduct"
+                value="Roman Romanov"
+                style="width: 197px"
+              /><input
+                type="text"
+                class="inputFormReduct"
+                value="oninterview"
+                style="width: 203px"
+              /><input
+                type="text"
+                class="inputFormReduct"
+                value="2400"
+                style="width: 241px"
+              />
+              <div class="wrapperButtons">
+                <div class="iconsGeneralRulls saveIcon"></div>
+                <div class="iconsGeneralRulls cancelIcon"></div>
+              </div>
+            </form>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td data-row="3" data-col="0">Konstantin Fesenko</td>
+          <td data-row="3" data-col="1">on_test_perdiod</td>
+          <td class="lastTd" data-row="3" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="4" data-col="0">Roman Konstantinov</td>
+          <td data-row="4" data-col="1">on_test_perdiod</td>
+          <td class="lastTd" data-row="4" data-col="2">
+            123456
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="5" data-col="0">Konstantin Konstantinov</td>
+          <td data-row="5" data-col="1">on_test_perdiod</td>
+          <td class="lastTd" data-row="5" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="6" data-col="0">Optre Hgterrw</td>
+          <td data-row="6" data-col="1">on_test_perdiod</td>
+          <td class="lastTd" data-row="6" data-col="2">
+            5678
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="7" data-col="0">Omg Ksdsfnov</td>
+          <td data-row="7" data-col="1">on_prison</td>
+          <td class="lastTd" data-row="7" data-col="2">
+            3000
+            <div class="pen"></div>
+          </td>
+        </tr>
+        <tr>
+          <td data-row="8" data-col="0">Naz Rtu</td>
+          <td data-row="8" data-col="1">validate</td>
+          <td class="lastTd" data-row="8" data-col="2">
+            200
+            <div class="pen"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+
+<!-- function renderCopyTable(data) {
+  const jsonKeys = Object.keys(data[0]);
+  let dataForRender,
+    tableForRender = "";
+  for (let j = 0; j < jsonKeys.length; j++) {
+    tableForRender += `<th>${jsonKeys[j]}</th>`;
+  }
+  dataForRender = `<tr>${tableForRender}</tr>`;
+  tableForRender = "";
+
+  for (let i = 0; i < data.length; i++) {
+    let tempLine = "";
+    for (let j = 0; j < jsonKeys.length; j++) {
+      if (j === jsonKeys.length - 1) {
+        tempLine += `<td class="lastTd">${
+          data[i][jsonKeys[j]]
+        }<div class="pen"></div></td>`;
+      } else {
+        tempLine += `<td>${data[i][jsonKeys[j]]}</td>`;
+      }
+    }
+    tableForRender += `<tr>${tempLine}</tr>`;
+  }
+  dataForRender = `
+      <caption>
+        Данные из файла
+      </caption>
+      ${dataForRender}
+      ${tableForRender}
+    `;
+  copyTable.innerHTML = dataForRender;
+  // console.log(dataForRender);
+} -->
+
+<!-- // const data = [ // { // candidateName: "Peter Petrov", // candidateStatus:
+"pending", // candidateNeedOffer: 1800, // }, // { // candidateName: "Ivan
+Ivanov", // candidateStatus: "pending", // candidateNeedOffer: 3000, // }, // {
+// candidateName: "Roman Romanov", // candidateStatus: "oninterview", //
+candidateNeedOffer: 2400, // }, // { // candidateName: "Konstantin Fesenko", //
+candidateStatus: "on_test_perdiod", // candidateNeedOffer: 3000, // }, // { //
+candidateName: "Roman Konstantinov", // candidateStatus: "on_test_perdiod", //
+candidateNeedOffer: 123456, // }, // { // candidateName: "Konstantin
+Konstantinov", // candidateStatus: "on_test_perdiod", // candidateNeedOffer:
+3000, // }, // { // candidateName: "Optre Hgterrw", // candidateStatus:
+"on_test_perdiod", // candidateNeedOffer: 5678, // }, // { // candidateName:
+"Omg Ksdsfnov", // candidateStatus: "on_prison", // candidateNeedOffer: 3000, //
+}, // { // candidateName: "Naz Rtu", // candidateStatus: "validate", //
+candidateNeedOffer: 200, // }, // ]; -->

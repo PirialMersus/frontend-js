@@ -43,7 +43,7 @@ p {
         margin-bottom: 30px;
     }
 
-    >form {
+    .formInputJSON {
         text-align: center;
         margin-bottom: 30px;
 
@@ -64,89 +64,101 @@ p {
         }
     }
 
-    .generalTable {
-        margin: 0 auto;
-        margin-bottom: 50px;
-        border: none;
-        box-shadow: 3px 3px 13px rgba(0, 0, 0, 1);
-        table-layout: fixed;
-        max-width: 90%;
-        text-align: left;
-        transition: all 2s ease;
+    #formToInputTableData {
 
-        caption {
-            font-size: 26px;
-            font-weight: 600;
-            padding: 20px;
-        }
+        #dataTable {
+            margin: 0 auto;
+            margin-bottom: 50px;
+            border: none;
+            box-shadow: 3px 3px 13px rgba(0, 0, 0, 1);
+            table-layout: fixed;
+            max-width: 90%;
+            text-align: left;
+            transition: all 2s ease;
 
-        tr {
-            transition: all 0.3s ease;
-            padding-right: 150px;
-
-            th {
+            caption {
+                font-size: 26px;
+                font-weight: 600;
                 padding: 20px;
-                font-size: 20px;
             }
 
-            .lastTd {
-                display: flex;
-                justify-content: space-between;
-                height: 100%;
-                position: relative;
+            tr {
+                transition: all 0.3s ease;
                 padding-right: 150px;
 
-                .wrapForReductAndDeklButtons {
-                    right: 15px;
-                    position: absolute;
-                    display: flex;
-
-                    .pen {
-                        display: block;
-
-
-                        width: 20px;
-                        margin-right: 15px;
-                        height: 20px;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        opacity: 0;
-                        visibility: hidden;
-                        background-image: url(../img/pen.svg);
-                        transition: all 0.3s ease;
-                    }
-
-                    .deleteRow {
-                        display: block;
-                        width: 20px;
-                        height: 20px;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        opacity: 0;
-                        visibility: hidden;
-                        background-image: url(../img/delete.svg);
-                        transition: all 0.3s ease;
+                &.active {
+                    td {
+                        padding: 2px;
                     }
                 }
 
-            }
+                th {
+                    padding: 20px;
+                    font-size: 20px;
+                }
 
-            td {
-                padding: 10px;
-                position: relative;
-                word-wrap: break-word;
-
-                form {
+                .lastTd {
                     display: flex;
                     justify-content: space-between;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    z-index: 1;
-                    border: none;
+                    height: 100%;
+                    position: relative;
+                    padding-right: 150px;
+
+                    .wrapForReductAndDelButtons {
+                        right: 15px;
+                        position: absolute;
+                        display: flex;
+
+                        .reductCancelButtonsGeneral {
+                            background-color: rgba(0, 0, 0, 0);
+                            border: none;
+                            display: block;
+                            width: 20px;
+                            height: 20px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            opacity: 0;
+                            visibility: hidden;
+                            transition: all 0.3s ease;
+                        }
+
+                        .pen {
+                            margin-right: 15px;
+                            background-image: url(../img/pen.svg);
+                        }
+
+                        .deleteRow {
+                            background-image: url(../img/delete.svg);
+                        }
+                    }
+
+                }
+
+                td {
+                    padding: 10px;
+                    position: relative;
+                    word-wrap: break-word;
+                    box-sizing: border-box;
+
+                    input {
+                        padding: 6px;
+                        // height: 100%;
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+
+                    // form {
+                    //     display: flex;
+                    //     justify-content: space-between;
+                    //     position: absolute;
+                    //     top: 0;
+                    //     left: 0;
+                    //     z-index: 1;
+                    //     border: none;
 
                     .wrapperButtons {
                         position: absolute;
+                        z-index: 5;
                         right: 0;
                         top: 0;
                         bottom: 0;
@@ -179,44 +191,34 @@ p {
                             background-image: url(../img/cancel.svg);
                         }
                     }
+
                 }
             }
-        }
 
-        tr:not(:first-child) {
-            cursor: pointer;
-        }
+            tr:not(:first-child) {
+                cursor: pointer;
+            }
 
-        tr:hover:not(:first-child) {
+            tr:hover:not(:first-child) {
 
 
-            background-color: rgba(51, 51, 0, 0.2);
+                background-color: rgba(51, 51, 0, 0.2);
 
-            .lastTd {
-                .wrapForReductAndDeklButtons {
-                    .pen {
-                        visibility: visible;
-                        opacity: 0.7;
-                        transform: scale(1.5);
+                .lastTd {
+                    .wrapForReductAndDelButtons {
+                        .reductCancelButtonsGeneral {
+                            visibility: visible;
+                            opacity: 0.7;
+                            transform: scale(1.5);
 
-                        &:hover {
-                            transform: scale(2);
-                            opacity: 1;
+                            &:hover {
+                                transform: scale(2);
+                                opacity: 1;
+                            }
                         }
                     }
 
-                    .deleteRow {
-                        visibility: visible;
-                        opacity: 0.7;
-                        transform: scale(1.5);
-
-                        &:hover {
-                            transform: scale(2);
-                            opacity: 1;
-                        }
-                    }
                 }
-
             }
         }
     }

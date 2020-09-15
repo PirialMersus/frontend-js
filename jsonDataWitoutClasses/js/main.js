@@ -17,11 +17,6 @@ function onClickSubmitInFormReductRow(rowAttr, values) {
   isFormToReductDataOpen = false;
 }
 
-function onClickResetInFormReductRow() {
-  selectedRow.innerHTML = selectedRowBeforChangingData;
-  isFormToReductDataOpen = false;
-}
-
 function addNewRow() {
   if (data) {
     data.push({});
@@ -31,6 +26,11 @@ function addNewRow() {
     }
     renderJSON(data);
   } else alert("download file first");
+}
+
+function onClickResetInFormReductRow() {
+  selectedRow.innerHTML = selectedRowBeforChangingData;
+  isFormToReductDataOpen = false;
 }
 
 function deleteRow(numberOfRow) {
@@ -83,11 +83,12 @@ input.addEventListener(
       jsonKeys = Object.keys(data[0]);
       renderJSON(data);
       setTimeout(() => {
+        // dataTable.style.display = "auto";
         dataTable.style.transform = "scale(" + 1 + ")";
         dataTable.style.opacity = 1;
       }, 100);
     };
-    reader.readAsText(file);
+    reader.readAsText(file); //????????????зачем эта строка
   },
   false
 );

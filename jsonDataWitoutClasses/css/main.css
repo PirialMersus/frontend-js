@@ -39,24 +39,24 @@ p {
   font-size: 28px;
   margin-bottom: 30px;
 }
-.wrapper .formInputJSON {
+.wrapper > form {
   text-align: center;
   margin-bottom: 30px;
 }
-.wrapper .formInputJSON label {
+.wrapper > form label {
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #a88af5;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.wrapper .formInputJSON label:hover {
+.wrapper > form label:hover {
   background-color: #8456f8;
 }
-.wrapper .formInputJSON input {
+.wrapper > form input {
   display: none;
 }
-.wrapper #formToInputTableData #dataTable {
+.wrapper .generalTable {
   margin: 0 auto;
   margin-bottom: 50px;
   border: none;
@@ -66,37 +66,44 @@ p {
   text-align: left;
   transition: all 2s ease;
 }
-.wrapper #formToInputTableData #dataTable caption {
+.wrapper .generalTable caption {
   font-size: 26px;
   font-weight: 600;
   padding: 20px;
 }
-.wrapper #formToInputTableData #dataTable tr {
+.wrapper .generalTable tr {
   transition: all 0.3s ease;
   padding-right: 150px;
 }
-.wrapper #formToInputTableData #dataTable tr.active td {
-  padding: 2px;
-}
-.wrapper #formToInputTableData #dataTable tr th {
+.wrapper .generalTable tr th {
   padding: 20px;
   font-size: 20px;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd {
+.wrapper .generalTable tr .lastTd {
   display: flex;
   justify-content: space-between;
   height: 100%;
   position: relative;
   padding-right: 150px;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForReductAndDelButtons {
+.wrapper .generalTable tr .lastTd .wrapForReductAndDeklButtons {
   right: 15px;
   position: absolute;
   display: flex;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForReductAndDelButtons .reductCancelButtonsGeneral {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
+.wrapper .generalTable tr .lastTd .wrapForReductAndDeklButtons .pen {
+  display: block;
+  width: 20px;
+  margin-right: 15px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  visibility: hidden;
+  background-image: url(../img/pen.svg);
+  transition: all 0.3s ease;
+}
+.wrapper .generalTable tr .lastTd .wrapForReductAndDeklButtons .deleteRow {
   display: block;
   width: 20px;
   height: 20px;
@@ -104,36 +111,32 @@ p {
   background-position: center;
   opacity: 0;
   visibility: hidden;
+  background-image: url(../img/delete.svg);
   transition: all 0.3s ease;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForReductAndDelButtons .pen {
-  margin-right: 15px;
-  background-image: url(../img/pen.svg);
-}
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForReductAndDelButtons .deleteRow {
-  background-image: url(../img/delete.svg);
-}
-.wrapper #formToInputTableData #dataTable tr td {
+.wrapper .generalTable tr td {
   padding: 10px;
   position: relative;
   word-wrap: break-word;
-  box-sizing: border-box;
 }
-.wrapper #formToInputTableData #dataTable tr td input {
-  padding: 6px;
-  width: 100%;
-  box-sizing: border-box;
-}
-.wrapper #formToInputTableData #dataTable tr td .wrapperButtons {
+.wrapper .generalTable tr td form {
+  display: flex;
+  justify-content: space-between;
   position: absolute;
-  z-index: 5;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border: none;
+}
+.wrapper .generalTable tr td form .wrapperButtons {
+  position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
   display: flex;
   align-items: center;
 }
-.wrapper #formToInputTableData #dataTable tr td .wrapperButtons .iconsGeneralRulls {
+.wrapper .generalTable tr td form .wrapperButtons .iconsGeneralRulls {
   background-color: rgba(255, 255, 255, 0);
   display: block;
   width: 25px;
@@ -145,27 +148,36 @@ p {
   border: none;
   cursor: pointer;
 }
-.wrapper #formToInputTableData #dataTable tr td .wrapperButtons .iconsGeneralRulls:hover {
+.wrapper .generalTable tr td form .wrapperButtons .iconsGeneralRulls:hover {
   transform: scale(1.9);
 }
-.wrapper #formToInputTableData #dataTable tr td .wrapperButtons .saveIcon {
+.wrapper .generalTable tr td form .wrapperButtons .saveIcon {
   background-image: url(../img/save.svg);
 }
-.wrapper #formToInputTableData #dataTable tr td .wrapperButtons .cancelIcon {
+.wrapper .generalTable tr td form .wrapperButtons .cancelIcon {
   background-image: url(../img/cancel.svg);
 }
-.wrapper #formToInputTableData #dataTable tr:not(:first-child) {
+.wrapper .generalTable tr:not(:first-child) {
   cursor: pointer;
 }
-.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) {
+.wrapper .generalTable tr:hover:not(:first-child) {
   background-color: rgba(51, 51, 0, 0.2);
 }
-.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) .lastTd .wrapForReductAndDelButtons .reductCancelButtonsGeneral {
+.wrapper .generalTable tr:hover:not(:first-child) .lastTd .wrapForReductAndDeklButtons .pen {
   visibility: visible;
   opacity: 0.7;
   transform: scale(1.5);
 }
-.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) .lastTd .wrapForReductAndDelButtons .reductCancelButtonsGeneral:hover {
+.wrapper .generalTable tr:hover:not(:first-child) .lastTd .wrapForReductAndDeklButtons .pen:hover {
+  transform: scale(2);
+  opacity: 1;
+}
+.wrapper .generalTable tr:hover:not(:first-child) .lastTd .wrapForReductAndDeklButtons .deleteRow {
+  visibility: visible;
+  opacity: 0.7;
+  transform: scale(1.5);
+}
+.wrapper .generalTable tr:hover:not(:first-child) .lastTd .wrapForReductAndDeklButtons .deleteRow:hover {
   transform: scale(2);
   opacity: 1;
 }
