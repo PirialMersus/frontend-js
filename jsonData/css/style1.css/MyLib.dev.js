@@ -37,7 +37,8 @@ function () {
       a.download = "filename.json";
       a.click();
     });
-    document.getElementById("reset").addEventListener("click", this.resetFunction);
+    document.getElementById("reset").addEventListener("click", this.resetFunction); // document.getElementById("test").htmlgl();
+    // document.rasterize(element, optionsObject): ImageData;
   } /////////////////////downloading JSON File //////////////////////
 
 
@@ -86,6 +87,7 @@ function () {
       dataForRender = "\n      <caption>\n        \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n      </caption>\n      ".concat(dataForRender, "\n      ").concat(tableForRender);
       document.getElementsByClassName("wrapper")[0].style.backgoundColor = this.state.backgroundColor;
       this.dataTable.innerHTML = dataForRender;
+      console.log(document.getElementsByClassName("wrapper")[0]);
     } ///////////////////// Finding click and reduct table //////////////////////
 
   }, {
@@ -182,7 +184,8 @@ function () {
       this.selectedRow.innerHTML = this.selectedRowBeforChangingData;
       this.isFormToReductDataOpen = false;
       this.selectedRow.classList.remove("active");
-    }
+    } ///////////////////// reset //////////////////////
+
   }, {
     key: "resetFunction",
     value: function resetFunction() {
@@ -233,5 +236,7 @@ function () {
 }();
 
 new MyLib({
-  backgroundColor: "red"
+  options: {
+    backgroundColor: "red"
+  }
 });

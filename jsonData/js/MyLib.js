@@ -31,9 +31,13 @@ class MyLib {
       a.download = "filename.json";
       a.click();
     });
+
     document
       .getElementById("reset")
       .addEventListener("click", this.resetFunction);
+
+    // document.getElementById("test").htmlgl();
+    // document.rasterize(element, optionsObject): ImageData;
   }
 
   /////////////////////downloading JSON File //////////////////////
@@ -87,6 +91,7 @@ class MyLib {
       "wrapper"
     )[0].style.backgoundColor = this.state.backgroundColor;
     this.dataTable.innerHTML = dataForRender;
+    console.log(document.getElementsByClassName("wrapper")[0]);
   }
 
   ///////////////////// Finding click and reduct table //////////////////////
@@ -195,6 +200,8 @@ class MyLib {
     this.selectedRow.classList.remove("active");
   }
 
+  ///////////////////// reset //////////////////////
+
   resetFunction() {
     Array.from(
       document.getElementsByClassName("wrapForReductAndDelButtons")
@@ -250,5 +257,7 @@ class MyLib {
 }
 
 new MyLib({
-  backgroundColor: "red",
+  options: {
+    backgroundColor: "red",
+  },
 });
