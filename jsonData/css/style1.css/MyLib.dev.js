@@ -6,12 +6,41 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+// function MyLib(options) {
+//   this.state = {
+//     backgroundColor: options.backgroundColor,
+//   };
+//   this.input = document.getElementById("inputFile");
+//   this.dataTable = document.getElementById("dataTable");
+//   this.isFormToEditDataOpen = false;
+//   this.selectedRowBeforChangingData = "";
+//   this.selectedRow = "";
+//   this.data;
+//   this.rowAttribute = "";
+//   this.jsonKeys;
+//   this.numberOfCols = 0;
+//   this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
+//   this.dataTable.addEventListener(
+//     "click",
+//     this.findClickAndEditTable.bind(this)
+//   );
+//   document
+//     .getElementById("addOneRowId")
+//     .addEventListener("click", this.addNewRow.bind(this));
+//   document
+//     .getElementById("saveButton")
+//     .addEventListener("click", this.saveButton.bind(this));
+//   document
+//     .getElementById("reset")
+//     .addEventListener("click", this.resetFunction);
+//   // document.getElementById("test").htmlgl();
+//   // document.rasterize(element, optionsObject): ImageData;
+// }
+// MyLib.prototype.resetFunction = function () {};
 var MyLib =
 /*#__PURE__*/
 function () {
   function MyLib(options) {
-    var _this = this;
-
     _classCallCheck(this, MyLib);
 
     this.state = {
@@ -19,7 +48,7 @@ function () {
     };
     this.input = document.getElementById("inputFile");
     this.dataTable = document.getElementById("dataTable");
-    this.isFormToReductDataOpen = false;
+    this.isFormToEditDataOpen = false;
     this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
     this.data;
@@ -27,32 +56,39 @@ function () {
     this.jsonKeys;
     this.numberOfCols = 0;
     this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
-    this.dataTable.addEventListener("click", this.findClickAndReductTable.bind(this));
+    this.dataTable.addEventListener("click", this.findClickAndEditTable.bind(this));
     document.getElementById("addOneRowId").addEventListener("click", this.addNewRow.bind(this));
-    document.getElementById("saveButton").addEventListener("click", function () {
-      var text = JSON.stringify(_this.data);
+    document.getElementById("saveButton").addEventListener("click", this.saveButton.bind(this));
+    document.getElementById("reset").addEventListener("click", this.resetFunction); // document.getElementById("test").htmlgl();
+    // document.rasterize(element, optionsObject): ImageData;
+  }
+
+  _createClass(MyLib, [{
+    key: "saveButton",
+    value: function saveButton(e) {
+      var text = JSON.stringify(this.data);
       var a = document.createElement("a");
       a.href = "data:attachment/text," + encodeURI(text);
       a.target = "_blank";
       a.download = "filename.json";
       a.click();
-    });
-    document.getElementById("reset").addEventListener("click", this.resetFunction); // document.getElementById("test").htmlgl();
-    // document.rasterize(element, optionsObject): ImageData;
-  } /////////////////////downloading JSON File //////////////////////
+    } /////////////////////downloading JSON File //////////////////////
 
-
-  _createClass(MyLib, [{
+  }, {
     key: "downloadingJSONFile",
-    value: function downloadingJSONFile(event) {
+    value: function downloadingJSONFile() {
+      var _this = this;
+
       var file = this.input.files[0];
       var reader = new FileReader();
 
-      reader.onload = function (event) {
-        this.data = JSON.parse(reader.result);
-        this.jsonKeys = Object.keys(this.data[0]);
-        this.renderJSON(this.data);
-      }.bind(this);
+      reader.onload = function () {
+        var data = JSON.parse(reader.result);
+        _this.data = data;
+        _this.jsonKeys = Object.keys(_this.data[0]);
+
+        _this.renderJSON(data);
+      };
 
       reader.readAsText(file);
     } ///////////////////// Render Data to Dom //////////////////////
@@ -70,14 +106,14 @@ function () {
       dataForRender = "<tr>".concat(tableForRender, "</tr>");
       tableForRender = "";
 
-      for (var i = 0; i < this.data.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         var tempLine = "";
 
         for (var _j = 0; _j < this.jsonKeys.length; _j++) {
           if (_j === this.jsonKeys.length - 1) {
-            tempLine += "<td class=\"lastTd\" data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(this.data[i][this.jsonKeys[_j]], "<div class=\"wrapForReductAndDelButtons\"><button class=\"pen reductCancelButtonsGeneral\"></button><button class=\"deleteRow reductCancelButtonsGeneral\"></button></div></td>");
+            tempLine += "<td class=\"lastTd\" data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(data[i][this.jsonKeys[_j]], "<div class=\"wrapForEditAndDelButtons\"><button class=\"pen editCancelButtonsGeneral\"></button><button class=\"deleteRow editCancelButtonsGeneral\"></button></div></td>");
           } else {
-            tempLine += "<td data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(this.data[i][this.jsonKeys[_j]], "</td>");
+            tempLine += "<td data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(data[i][this.jsonKeys[_j]], "</td>");
           }
         }
 
@@ -85,17 +121,18 @@ function () {
       }
 
       dataForRender = "\n      <caption>\n        \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n      </caption>\n      ".concat(dataForRender, "\n      ").concat(tableForRender);
-      document.getElementsByClassName("wrapper")[0].style.backgoundColor = this.state.backgroundColor;
+      document.getElementsByClassName("wrapper")[0].style.backgroundColor = this.state.backgroundColor;
+      console.log(this.state.backgroundColor);
       this.dataTable.innerHTML = dataForRender;
       console.log(document.getElementsByClassName("wrapper")[0]);
-    } ///////////////////// Finding click and reduct table //////////////////////
+    } ///////////////////// Finding click and edit table //////////////////////
 
   }, {
-    key: "findClickAndReductTable",
-    value: function findClickAndReductTable() {
+    key: "findClickAndEditTable",
+    value: function findClickAndEditTable() {
       var _this2 = this;
 
-      if (this.isFormToReductDataOpen) return;
+      if (this.isFormToEditDataOpen) return;
       var row = "";
       var td = event.target.closest("td");
       this.rowAttribute = td.getAttribute("data-row");
@@ -105,15 +142,15 @@ function () {
         this.deleteRow(this.rowAttribute);
       } else {
         if (!td || !this.dataTable.contains(td)) return;
-        this.isFormToReductDataOpen = true;
+        this.isFormToEditDataOpen = true;
         this.selectedRowBeforChangingData = td.parentNode.innerHTML;
         this.selectedRow = td.parentNode;
 
         for (var j = 0; j < this.jsonKeys.length; j++) {
           if (j === this.jsonKeys.length - 1) {
-            row += "<td><input type=\"text\" name=\"".concat(this.jsonKeys[j], "\" class=\"inputFormReduct\" value=\"").concat(this.data[this.rowAttribute][this.jsonKeys[j]], "\"/> <div class=\"wrapperButtons\">\n                  <button type=\"submit\" class=\"iconsGeneralRulls saveIcon\"></button>\n                  <button type=\"reset\" class=\"iconsGeneralRulls cancelIcon\"></button>\n                </div>\n          </td>");
+            row += "<td><input type=\"text\" name=\"".concat(this.jsonKeys[j], "\" class=\"inputFormEdit\" value=\"").concat(this.data[this.rowAttribute][this.jsonKeys[j]], "\"/> <div class=\"wrapperButtons\">\n                  <button type=\"submit\" class=\"iconsGeneralRulls saveIcon\"></button>\n                  <button type=\"reset\" class=\"iconsGeneralRulls cancelIcon\"></button>\n                </div>\n          </td>");
           } else {
-            row += "<td><input type=\"text\" name=\"".concat(this.jsonKeys[j], "\" class=\"inputFormReduct\" value=\"").concat(this.data[this.rowAttribute][this.jsonKeys[j]], "\"/></td>");
+            row += "<td><input type=\"text\" name=\"".concat(this.jsonKeys[j], "\" class=\"inputFormEdit\" value=\"").concat(this.data[this.rowAttribute][this.jsonKeys[j]], "\"/></td>");
           }
 
           this.numberOfCols = j;
@@ -121,7 +158,7 @@ function () {
 
         this.selectedRow.classList.add("active");
         this.selectedRow.innerHTML = row;
-        var inputs = document.getElementsByClassName("inputFormReduct");
+        var inputs = document.getElementsByClassName("inputFormEdit");
         document.getElementById("formToInputTableData").addEventListener("submit", function (e) {
           e.preventDefault();
           e.stopPropagation();
@@ -132,13 +169,13 @@ function () {
             inputsValues[i] = inputs[i].value;
           }
 
-          _this2.onClickSaveInFormReductRow(_this2.rowAttribute, inputsValues);
+          _this2.onClickSaveInFormEditRow(_this2.rowAttribute, inputsValues);
         });
         document.getElementById("formToInputTableData").addEventListener("reset", function (e) {
           e.preventDefault();
           e.stopPropagation();
 
-          _this2.onClickResetInFormReductRow();
+          _this2.onClickResetInFormEditRow();
         });
       }
     } /////////////////////Deleting the row //////////////////////
@@ -163,11 +200,11 @@ function () {
 
         this.renderJSON(this.data);
       } else alert("download file first");
-    } ///////////////////// Reduct and saving row data //////////////////////
+    } ///////////////////// Edit and saving row data //////////////////////
 
   }, {
-    key: "onClickSaveInFormReductRow",
-    value: function onClickSaveInFormReductRow(rowAttr, values) {
+    key: "onClickSaveInFormEditRow",
+    value: function onClickSaveInFormEditRow(rowAttr, values) {
       console.log("after", rowAttr);
 
       for (var i = 0; i < values.length; i++) {
@@ -175,21 +212,21 @@ function () {
       }
 
       this.renderJSON(this.data);
-      this.isFormToReductDataOpen = false;
-    } ///////////////////// Cancelling reducting row data //////////////////////
+      this.isFormToEditDataOpen = false;
+    } ///////////////////// Cancelling editing row data //////////////////////
 
   }, {
-    key: "onClickResetInFormReductRow",
-    value: function onClickResetInFormReductRow() {
+    key: "onClickResetInFormEditRow",
+    value: function onClickResetInFormEditRow() {
       this.selectedRow.innerHTML = this.selectedRowBeforChangingData;
-      this.isFormToReductDataOpen = false;
+      this.isFormToEditDataOpen = false;
       this.selectedRow.classList.remove("active");
     } ///////////////////// reset //////////////////////
 
   }, {
     key: "resetFunction",
     value: function resetFunction() {
-      Array.from(document.getElementsByClassName("wrapForReductAndDelButtons")).forEach(function (element) {
+      Array.from(document.getElementsByClassName("wrapForEditAndDelButtons")).forEach(function (element) {
         element.style.display = "none";
       });
       html2canvas(document.querySelector("#formToInputTableData")).then(function (canvas) {
@@ -236,7 +273,5 @@ function () {
 }();
 
 new MyLib({
-  options: {
-    backgroundColor: "red"
-  }
+  backgroundColor: "red"
 });

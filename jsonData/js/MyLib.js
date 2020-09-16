@@ -1,3 +1,41 @@
+// function MyLib(options) {
+//   this.state = {
+//     backgroundColor: options.backgroundColor,
+//   };
+//   this.input = document.getElementById("inputFile");
+//   this.dataTable = document.getElementById("dataTable");
+//   this.isFormToEditDataOpen = false;
+//   this.selectedRowBeforChangingData = "";
+//   this.selectedRow = "";
+//   this.data;
+//   this.rowAttribute = "";
+//   this.jsonKeys;
+//   this.numberOfCols = 0;
+
+//   this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
+//   this.dataTable.addEventListener(
+//     "click",
+//     this.findClickAndEditTable.bind(this)
+//   );
+
+//   document
+//     .getElementById("addOneRowId")
+//     .addEventListener("click", this.addNewRow.bind(this));
+
+//   document
+//     .getElementById("saveButton")
+//     .addEventListener("click", this.saveButton.bind(this));
+
+//   document
+//     .getElementById("reset")
+//     .addEventListener("click", this.resetFunction);
+
+//   // document.getElementById("test").htmlgl();
+//   // document.rasterize(element, optionsObject): ImageData;
+// }
+
+// MyLib.prototype.resetFunction = function () {};
+
 class MyLib {
   constructor(options) {
     this.state = {
@@ -5,32 +43,27 @@ class MyLib {
     };
     this.input = document.getElementById("inputFile");
     this.dataTable = document.getElementById("dataTable");
-    this.isFormToReductDataOpen = false;
+    this.isFormToEditDataOpen = false;
     this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
     this.data;
     this.rowAttribute = "";
     this.jsonKeys;
     this.numberOfCols = 0;
+
     this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
     this.dataTable.addEventListener(
       "click",
-      this.findClickAndReductTable.bind(this)
+      this.findClickAndEditTable.bind(this)
     );
 
     document
       .getElementById("addOneRowId")
       .addEventListener("click", this.addNewRow.bind(this));
 
-    document.getElementById("saveButton").addEventListener("click", () => {
-      let text = JSON.stringify(this.data);
-      let a = document.createElement("a");
-
-      a.href = "data:attachment/text," + encodeURI(text);
-      a.target = "_blank";
-      a.download = "filename.json";
-      a.click();
-    });
+    document
+      .getElementById("saveButton")
+      .addEventListener("click", this.saveButton.bind(this));
 
     document
       .getElementById("reset")
@@ -40,15 +73,27 @@ class MyLib {
     // document.rasterize(element, optionsObject): ImageData;
   }
 
+  saveButton(e) {
+    let text = JSON.stringify(this.data);
+    let a = document.createElement("a");
+
+    a.href = "data:attachment/text," + encodeURI(text);
+    a.target = "_blank";
+    a.download = "filename.json";
+    a.click();
+  }
+
   /////////////////////downloading JSON File //////////////////////
-  downloadingJSONFile(event) {
+
+  downloadingJSONFile() {
     const file = this.input.files[0];
     const reader = new FileReader();
-    reader.onload = function (event) {
-      this.data = JSON.parse(reader.result);
+    reader.onload = () => {
+      const data = JSON.parse(reader.result);
+      this.data = data;
       this.jsonKeys = Object.keys(this.data[0]);
-      this.renderJSON(this.data);
-    }.bind(this);
+      this.renderJSON(data);
+    };
     reader.readAsText(file);
   }
 
@@ -64,18 +109,18 @@ class MyLib {
     dataForRender = `<tr>${tableForRender}</tr>`;
     tableForRender = "";
 
-    for (let i = 0; i < this.data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       let tempLine = "";
       for (let j = 0; j < this.jsonKeys.length; j++) {
         if (j === this.jsonKeys.length - 1) {
           tempLine += `<td class="lastTd" data-row="${i}" data-col="${
             this.jsonKeys[j]
           }">${
-            this.data[i][this.jsonKeys[j]]
-          }<div class="wrapForReductAndDelButtons"><button class="pen reductCancelButtonsGeneral"></button><button class="deleteRow reductCancelButtonsGeneral"></button></div></td>`;
+            data[i][this.jsonKeys[j]]
+          }<div class="wrapForEditAndDelButtons"><button class="pen editCancelButtonsGeneral"></button><button class="deleteRow editCancelButtonsGeneral"></button></div></td>`;
         } else {
           tempLine += `<td data-row="${i}" data-col="${this.jsonKeys[j]}">${
-            this.data[i][this.jsonKeys[j]]
+            data[i][this.jsonKeys[j]]
           }</td>`;
         }
       }
@@ -89,15 +134,16 @@ class MyLib {
       ${tableForRender}`;
     document.getElementsByClassName(
       "wrapper"
-    )[0].style.backgoundColor = this.state.backgroundColor;
+    )[0].style.backgroundColor = this.state.backgroundColor;
+    console.log(this.state.backgroundColor);
     this.dataTable.innerHTML = dataForRender;
     console.log(document.getElementsByClassName("wrapper")[0]);
   }
 
-  ///////////////////// Finding click and reduct table //////////////////////
+  ///////////////////// Finding click and edit table //////////////////////
 
-  findClickAndReductTable() {
-    if (this.isFormToReductDataOpen) return;
+  findClickAndEditTable() {
+    if (this.isFormToEditDataOpen) return;
 
     let row = "";
     const td = event.target.closest("td");
@@ -107,7 +153,7 @@ class MyLib {
       this.deleteRow(this.rowAttribute);
     } else {
       if (!td || !this.dataTable.contains(td)) return;
-      this.isFormToReductDataOpen = true;
+      this.isFormToEditDataOpen = true;
       this.selectedRowBeforChangingData = td.parentNode.innerHTML;
       this.selectedRow = td.parentNode;
 
@@ -115,7 +161,7 @@ class MyLib {
         if (j === this.jsonKeys.length - 1) {
           row += `<td><input type="text" name="${
             this.jsonKeys[j]
-          }" class="inputFormReduct" value="${
+          }" class="inputFormEdit" value="${
             this.data[this.rowAttribute][this.jsonKeys[j]]
           }"/> <div class="wrapperButtons">
                   <button type="submit" class="iconsGeneralRulls saveIcon"></button>
@@ -125,7 +171,7 @@ class MyLib {
         } else {
           row += `<td><input type="text" name="${
             this.jsonKeys[j]
-          }" class="inputFormReduct" value="${
+          }" class="inputFormEdit" value="${
             this.data[this.rowAttribute][this.jsonKeys[j]]
           }"/></td>`;
         }
@@ -135,7 +181,7 @@ class MyLib {
       this.selectedRow.classList.add("active");
       this.selectedRow.innerHTML = row;
 
-      const inputs = document.getElementsByClassName("inputFormReduct");
+      const inputs = document.getElementsByClassName("inputFormEdit");
 
       document
         .getElementById("formToInputTableData")
@@ -148,7 +194,7 @@ class MyLib {
           for (let i = 0; i < inputs.length; i++) {
             inputsValues[i] = inputs[i].value;
           }
-          this.onClickSaveInFormReductRow(this.rowAttribute, inputsValues);
+          this.onClickSaveInFormEditRow(this.rowAttribute, inputsValues);
         });
 
       document
@@ -156,7 +202,7 @@ class MyLib {
         .addEventListener("reset", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          this.onClickResetInFormReductRow();
+          this.onClickResetInFormEditRow();
         });
     }
   }
@@ -181,22 +227,22 @@ class MyLib {
     } else alert("download file first");
   }
 
-  ///////////////////// Reduct and saving row data //////////////////////
+  ///////////////////// Edit and saving row data //////////////////////
 
-  onClickSaveInFormReductRow(rowAttr, values) {
+  onClickSaveInFormEditRow(rowAttr, values) {
     console.log("after", rowAttr);
     for (let i = 0; i < values.length; i++) {
       this.data[rowAttr][this.jsonKeys[i]] = values[i];
     }
     this.renderJSON(this.data);
-    this.isFormToReductDataOpen = false;
+    this.isFormToEditDataOpen = false;
   }
 
-  ///////////////////// Cancelling reducting row data //////////////////////
+  ///////////////////// Cancelling editing row data //////////////////////
 
-  onClickResetInFormReductRow() {
+  onClickResetInFormEditRow() {
     this.selectedRow.innerHTML = this.selectedRowBeforChangingData;
-    this.isFormToReductDataOpen = false;
+    this.isFormToEditDataOpen = false;
     this.selectedRow.classList.remove("active");
   }
 
@@ -204,7 +250,7 @@ class MyLib {
 
   resetFunction() {
     Array.from(
-      document.getElementsByClassName("wrapForReductAndDelButtons")
+      document.getElementsByClassName("wrapForEditAndDelButtons")
     ).forEach((element) => {
       element.style.display = "none";
     });
@@ -257,7 +303,5 @@ class MyLib {
 }
 
 new MyLib({
-  options: {
-    backgroundColor: "red",
-  },
+  backgroundColor: "red",
 });

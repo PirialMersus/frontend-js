@@ -89,12 +89,12 @@ p {
   position: relative;
   padding-right: 150px;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForReductAndDelButtons {
+.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons {
   right: 15px;
   position: absolute;
   display: flex;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForReductAndDelButtons .reductCancelButtonsGeneral {
+.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   display: block;
@@ -106,11 +106,11 @@ p {
   visibility: hidden;
   transition: all 0.3s ease;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForReductAndDelButtons .pen {
+.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .pen {
   margin-right: 15px;
   background-image: url(../img/pen.svg);
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForReductAndDelButtons .deleteRow {
+.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .deleteRow {
   background-image: url(../img/delete.svg);
 }
 .wrapper #formToInputTableData #dataTable tr td {
@@ -160,12 +160,12 @@ p {
 .wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) {
   background-color: rgba(51, 51, 0, 0.2);
 }
-.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) .lastTd .wrapForReductAndDelButtons .reductCancelButtonsGeneral {
+.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
   visibility: visible;
   opacity: 0.7;
   transform: scale(1.5);
 }
-.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) .lastTd .wrapForReductAndDelButtons .reductCancelButtonsGeneral:hover {
+.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral:hover {
   transform: scale(2);
   opacity: 1;
 }
