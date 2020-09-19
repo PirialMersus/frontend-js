@@ -68,12 +68,9 @@ class MyLib {
     document
       .getElementById("reset")
       .addEventListener("click", this.resetFunction);
-
-    // document.getElementById("test").htmlgl();
-    // document.rasterize(element, optionsObject): ImageData;
   }
 
-  saveButton(e) {
+  saveButton() {
     let text = JSON.stringify(this.data);
     let a = document.createElement("a");
 
@@ -135,14 +132,27 @@ class MyLib {
     document.getElementsByClassName(
       "wrapper"
     )[0].style.backgroundColor = this.state.backgroundColor;
-    console.log(this.state.backgroundColor);
     this.dataTable.innerHTML = dataForRender;
-    console.log(document.getElementsByClassName("wrapper")[0]);
   }
 
   ///////////////////// Finding click and edit table //////////////////////
 
-  findClickAndEditTable() {
+  findClickAndEditTable(event) {
+    // console.log(event.target);
+    // switch(x) {
+    //   case 'value1':  // if (x === 'value1')
+    //     ...
+    //     [break]
+
+    //   case 'value2':  // if (x === 'value2')
+    //     ...
+    //     [break]
+
+    //   default:
+    //     ...
+    //     [break]
+    // }
+
     if (this.isFormToEditDataOpen) return;
 
     let row = "";
@@ -189,7 +199,7 @@ class MyLib {
           e.preventDefault();
           e.stopPropagation();
 
-          console.log("before", this.rowAttribute);
+          // console.log("before", this.rowAttribute);
           const inputsValues = [];
           for (let i = 0; i < inputs.length; i++) {
             inputsValues[i] = inputs[i].value;
@@ -303,5 +313,5 @@ class MyLib {
 }
 
 new MyLib({
-  backgroundColor: "red",
+  backgroundColor: "rgba(233, 227, 248, 0.8)",
 });

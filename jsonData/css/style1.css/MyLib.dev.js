@@ -59,13 +59,12 @@ function () {
     this.dataTable.addEventListener("click", this.findClickAndEditTable.bind(this));
     document.getElementById("addOneRowId").addEventListener("click", this.addNewRow.bind(this));
     document.getElementById("saveButton").addEventListener("click", this.saveButton.bind(this));
-    document.getElementById("reset").addEventListener("click", this.resetFunction); // document.getElementById("test").htmlgl();
-    // document.rasterize(element, optionsObject): ImageData;
+    document.getElementById("reset").addEventListener("click", this.resetFunction);
   }
 
   _createClass(MyLib, [{
     key: "saveButton",
-    value: function saveButton(e) {
+    value: function saveButton() {
       var text = JSON.stringify(this.data);
       var a = document.createElement("a");
       a.href = "data:attachment/text," + encodeURI(text);
@@ -122,16 +121,26 @@ function () {
 
       dataForRender = "\n      <caption>\n        \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n      </caption>\n      ".concat(dataForRender, "\n      ").concat(tableForRender);
       document.getElementsByClassName("wrapper")[0].style.backgroundColor = this.state.backgroundColor;
-      console.log(this.state.backgroundColor);
       this.dataTable.innerHTML = dataForRender;
-      console.log(document.getElementsByClassName("wrapper")[0]);
     } ///////////////////// Finding click and edit table //////////////////////
 
   }, {
     key: "findClickAndEditTable",
-    value: function findClickAndEditTable() {
+    value: function findClickAndEditTable(event) {
       var _this2 = this;
 
+      // console.log(event.target);
+      // switch(x) {
+      //   case 'value1':  // if (x === 'value1')
+      //     ...
+      //     [break]
+      //   case 'value2':  // if (x === 'value2')
+      //     ...
+      //     [break]
+      //   default:
+      //     ...
+      //     [break]
+      // }
       if (this.isFormToEditDataOpen) return;
       var row = "";
       var td = event.target.closest("td");
@@ -161,8 +170,8 @@ function () {
         var inputs = document.getElementsByClassName("inputFormEdit");
         document.getElementById("formToInputTableData").addEventListener("submit", function (e) {
           e.preventDefault();
-          e.stopPropagation();
-          console.log("before", _this2.rowAttribute);
+          e.stopPropagation(); // console.log("before", this.rowAttribute);
+
           var inputsValues = [];
 
           for (var i = 0; i < inputs.length; i++) {
@@ -273,5 +282,5 @@ function () {
 }();
 
 new MyLib({
-  backgroundColor: "red"
+  backgroundColor: "rgba(233, 227, 248, 0.8)"
 });
