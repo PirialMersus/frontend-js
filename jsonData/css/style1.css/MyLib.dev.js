@@ -44,10 +44,14 @@ function () {
     _classCallCheck(this, MyLib);
 
     this.state = {
-      backgroundColor: options.backgroundColor
-    };
+      backgroundColor: options.backgroundColor // element: options.element,
+
+    }; // this._elem = options.element;
+    // options.elem.onclick = this.onClick.bind(this);
+
     this.input = document.getElementById("inputFile");
     this.dataTable = document.getElementById("dataTable");
+    this.mainFormTable = document.getElementById("formToInputTableData");
     this.isFormToEditDataOpen = false;
     this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
@@ -55,22 +59,65 @@ function () {
     this.rowAttribute = "";
     this.jsonKeys;
     this.numberOfCols = 0;
-    this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
-    this.dataTable.addEventListener("click", this.findClickAndEditTable.bind(this));
-    document.getElementById("addOneRowId").addEventListener("click", this.addNewRow.bind(this));
-    document.getElementById("saveButton").addEventListener("click", this.saveButton.bind(this));
-    document.getElementById("reset").addEventListener("click", this.resetFunction);
+    document.getElementsByClassName("wrapper")[0].addEventListener("click", this.findClick.bind(this)); // this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
+    // this.mainFormTable.addEventListener(
+    //   "click",
+    //   this.findClickAndEditTable.bind(this)
+    // );
+    // this.mainFormTable.addEventListener("submit", (e) => {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    //   const inputs = document.getElementsByClassName("inputFormEdit");
+    //   const inputsValues = [];
+    //   for (let i = 0; i < inputs.length; i++) {
+    //     inputsValues[i] = inputs[i].value;
+    //   }
+    //   this.onClickSaveInFormEditRow(this.rowAttribute, inputsValues);
+    // });
+    // this.mainFormTable.addEventListener("reset", (e) => {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    //   this.onClickResetInFormEditRow();
+    // });
+    // document
+    //   .getElementById("addOneRowId")
+    //   .addEventListener("click", this.addNewRow.bind(this));
+    // document
+    //   .getElementById("saveButton")
+    //   .addEventListener("click", this.saveButton.bind(this));
+    // document
+    //   .getElementById("reset")
+    //   .addEventListener("click", this.resetFunction);
   }
 
   _createClass(MyLib, [{
-    key: "saveButton",
-    value: function saveButton() {
-      var text = JSON.stringify(this.data);
-      var a = document.createElement("a");
-      a.href = "data:attachment/text," + encodeURI(text);
-      a.target = "_blank";
-      a.download = "filename.json";
-      a.click();
+    key: "findClick",
+    value: function findClick(event) {
+      var action = event.target.dataset.action;
+
+      if (action) {
+        console.log(action);
+        this[action]();
+      }
+    } // onClick(event) {
+    //   let action = event.target.dataset.action;
+    //   if (action) {
+    //     this[action]();
+    //   }
+    //   console.log("super");
+    // }
+
+  }, {
+    key: "saveAsJSON",
+    value: function saveAsJSON() {
+      if (this.data) {
+        var text = JSON.stringify(this.data);
+        var a = document.createElement("a");
+        a.href = "data:attachment/text," + encodeURI(text);
+        a.target = "_blank";
+        a.download = "filename.json";
+        a.click();
+      } else alert("Сначала загрузите таблицу");
     } /////////////////////downloading JSON File //////////////////////
 
   }, {
@@ -85,10 +132,12 @@ function () {
         var data = JSON.parse(reader.result);
         _this.data = data;
         _this.jsonKeys = Object.keys(_this.data[0]);
+        console.log("1");
 
         _this.renderJSON(data);
       };
 
+      console.log("2");
       reader.readAsText(file);
     } ///////////////////// Render Data to Dom //////////////////////
 
@@ -127,30 +176,26 @@ function () {
   }, {
     key: "findClickAndEditTable",
     value: function findClickAndEditTable(event) {
-      var _this2 = this;
+      console.log("findClickAndEditTable");
 
-      // console.log(event.target);
-      // switch(x) {
-      //   case 'value1':  // if (x === 'value1')
-      //     ...
-      //     [break]
-      //   case 'value2':  // if (x === 'value2')
-      //     ...
-      //     [break]
-      //   default:
-      //     ...
-      //     [break]
-      // }
-      if (this.isFormToEditDataOpen) return;
+      if (this.isFormToEditDataOpen) {
+        return;
+      }
+
       var row = "";
       var td = event.target.closest("td");
       this.rowAttribute = td.getAttribute("data-row");
-      var deleteButton = event.target.closest(".deleteRow");
+      var deleteButton = event.target.closest(".deleteRow"); // if (
+      //   td.parentNode.classList.contains("active") ||
+      //   td.parentNode.parentNode.classList.contains("active")
+      // ) {
+      //   console.log("im working");
+      //   return;
+      // }
 
       if (deleteButton) {
         this.deleteRow(this.rowAttribute);
-      } else {
-        if (!td || !this.dataTable.contains(td)) return;
+      } else if (td || this.dataTable.contains(td)) {
         this.isFormToEditDataOpen = true;
         this.selectedRowBeforChangingData = td.parentNode.innerHTML;
         this.selectedRow = td.parentNode;
@@ -167,25 +212,6 @@ function () {
 
         this.selectedRow.classList.add("active");
         this.selectedRow.innerHTML = row;
-        var inputs = document.getElementsByClassName("inputFormEdit");
-        document.getElementById("formToInputTableData").addEventListener("submit", function (e) {
-          e.preventDefault();
-          e.stopPropagation(); // console.log("before", this.rowAttribute);
-
-          var inputsValues = [];
-
-          for (var i = 0; i < inputs.length; i++) {
-            inputsValues[i] = inputs[i].value;
-          }
-
-          _this2.onClickSaveInFormEditRow(_this2.rowAttribute, inputsValues);
-        });
-        document.getElementById("formToInputTableData").addEventListener("reset", function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          _this2.onClickResetInFormEditRow();
-        });
       }
     } /////////////////////Deleting the row //////////////////////
 
@@ -197,8 +223,8 @@ function () {
     } /////////////////////Adding new row //////////////////////
 
   }, {
-    key: "addNewRow",
-    value: function addNewRow() {
+    key: "addOneRow",
+    value: function addOneRow() {
       if (this.data) {
         this.data.push({});
         var dataLength = this.data.length;
@@ -214,7 +240,7 @@ function () {
   }, {
     key: "onClickSaveInFormEditRow",
     value: function onClickSaveInFormEditRow(rowAttr, values) {
-      console.log("after", rowAttr);
+      console.log("save as json");
 
       for (var i = 0; i < values.length; i++) {
         this.data[rowAttr][this.jsonKeys[i]] = values[i];
@@ -235,6 +261,7 @@ function () {
   }, {
     key: "resetFunction",
     value: function resetFunction() {
+      console.log("reset");
       Array.from(document.getElementsByClassName("wrapForEditAndDelButtons")).forEach(function (element) {
         element.style.display = "none";
       });
@@ -282,5 +309,6 @@ function () {
 }();
 
 new MyLib({
-  backgroundColor: "rgba(233, 227, 248, 0.8)"
+  backgroundColor: "rgba(233, 227, 248, 0.8)",
+  element: "wrapper"
 });

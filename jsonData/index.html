@@ -11,14 +11,23 @@
       <h1>Working with Json Data</h1>
       <form class="formInputJSON" action="#">
         <label for="inputFile">Download JSON file</label>
-        <input id="inputFile" type="file" multiple />
+        <input
+          data-action="downloadingJSONFile"
+          id="inputFile"
+          type="file"
+          multiple
+        />
       </form>
       <form action="#" id="formToInputTableData">
-        <table border="1" id="dataTable"></table>
+        <table
+          data-action="findClickAndEditTable"
+          border="1"
+          id="dataTable"
+        ></table>
       </form>
-      <a id="addOneRowId">Add a new row</a>
-      <a id="saveButton">save as JSON</a>
-      <a id="reset">Reset</a>
+      <button data-action="addOneRow" id="addOneRowId">Add a new row</button>
+      <button data-action="saveAsJSON" id="saveButton">save as JSON</button>
+      <button data-action="resetFunction" id="reset">Reset</button>
       <!-- <html-gl id="test">
         <img src="img/forCanvasTesting.jpg" alt="" />
       </html-gl> -->

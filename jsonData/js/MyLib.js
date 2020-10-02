@@ -40,9 +40,13 @@ class MyLib {
   constructor(options) {
     this.state = {
       backgroundColor: options.backgroundColor,
+      // element: options.element,
     };
+    // this._elem = options.element;
+    // options.elem.onclick = this.onClick.bind(this);
     this.input = document.getElementById("inputFile");
     this.dataTable = document.getElementById("dataTable");
+    this.mainFormTable = document.getElementById("formToInputTableData");
     this.isFormToEditDataOpen = false;
     this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
@@ -51,33 +55,75 @@ class MyLib {
     this.jsonKeys;
     this.numberOfCols = 0;
 
-    this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
-    this.dataTable.addEventListener(
-      "click",
-      this.findClickAndEditTable.bind(this)
-    );
-
     document
-      .getElementById("addOneRowId")
-      .addEventListener("click", this.addNewRow.bind(this));
+      .getElementsByClassName("wrapper")[0]
+      .addEventListener("click", this.findClick.bind(this));
 
-    document
-      .getElementById("saveButton")
-      .addEventListener("click", this.saveButton.bind(this));
+    // this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
 
-    document
-      .getElementById("reset")
-      .addEventListener("click", this.resetFunction);
+    // this.mainFormTable.addEventListener(
+    //   "click",
+    //   this.findClickAndEditTable.bind(this)
+    // );
+
+    // this.mainFormTable.addEventListener("submit", (e) => {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+
+    //   const inputs = document.getElementsByClassName("inputFormEdit");
+    //   const inputsValues = [];
+    //   for (let i = 0; i < inputs.length; i++) {
+    //     inputsValues[i] = inputs[i].value;
+    //   }
+    //   this.onClickSaveInFormEditRow(this.rowAttribute, inputsValues);
+    // });
+
+    // this.mainFormTable.addEventListener("reset", (e) => {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+
+    //   this.onClickResetInFormEditRow();
+    // });
+
+    // document
+    //   .getElementById("addOneRowId")
+    //   .addEventListener("click", this.addNewRow.bind(this));
+
+    // document
+    //   .getElementById("saveButton")
+    //   .addEventListener("click", this.saveButton.bind(this));
+
+    // document
+    //   .getElementById("reset")
+    //   .addEventListener("click", this.resetFunction);
   }
 
-  saveButton() {
-    let text = JSON.stringify(this.data);
-    let a = document.createElement("a");
+  findClick(event) {
+    let action = event.target.dataset.action;
+    if (action) {
+      console.log(action);
+      this[action]();
+    }
+  }
 
-    a.href = "data:attachment/text," + encodeURI(text);
-    a.target = "_blank";
-    a.download = "filename.json";
-    a.click();
+  // onClick(event) {
+  //   let action = event.target.dataset.action;
+  //   if (action) {
+  //     this[action]();
+  //   }
+  //   console.log("super");
+  // }
+
+  saveAsJSON() {
+    if (this.data) {
+      let text = JSON.stringify(this.data);
+      let a = document.createElement("a");
+
+      a.href = "data:attachment/text," + encodeURI(text);
+      a.target = "_blank";
+      a.download = "filename.json";
+      a.click();
+    } else alert("Сначала загрузите таблицу");
   }
 
   /////////////////////downloading JSON File //////////////////////
@@ -89,8 +135,10 @@ class MyLib {
       const data = JSON.parse(reader.result);
       this.data = data;
       this.jsonKeys = Object.keys(this.data[0]);
+      console.log("1");
       this.renderJSON(data);
     };
+    console.log("2");
     reader.readAsText(file);
   }
 
@@ -138,31 +186,24 @@ class MyLib {
   ///////////////////// Finding click and edit table //////////////////////
 
   findClickAndEditTable(event) {
-    // console.log(event.target);
-    // switch(x) {
-    //   case 'value1':  // if (x === 'value1')
-    //     ...
-    //     [break]
-
-    //   case 'value2':  // if (x === 'value2')
-    //     ...
-    //     [break]
-
-    //   default:
-    //     ...
-    //     [break]
-    // }
-
-    if (this.isFormToEditDataOpen) return;
-
+    console.log("findClickAndEditTable");
+    if (this.isFormToEditDataOpen) {
+      return;
+    }
     let row = "";
     const td = event.target.closest("td");
     this.rowAttribute = td.getAttribute("data-row");
     const deleteButton = event.target.closest(".deleteRow");
+    // if (
+    //   td.parentNode.classList.contains("active") ||
+    //   td.parentNode.parentNode.classList.contains("active")
+    // ) {
+    //   console.log("im working");
+    //   return;
+    // }
     if (deleteButton) {
       this.deleteRow(this.rowAttribute);
-    } else {
-      if (!td || !this.dataTable.contains(td)) return;
+    } else if (td || this.dataTable.contains(td)) {
       this.isFormToEditDataOpen = true;
       this.selectedRowBeforChangingData = td.parentNode.innerHTML;
       this.selectedRow = td.parentNode;
@@ -190,30 +231,6 @@ class MyLib {
 
       this.selectedRow.classList.add("active");
       this.selectedRow.innerHTML = row;
-
-      const inputs = document.getElementsByClassName("inputFormEdit");
-
-      document
-        .getElementById("formToInputTableData")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // console.log("before", this.rowAttribute);
-          const inputsValues = [];
-          for (let i = 0; i < inputs.length; i++) {
-            inputsValues[i] = inputs[i].value;
-          }
-          this.onClickSaveInFormEditRow(this.rowAttribute, inputsValues);
-        });
-
-      document
-        .getElementById("formToInputTableData")
-        .addEventListener("reset", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.onClickResetInFormEditRow();
-        });
     }
   }
 
@@ -226,7 +243,7 @@ class MyLib {
 
   /////////////////////Adding new row //////////////////////
 
-  addNewRow() {
+  addOneRow() {
     if (this.data) {
       this.data.push({});
       const dataLength = this.data.length;
@@ -240,7 +257,7 @@ class MyLib {
   ///////////////////// Edit and saving row data //////////////////////
 
   onClickSaveInFormEditRow(rowAttr, values) {
-    console.log("after", rowAttr);
+    console.log("save as json");
     for (let i = 0; i < values.length; i++) {
       this.data[rowAttr][this.jsonKeys[i]] = values[i];
     }
@@ -259,6 +276,7 @@ class MyLib {
   ///////////////////// reset //////////////////////
 
   resetFunction() {
+    console.log("reset");
     Array.from(
       document.getElementsByClassName("wrapForEditAndDelButtons")
     ).forEach((element) => {
@@ -314,4 +332,5 @@ class MyLib {
 
 new MyLib({
   backgroundColor: "rgba(233, 227, 248, 0.8)",
+  element: "wrapper",
 });

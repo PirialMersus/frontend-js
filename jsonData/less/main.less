@@ -2,9 +2,9 @@
 
 html,
 body {
-    margin: 0;
-    font-family: "Tahoma";
-    text-align: center;
+  margin: 0;
+  font-family: "Tahoma";
+  text-align: center;
 }
 
 h1,
@@ -18,238 +18,233 @@ li,
 a,
 div,
 p {
-    margin: 0;
-    padding: 0;
-    font-family: "Tahoma";
-    font-size: 14px;
-    color: #000000;
-    font-weight: 400;
-    list-style: none;
-    text-decoration: none;
-    box-shadow: none;
-    border: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma";
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  list-style: none;
+  text-decoration: none;
+  box-shadow: none;
+  border: none;
 }
 
 .wrapper {
-    display: inline-block;
-    margin: 0 auto;
-    padding: 30px 30px;
-    min-width: 800px;
-    background-color: rgba(233, 227, 248, 0.8);
+  display: inline-block;
+  margin: 0 auto;
+  padding: 30px 30px;
+  min-width: 800px;
+  background-color: rgba(233, 227, 248, 0.8);
 
-    h1 {
-        text-align: center;
-        font-size: 28px;
-        margin-bottom: 30px;
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .formInputJSON {
+    text-align: center;
+    margin-bottom: 30px;
+
+    label {
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: rgb(168, 138, 245);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgb(132, 86, 248);
+      }
     }
 
-    .formInputJSON {
-        text-align: center;
-        margin-bottom: 30px;
-
-        label {
-            padding: 10px 20px;
-            border-radius: 5px;
-            background-color: rgb(168, 138, 245);
-            cursor: pointer;
-            transition: all 0.3s ease;
-
-            &:hover {
-                background-color: rgb(132, 86, 248);
-            }
-        }
-
-        input {
-            display: none;
-        }
+    input {
+      display: none;
     }
+  }
 
-    #formToInputTableData {
-
-        #dataTable {
-            margin: 0 auto;
-            margin-bottom: 50px;
-            border: none;
-            box-shadow: 3px 3px 13px rgba(0, 0, 0, 1);
-            table-layout: fixed;
-            max-width: 90%;
-            text-align: left;
-            transition: all 2s ease;
-
-            caption {
-                font-size: 26px;
-                font-weight: 600;
-                padding: 20px;
-            }
-
-            tr {
-                transition: all 0.3s ease;
-                padding-right: 150px;
-
-                &.active {
-                    td {
-                        padding: 2px;
-                    }
-                }
-
-                th {
-                    padding: 20px;
-                    font-size: 20px;
-                }
-
-                .lastTd {
-                    display: flex;
-                    justify-content: space-between;
-                    height: 100%;
-                    position: relative;
-                    padding-right: 150px;
-
-                    .wrapForEditAndDelButtons {
-                        right: 15px;
-                        position: absolute;
-                        display: flex;
-
-                        .editCancelButtonsGeneral {
-                            background-color: rgba(0, 0, 0, 0);
-                            border: none;
-                            display: block;
-                            width: 20px;
-                            height: 20px;
-                            background-repeat: no-repeat;
-                            background-position: center;
-                            opacity: 0;
-                            visibility: hidden;
-                            transition: all 0.3s ease;
-                        }
-
-                        .pen {
-                            margin-right: 15px;
-                            background-image: url(../img/pen.svg);
-                        }
-
-                        .deleteRow {
-                            background-image: url(../img/delete.svg);
-                        }
-                    }
-
-                }
-
-                td {
-                    padding: 10px;
-                    position: relative;
-                    word-wrap: break-word;
-                    box-sizing: border-box;
-
-                    input {
-                        padding: 6px;
-                        // height: 100%;
-                        width: 100%;
-                        box-sizing: border-box;
-                    }
-
-                    // form {
-                    //     display: flex;
-                    //     justify-content: space-between;
-                    //     position: absolute;
-                    //     top: 0;
-                    //     left: 0;
-                    //     z-index: 1;
-                    //     border: none;
-
-                    .wrapperButtons {
-                        position: absolute;
-                        z-index: 5;
-                        right: 0;
-                        top: 0;
-                        bottom: 0;
-                        display: flex;
-                        align-items: center;
-
-                        .iconsGeneralRulls {
-                            background-color: rgba(255, 255, 255, 0);
-                            display: block;
-                            width: 25px;
-                            height: 25px;
-                            background-repeat: no-repeat;
-                            background-position: center;
-                            transition: all 0.3s ease;
-                            margin-right: 10px;
-                            border: none;
-                            cursor: pointer;
-
-
-                            &:hover {
-                                transform: scale(1.9);
-                            }
-                        }
-
-                        .saveIcon {
-                            background-image: url(../img/save.svg);
-                        }
-
-                        .cancelIcon {
-                            background-image: url(../img/cancel.svg);
-                        }
-                    }
-
-                }
-            }
-
-            tr:not(:first-child) {
-                cursor: pointer;
-            }
-
-            tr:hover:not(:first-child) {
-
-
-                background-color: rgba(51, 51, 0, 0.2);
-
-                .lastTd {
-                    .wrapForEditAndDelButtons {
-                        .editCancelButtonsGeneral {
-                            visibility: visible;
-                            opacity: 0.7;
-                            transform: scale(1.5);
-
-                            &:hover {
-                                transform: scale(2);
-                                opacity: 1;
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
-    }
-
+  #formToInputTableData {
     #dataTable {
-        // opacity: 0;
-        // visibility: hidden;
-    }
+      margin: 0 auto;
+      margin-bottom: 50px;
+      border: none;
+      box-shadow: 3px 3px 13px rgba(0, 0, 0, 1);
+      table-layout: fixed;
+      max-width: 90%;
+      text-align: left;
+      transition: all 2s ease;
 
-    a {
-        // display: block;
-        padding: 10px 20px;
-        border-radius: 5px;
-        background-color: rgb(168, 138, 245);
-        cursor: pointer;
-        margin-right: 30px;
+      caption {
+        font-size: 26px;
+        font-weight: 600;
+        padding: 20px;
+      }
+
+      tr {
         transition: all 0.3s ease;
+        padding-right: 150px;
 
-        &:hover {
-            background-color: rgb(132, 86, 248);
+        &.active {
+          td {
+            padding: 2px;
+          }
         }
-    }
 
-    text-align: right;
+        th {
+          padding: 20px;
+          font-size: 20px;
+        }
+
+        .lastTd {
+          display: flex;
+          justify-content: space-between;
+          height: 100%;
+          position: relative;
+          padding-right: 150px;
+
+          .wrapForEditAndDelButtons {
+            right: 15px;
+            position: absolute;
+            display: flex;
+
+            .editCancelButtonsGeneral {
+              background-color: rgba(0, 0, 0, 0);
+              border: none;
+              display: block;
+              width: 20px;
+              height: 20px;
+              background-repeat: no-repeat;
+              background-position: center;
+              opacity: 0;
+              visibility: hidden;
+              transition: all 0.3s ease;
+              cursor: pointer;
+            }
+
+            .pen {
+              margin-right: 15px;
+              background-image: url(../img/pen.svg);
+            }
+
+            .deleteRow {
+              background-image: url(../img/delete.svg);
+            }
+          }
+        }
+
+        td {
+          padding: 10px;
+          position: relative;
+          word-wrap: break-word;
+          box-sizing: border-box;
+
+          input {
+            padding: 6px;
+            // height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+          }
+
+          // form {
+          //     display: flex;
+          //     justify-content: space-between;
+          //     position: absolute;
+          //     top: 0;
+          //     left: 0;
+          //     z-index: 1;
+          //     border: none;
+
+          .wrapperButtons {
+            position: absolute;
+            z-index: 5;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+
+            .iconsGeneralRulls {
+              background-color: rgba(255, 255, 255, 0);
+              display: block;
+              width: 25px;
+              height: 25px;
+              background-repeat: no-repeat;
+              background-position: center;
+              transition: all 0.3s ease;
+              margin-right: 10px;
+              border: none;
+              cursor: pointer;
+
+              &:hover {
+                transform: scale(1.9);
+              }
+            }
+
+            .saveIcon {
+              background-image: url(../img/save.svg);
+            }
+
+            .cancelIcon {
+              background-image: url(../img/cancel.svg);
+            }
+          }
+        }
+      }
+
+      tr:not(:first-child) {
+        cursor: pointer;
+      }
+
+      tr:hover:not(:first-child) {
+        background-color: rgba(51, 51, 0, 0.2);
+
+        .lastTd {
+          .wrapForEditAndDelButtons {
+            .editCancelButtonsGeneral {
+              visibility: visible;
+              opacity: 0.7;
+              transform: scale(1.5);
+
+              &:hover {
+                transform: scale(2);
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #dataTable {
+    // opacity: 0;
+    // visibility: hidden;
+  }
+
+  button {
+    // display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: rgb(168, 138, 245);
+    cursor: pointer;
+    margin-right: 30px;
+    border: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgb(132, 86, 248);
+    }
+  }
+
+  text-align: right;
 }
 
 canvas {
-    // margin: 30px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  // margin: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

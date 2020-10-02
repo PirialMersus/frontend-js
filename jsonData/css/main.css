@@ -105,6 +105,7 @@ p {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 .wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .pen {
   margin-right: 15px;
@@ -169,15 +170,16 @@ p {
   transform: scale(2);
   opacity: 1;
 }
-.wrapper a {
+.wrapper button {
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #a88af5;
   cursor: pointer;
   margin-right: 30px;
+  border: none;
   transition: all 0.3s ease;
 }
-.wrapper a:hover {
+.wrapper button:hover {
   background-color: #8456f8;
 }
 canvas {
