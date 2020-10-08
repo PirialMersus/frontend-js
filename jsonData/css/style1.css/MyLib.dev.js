@@ -59,6 +59,7 @@ function () {
     this.rowAttribute = "";
     this.jsonKeys;
     this.numberOfCols = 0;
+    this.isFileDownloaded = false;
     document.getElementsByClassName("wrapper")[0].addEventListener("click", this.findClick.bind(this)); // this.input.addEventListener("change", this.downloadingJSONFile.bind(this));
     // this.mainFormTable.addEventListener(
     //   "click",
@@ -132,12 +133,11 @@ function () {
         var data = JSON.parse(reader.result);
         _this.data = data;
         _this.jsonKeys = Object.keys(_this.data[0]);
-        console.log("1");
 
         _this.renderJSON(data);
       };
 
-      console.log("2");
+      this.isFileDownloaded = true;
       reader.readAsText(file);
     } ///////////////////// Render Data to Dom //////////////////////
 
@@ -159,7 +159,7 @@ function () {
 
         for (var _j = 0; _j < this.jsonKeys.length; _j++) {
           if (_j === this.jsonKeys.length - 1) {
-            tempLine += "<td class=\"lastTd\" data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(data[i][this.jsonKeys[_j]], "<div class=\"wrapForEditAndDelButtons\"><button class=\"pen editCancelButtonsGeneral\"></button><button class=\"deleteRow editCancelButtonsGeneral\"></button></div></td>");
+            tempLine += "<td class=\"lastTd\" data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(data[i][this.jsonKeys[_j]], " <div class=\"wrapForEditAndDelButtons\">\n             <button class=\"pen editCancelButtonsGeneral\"></button>\n             <button class=\"deleteRow editCancelButtonsGeneral\"></button>\n            </div>\n          </td>");
           } else {
             tempLine += "<td data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(data[i][this.jsonKeys[_j]], "</td>");
           }
@@ -310,5 +310,6 @@ function () {
 
 new MyLib({
   backgroundColor: "rgba(233, 227, 248, 0.8)",
+  // backgroundColor: "red",
   element: "wrapper"
 });

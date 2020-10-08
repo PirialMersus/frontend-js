@@ -54,6 +54,7 @@ class MyLib {
     this.rowAttribute = "";
     this.jsonKeys;
     this.numberOfCols = 0;
+    this.isFileDownloaded = false;
 
     document
       .getElementsByClassName("wrapper")[0]
@@ -135,10 +136,9 @@ class MyLib {
       const data = JSON.parse(reader.result);
       this.data = data;
       this.jsonKeys = Object.keys(this.data[0]);
-      console.log("1");
       this.renderJSON(data);
     };
-    console.log("2");
+    this.isFileDownloaded = true;
     reader.readAsText(file);
   }
 
@@ -151,6 +151,7 @@ class MyLib {
     for (let j = 0; j < this.jsonKeys.length; j++) {
       tableForRender += `<th data-number>${this.jsonKeys[j]}</th>`;
     }
+
     dataForRender = `<tr>${tableForRender}</tr>`;
     tableForRender = "";
 
@@ -160,9 +161,11 @@ class MyLib {
         if (j === this.jsonKeys.length - 1) {
           tempLine += `<td class="lastTd" data-row="${i}" data-col="${
             this.jsonKeys[j]
-          }">${
-            data[i][this.jsonKeys[j]]
-          }<div class="wrapForEditAndDelButtons"><button class="pen editCancelButtonsGeneral"></button><button class="deleteRow editCancelButtonsGeneral"></button></div></td>`;
+          }">${data[i][this.jsonKeys[j]]} <div class="wrapForEditAndDelButtons">
+             <button class="pen editCancelButtonsGeneral"></button>
+             <button class="deleteRow editCancelButtonsGeneral"></button>
+            </div>
+          </td>`;
         } else {
           tempLine += `<td data-row="${i}" data-col="${this.jsonKeys[j]}">${
             data[i][this.jsonKeys[j]]
@@ -332,5 +335,6 @@ class MyLib {
 
 new MyLib({
   backgroundColor: "rgba(233, 227, 248, 0.8)",
+  // backgroundColor: "red",
   element: "wrapper",
 });
