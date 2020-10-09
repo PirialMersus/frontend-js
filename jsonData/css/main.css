@@ -58,7 +58,11 @@ p {
   background-color: #8456f8;
 }
 .wrapper .formInputJSON input {
-  display: none;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
 }
 .wrapper #formToInputTableData #dataTable {
   margin: 0 auto;
@@ -85,6 +89,7 @@ p {
 .wrapper #formToInputTableData #dataTable tr th {
   padding: 20px;
   font-size: 20px;
+  width: 240px;
 }
 .wrapper #formToInputTableData #dataTable tr .lastTd {
   display: flex;
@@ -115,7 +120,7 @@ p {
   margin-right: 15px;
   background-image: url(../img/pen.svg);
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .deleteRow {
+.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .deleteRowButton {
   background-image: url(../img/delete.svg);
 }
 .wrapper #formToInputTableData #dataTable tr td {
@@ -158,9 +163,6 @@ p {
 }
 .wrapper #formToInputTableData #dataTable tr td .wrapperButtons .cancelIcon {
   background-image: url(../img/cancel.svg);
-}
-.wrapper #formToInputTableData #dataTable tr:not(:first-child) {
-  cursor: pointer;
 }
 .wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) {
   background-color: rgba(51, 51, 0, 0.2);

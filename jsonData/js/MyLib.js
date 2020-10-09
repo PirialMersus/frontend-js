@@ -1,3 +1,5 @@
+let numberOfTables = 0;
+
 // function MyLib(options) {
 //   this.state = {
 //     backgroundColor: options.backgroundColor,
@@ -67,24 +69,24 @@ class MyLib {
     //   this.findClickAndEditTable.bind(this)
     // );
 
-    // this.mainFormTable.addEventListener("submit", (e) => {
-    //   e.preventDefault();
-    //   e.stopPropagation();
+    this.mainFormTable.addEventListener("submit", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-    //   const inputs = document.getElementsByClassName("inputFormEdit");
-    //   const inputsValues = [];
-    //   for (let i = 0; i < inputs.length; i++) {
-    //     inputsValues[i] = inputs[i].value;
-    //   }
-    //   this.onClickSaveInFormEditRow(this.rowAttribute, inputsValues);
-    // });
+      // const inputs = document.getElementsByClassName("inputFormEdit");
+      // const inputsValues = [];
+      // for (let i = 0; i < inputs.length; i++) {
+      //   inputsValues[i] = inputs[i].value;
+      // }
+      this.onClickSaveInFormEditRow();
+    });
 
-    // this.mainFormTable.addEventListener("reset", (e) => {
-    //   e.preventDefault();
-    //   e.stopPropagation();
+    this.mainFormTable.addEventListener("reset", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-    //   this.onClickResetInFormEditRow();
-    // });
+      this.onClickResetInFormEditRow();
+    });
 
     // document
     //   .getElementById("addOneRowId")
@@ -102,9 +104,65 @@ class MyLib {
   findClick(event) {
     let action = event.target.dataset.action;
     if (action) {
-      console.log(action);
-      this[action]();
+      this[action](event);
     }
+  }
+
+  ///////////////////// Edit and saving row data //////////////////////
+
+  onClickSaveInFormEditRow() {
+    const inputs = document.getElementsByClassName("inputFormEdit");
+
+    for (let i = 0; i < this.jsonKeys.length; i++) {
+      this.data[this.rowAttribute][this.jsonKeys[i]] = inputs[i].value;
+    }
+
+    this.renderJSON(this.data);
+    this.isFormToEditDataOpen = false;
+  }
+
+  ///////////////////// Cancelling editing row data //////////////////////
+
+  onClickResetInFormEditRow() {
+    this.selectedRow.innerHTML = this.selectedRowBeforChangingData;
+    this.isFormToEditDataOpen = false;
+    this.selectedRow.classList.remove("active");
+  }
+
+  editRow(event) {
+    if (this.isFormToEditDataOpen) {
+      return;
+    }
+    this.isFormToEditDataOpen = true;
+    let row = "";
+    const td = event.target.closest("td");
+    this.rowAttribute = td.getAttribute("data-row");
+    this.selectedRowBeforChangingData = td.parentNode.innerHTML;
+    this.selectedRow = td.parentNode;
+
+    for (let j = 0; j < this.jsonKeys.length; j++) {
+      if (j === this.jsonKeys.length - 1) {
+        row += `<td><input type="text" name="${
+          this.jsonKeys[j]
+        }" class="inputFormEdit" value="${
+          this.data[this.rowAttribute][this.jsonKeys[j]]
+        }"/> <div class="wrapperButtons">
+                  <button data-action="onClickSaveInFormEditRow" type="submit" class="iconsGeneralRulls saveIcon"></button>
+                  <button data-action="onClickResetInFormEditRow" type="reset" class="iconsGeneralRulls cancelIcon"></button>
+                </div>
+          </td>`;
+      } else {
+        row += `<td><input type="text" name="${
+          this.jsonKeys[j]
+        }" class="inputFormEdit" value="${
+          this.data[this.rowAttribute][this.jsonKeys[j]]
+        }"/></td>`;
+      }
+      this.numberOfCols = j;
+    }
+
+    this.selectedRow.classList.add("active");
+    this.selectedRow.innerHTML = row;
   }
 
   // onClick(event) {
@@ -117,7 +175,7 @@ class MyLib {
 
   saveAsJSON() {
     if (this.data) {
-      let text = JSON.stringify(this.data);
+      const text = JSON.stringify(this.data);
       let a = document.createElement("a");
 
       a.href = "data:attachment/text," + encodeURI(text);
@@ -162,8 +220,8 @@ class MyLib {
           tempLine += `<td class="lastTd" data-row="${i}" data-col="${
             this.jsonKeys[j]
           }">${data[i][this.jsonKeys[j]]} <div class="wrapForEditAndDelButtons">
-             <button class="pen editCancelButtonsGeneral"></button>
-             <button class="deleteRow editCancelButtonsGeneral"></button>
+             <button data-action="editRow" class="pen editCancelButtonsGeneral"></button>
+             <button data-action="deleteRow" class="deleteRowButton editCancelButtonsGeneral"></button>
             </div>
           </td>`;
         } else {
@@ -188,59 +246,59 @@ class MyLib {
 
   ///////////////////// Finding click and edit table //////////////////////
 
-  findClickAndEditTable(event) {
-    console.log("findClickAndEditTable");
-    if (this.isFormToEditDataOpen) {
-      return;
-    }
-    let row = "";
-    const td = event.target.closest("td");
-    this.rowAttribute = td.getAttribute("data-row");
-    const deleteButton = event.target.closest(".deleteRow");
-    // if (
-    //   td.parentNode.classList.contains("active") ||
-    //   td.parentNode.parentNode.classList.contains("active")
-    // ) {
-    //   console.log("im working");
-    //   return;
-    // }
-    if (deleteButton) {
-      this.deleteRow(this.rowAttribute);
-    } else if (td || this.dataTable.contains(td)) {
-      this.isFormToEditDataOpen = true;
-      this.selectedRowBeforChangingData = td.parentNode.innerHTML;
-      this.selectedRow = td.parentNode;
+  // findClickAndEditTable(event) {
+  //   console.log("findClickAndEditTable");
+  //   if (this.isFormToEditDataOpen) {
+  //     return;
+  //   }
+  //   let row = "";
+  //   const td = event.target.closest("td");
+  //   this.rowAttribute = td.getAttribute("data-row");
+  //   const deleteButton = event.target.closest(".deleteRowButton");
+  //   // if (
+  //   //   td.parentNode.classList.contains("active") ||
+  //   //   td.parentNode.parentNode.classList.contains("active")
+  //   // ) {
+  //   //   console.log("im working");
+  //   //   return;
+  //   // }
+  //   if (deleteButton) {
+  //     this.deleteRow(this.rowAttribute);
+  //   } else if (td || this.dataTable.contains(td)) {
+  //     this.isFormToEditDataOpen = true;
+  //     this.selectedRowBeforChangingData = td.parentNode.innerHTML;
+  //     this.selectedRow = td.parentNode;
 
-      for (let j = 0; j < this.jsonKeys.length; j++) {
-        if (j === this.jsonKeys.length - 1) {
-          row += `<td><input type="text" name="${
-            this.jsonKeys[j]
-          }" class="inputFormEdit" value="${
-            this.data[this.rowAttribute][this.jsonKeys[j]]
-          }"/> <div class="wrapperButtons">
-                  <button type="submit" class="iconsGeneralRulls saveIcon"></button>
-                  <button type="reset" class="iconsGeneralRulls cancelIcon"></button>
-                </div>
-          </td>`;
-        } else {
-          row += `<td><input type="text" name="${
-            this.jsonKeys[j]
-          }" class="inputFormEdit" value="${
-            this.data[this.rowAttribute][this.jsonKeys[j]]
-          }"/></td>`;
-        }
-        this.numberOfCols = j;
-      }
+  //     for (let j = 0; j < this.jsonKeys.length; j++) {
+  //       if (j === this.jsonKeys.length - 1) {
+  //         row += `<td><input type="text" name="${
+  //           this.jsonKeys[j]
+  //         }" class="inputFormEdit" value="${
+  //           this.data[this.rowAttribute][this.jsonKeys[j]]
+  //         }"/> <div class="wrapperButtons">
+  //                 <button type="submit" class="iconsGeneralRulls saveIcon"></button>
+  //                 <button type="reset" class="iconsGeneralRulls cancelIcon"></button>
+  //               </div>
+  //         </td>`;
+  //       } else {
+  //         row += `<td><input type="text" name="${
+  //           this.jsonKeys[j]
+  //         }" class="inputFormEdit" value="${
+  //           this.data[this.rowAttribute][this.jsonKeys[j]]
+  //         }"/></td>`;
+  //       }
+  //       this.numberOfCols = j;
+  //     }
 
-      this.selectedRow.classList.add("active");
-      this.selectedRow.innerHTML = row;
-    }
-  }
+  //     this.selectedRow.classList.add("active");
+  //     this.selectedRow.innerHTML = row;
+  //   }
+  // }
 
   /////////////////////Deleting the row //////////////////////
 
-  deleteRow(numberOfRow) {
-    this.data.splice(numberOfRow, 1);
+  deleteRow(event) {
+    this.data.splice(event.target.closest("td").getAttribute("data-row"), 1);
     this.renderJSON(this.data);
   }
 
@@ -251,29 +309,10 @@ class MyLib {
       this.data.push({});
       const dataLength = this.data.length;
       for (let i = 0; i < this.jsonKeys.length; i++) {
-        this.data[dataLength - 1][this.jsonKeys[i]] = "...click here...";
+        this.data[dataLength - 1][this.jsonKeys[i]] = "...click edit button...";
       }
       this.renderJSON(this.data);
     } else alert("download file first");
-  }
-
-  ///////////////////// Edit and saving row data //////////////////////
-
-  onClickSaveInFormEditRow(rowAttr, values) {
-    console.log("save as json");
-    for (let i = 0; i < values.length; i++) {
-      this.data[rowAttr][this.jsonKeys[i]] = values[i];
-    }
-    this.renderJSON(this.data);
-    this.isFormToEditDataOpen = false;
-  }
-
-  ///////////////////// Cancelling editing row data //////////////////////
-
-  onClickResetInFormEditRow() {
-    this.selectedRow.innerHTML = this.selectedRowBeforChangingData;
-    this.isFormToEditDataOpen = false;
-    this.selectedRow.classList.remove("active");
   }
 
   ///////////////////// reset //////////////////////
