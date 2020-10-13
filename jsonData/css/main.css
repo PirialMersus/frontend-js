@@ -34,17 +34,17 @@ p {
   background-color: rgba(233, 227, 248, 0.8);
   text-align: right;
 }
-.wrapper h1 {
+.wrapper #formForEnterJSONFile h1 {
   text-align: center;
   font-size: 28px;
   margin-bottom: 30px;
 }
-.wrapper .formInputJSON {
+.wrapper #formForEnterJSONFile .formInputJSON {
   text-align: center;
   margin-bottom: 30px;
 }
-.wrapper .formInputJSON label,
-.wrapper .formInputJSON button {
+.wrapper #formForEnterJSONFile .formInputJSON label,
+.wrapper #formForEnterJSONFile .formInputJSON button {
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #a88af5;
@@ -53,11 +53,11 @@ p {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.wrapper .formInputJSON label:hover,
-.wrapper .formInputJSON button:hover {
+.wrapper #formForEnterJSONFile .formInputJSON label:hover,
+.wrapper #formForEnterJSONFile .formInputJSON button:hover {
   background-color: #8456f8;
 }
-.wrapper .formInputJSON input {
+.wrapper #formForEnterJSONFile .formInputJSON input {
   position: absolute;
   overflow: hidden;
   opacity: 0;
@@ -81,7 +81,6 @@ p {
 }
 .wrapper #formToInputTableData #dataTable tr {
   transition: all 0.3s ease;
-  padding-right: 150px;
 }
 .wrapper #formToInputTableData #dataTable tr.active td {
   padding: 2px;
@@ -96,7 +95,6 @@ p {
   justify-content: space-between;
   height: 100%;
   position: relative;
-  padding-right: 150px;
 }
 .wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons {
   position: absolute;
@@ -176,7 +174,7 @@ p {
   transform: scale(2);
   opacity: 1;
 }
-.wrapper > button {
+.wrapper .tableWrapper > button {
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #a88af5;
@@ -186,7 +184,7 @@ p {
   font-size: 14px;
   transition: all 0.3s ease;
 }
-.wrapper > button:hover {
+.wrapper .tableWrapper > button:hover {
   background-color: #8456f8;
 }
 canvas {

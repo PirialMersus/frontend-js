@@ -36,41 +36,44 @@ p {
   padding: 30px 30px;
   min-width: 800px;
   background-color: rgba(233, 227, 248, 0.8);
+  text-align: right;
 
-  h1 {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 30px;
-  }
+  #formForEnterJSONFile {
 
-  .formInputJSON {
-    text-align: center;
-    margin-bottom: 30px;
 
-    label,
-    button {
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: rgb(168, 138, 245);
-      border: none;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
 
-      &:hover {
-        background-color: rgb(132, 86, 248);
+    .formInputJSON {
+      text-align: center;
+      margin-bottom: 30px;
+
+      label,
+      button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: rgb(168, 138, 245);
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: rgb(132, 86, 248);
+        }
+      }
+
+      input {
+        position: absolute;
+        overflow: hidden;
+        opacity: 0;
+        width: 0.1px;
+        height: 0.1px;
       }
     }
-
-    input {
-      position: absolute;
-      overflow: hidden;
-      opacity: 0;
-      width: 0.1px;
-      height: 0.1px;
-    }
-
-    button {}
   }
 
   #formToInputTableData {
@@ -92,7 +95,6 @@ p {
 
       tr {
         transition: all 0.3s ease;
-        padding-right: 150px;
 
         &.active {
           td {
@@ -111,7 +113,6 @@ p {
           justify-content: space-between;
           height: 100%;
           position: relative;
-          padding-right: 150px;
 
           .wrapForEditAndDelButtons {
             position: absolute;
@@ -202,10 +203,6 @@ p {
         }
       }
 
-      // tr:not(:first-child) {
-      //   cursor: pointer;
-      // }
-
       tr:hover:not(:first-child) {
         background-color: rgba(51, 51, 0, 0.2);
 
@@ -225,34 +222,29 @@ p {
         }
       }
     }
+
   }
 
-  #dataTable {
-    // opacity: 0;
-    // visibility: hidden;
-  }
+  .tableWrapper {
+    >button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: rgb(168, 138, 245);
+      cursor: pointer;
+      margin-right: 30px;
+      border: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
 
-  >button {
-    // display: block;
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: rgb(168, 138, 245);
-    cursor: pointer;
-    margin-right: 30px;
-    border: none;
-    font-size: 14px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: rgb(132, 86, 248);
+      &:hover {
+        background-color: rgb(132, 86, 248);
+      }
     }
   }
-
-  text-align: right;
 }
 
+
 canvas {
-  // margin: 30px;
   position: absolute;
   top: 0;
   left: 0;

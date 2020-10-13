@@ -7,23 +7,25 @@
     <title>Json Data</title>
   </head>
   <body>
-    <div class="wrapper">
-      <h1>Working with Json Data</h1>
-      <form class="formInputJSON" action="#">
-        <input id="inputFile" class="inputfile" type="file" multiple />
-        <label for="inputFile"> <span> Download JSON file</span></label>
-        <button type="submit" data-action="downloadingJSONFile">Load</button>
-      </form>
-      <form action="#" id="formToInputTableData">
+    <div class="wrapper" id="wrapper">
+      <div id="formForEnterJSONFile">
+        <h1>Working with Json Data</h1>
+        <form class="formInputJSON" action="#">
+          <input id="inputFile" class="inputfile" type="file" multiple />
+          <label for="inputFile"> <span> Download JSON file</span></label>
+          <button type="submit" data-action="downloadingJSONFile">Load</button>
+        </form>
+      </div>
+      <!-- <form action="#" id="formToInputTableData">
         <table
           data-action="findClickAndEditTable"
           border="1"
           id="dataTable"
         ></table>
-      </form>
-      <button data-action="addOneRow" id="addOneRowId">Add a new row</button>
+      </form> -->
+      <!-- <button data-action="addOneRow" id="addOneRowId">Add a new row</button>
       <button data-action="saveAsJSON" id="saveButton">save as JSON</button>
-      <button data-action="resetFunction" id="reset">Reset</button>
+      <button data-action="resetFunction" id="reset">Reset</button> -->
       <!-- <html-gl id="test">
         <img src="img/forCanvasTesting.jpg" alt="" />
       </html-gl> -->
@@ -33,6 +35,8 @@
     <!-- <script src="js/htmlgl.js"></script> -->
     <!-- <script src="js/htmlgl-effects.js"></script> -->
     <!-- <script src="js/main.js"></script> -->
+
+    <script src="js/Table.js"></script>
     <script src="js/MyLib.js"></script>
   </body>
 </html>
