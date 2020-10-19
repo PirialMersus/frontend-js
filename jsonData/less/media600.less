@@ -1,0 +1,77 @@
+@media (max-width: 600px) {
+  .wrapper {
+    box-sizing: border-box;
+    // max-width: 960px;
+    padding: 0px;
+    min-width: 400px;
+    width: 100%;
+
+    // max-width: 90%;
+    #formToInputTableData {
+      #dataTable {
+        min-width: 500px;
+
+        caption {
+          font-size: 2.5em;
+          padding: 10px;
+        }
+        tr {
+          th {
+            font-size: 0.9em;
+            padding: 2px 8px;
+          }
+          td {
+            font-size: 0.9em;
+            padding: 5px;
+
+            input {
+              padding: 2px;
+            }
+
+            .wrapperButtons {
+              .iconsGeneralRulls {
+                width: 16px;
+                height: 16px;
+              }
+            }
+          }
+
+          .lastTd {
+            .wrapForEditAndDelButtons {
+              .editCancelButtonsGeneral {
+                visibility: visible;
+                opacity: 0.7;
+                width: 18px;
+                height: 18px;
+              }
+            }
+          }
+        }
+
+        // &:hover:not(:first-child) {
+        //   .lastTd {
+        //     .wrapForEditAndDelButtons {
+        //       .editCancelButtonsGeneral {
+        //         visibility: visible;
+        //         opacity: 0.7;
+        //         transform: scale(1.5);
+
+        //         &:hover {
+        //           transform: scale(2);
+        //           opacity: 1;
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+      }
+    }
+    .tableWrapper {
+      > button {
+        font-size: 0.9em;
+        padding: 6px 14px;
+        margin-right: 10px;
+      }
+    }
+  }
+}

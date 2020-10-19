@@ -1,0 +1,41 @@
+@media (max-width: 600px) {
+  .wrapper {
+    box-sizing: border-box;
+    padding: 0px;
+    min-width: 400px;
+    width: 100%;
+  }
+  .wrapper #formToInputTableData #dataTable {
+    min-width: 500px;
+  }
+  .wrapper #formToInputTableData #dataTable caption {
+    font-size: 2.5em;
+    padding: 10px;
+  }
+  .wrapper #formToInputTableData #dataTable tr th {
+    font-size: 0.9em;
+    padding: 2px 8px;
+  }
+  .wrapper #formToInputTableData #dataTable tr td {
+    font-size: 0.9em;
+    padding: 5px;
+  }
+  .wrapper #formToInputTableData #dataTable tr td input {
+    padding: 2px;
+  }
+  .wrapper #formToInputTableData #dataTable tr td .wrapperButtons .iconsGeneralRulls {
+    width: 16px;
+    height: 16px;
+  }
+  .wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
+    visibility: visible;
+    opacity: 0.7;
+    width: 18px;
+    height: 18px;
+  }
+  .wrapper .tableWrapper > button {
+    font-size: 0.9em;
+    padding: 6px 14px;
+    margin-right: 10px;
+  }
+}

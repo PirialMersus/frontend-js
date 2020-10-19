@@ -24,8 +24,7 @@ function () {
     this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
     this.rowAttribute = "";
-    this.numberOfCols = 0;
-    this.isFileDownloaded = false;
+    this.numberOfCols = 0; // this.isFileDownloaded = false;
   }
 
   _createClass(Table, [{
@@ -103,7 +102,7 @@ function () {
     value: function renderJSON(data) {
       var _this = this;
 
-      var buttonsForRender = "<button data-action=\"addOneRow\" id=\"addOneRowId\">Add a new row</button>\n      <button data-action=\"saveAsJSON\" id=\"saveButton\">save as JSON</button>\n      <button data-action=\"resetFunction\" id=\"reset\">Reset</button>";
+      var buttonsForRender = "\n      <button class=\"classForEditingButtons2\" data-action=\"addOneRow\" id=\"addOneRowId\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Add a new row\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"saveAsJSON\" id=\"saveButton\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        save as JSON\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"resetFunction\" id=\"reset\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Reset\n      </button>";
       var dataForRender,
           tableForRender = "";
 

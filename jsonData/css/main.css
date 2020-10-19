@@ -31,7 +31,7 @@ p {
   margin: 0 auto;
   padding: 30px 30px;
   min-width: 800px;
-  background-color: rgba(233, 227, 248, 0.8);
+  background-color: rgba(200, 196, 214, 0.8);
   text-align: right;
 }
 .wrapper #formForEnterJSONFile h1 {
@@ -45,17 +45,27 @@ p {
 }
 .wrapper #formForEnterJSONFile .formInputJSON label,
 .wrapper #formForEnterJSONFile .formInputJSON button {
+  color: #fff;
+  transition: 0.5s;
+  position: relative;
   padding: 10px 20px;
   border-radius: 5px;
-  background-color: #a88af5;
+  background-color: #946ff1;
   border: none;
   font-size: 14px;
+  overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 .wrapper #formForEnterJSONFile .formInputJSON label:hover,
 .wrapper #formForEnterJSONFile .formInputJSON button:hover {
-  background-color: #8456f8;
+  background: #730bec url(pixel2.png);
+  background-size: 180px;
+  transition-delay: 0.8s;
+  animation: animate 0.8s steps(8) forwards;
+}
+.wrapper #formForEnterJSONFile .formInputJSON label:focus,
+.wrapper #formForEnterJSONFile .formInputJSON button:focus {
+  border: none;
 }
 .wrapper #formForEnterJSONFile .formInputJSON input {
   position: absolute;
@@ -67,9 +77,10 @@ p {
 .wrapper #formToInputTableData #dataTable {
   margin: 0 auto;
   margin-bottom: 50px;
+  box-sizing: border-box;
   border: none;
   box-shadow: 3px 3px 13px #000000;
-  table-layout: fixed;
+  table-layout: auto;
   max-width: 90%;
   text-align: left;
   transition: all 2s ease;
@@ -88,7 +99,8 @@ p {
 .wrapper #formToInputTableData #dataTable tr th {
   padding: 20px;
   font-size: 20px;
-  width: 240px;
+  max-width: 240px;
+  text-align: center;
 }
 .wrapper #formToInputTableData #dataTable tr .lastTd {
   display: flex;
@@ -175,6 +187,8 @@ p {
   opacity: 1;
 }
 .wrapper .tableWrapper > button {
+  overflow: hidden;
+  position: relative;
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #a88af5;
@@ -183,9 +197,57 @@ p {
   border: none;
   font-size: 14px;
   transition: all 0.3s ease;
+  color: #eeeeee;
+}
+.wrapper .tableWrapper > button::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  width: 50%;
+  background: rgba(255, 255, 255, 0.05);
 }
 .wrapper .tableWrapper > button:hover {
   background-color: #8456f8;
+}
+.wrapper .tableWrapper > button span:nth-child(1) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #0c002b, #1779ff);
+  animation: animate1 2s linear infinite;
+}
+.wrapper .tableWrapper > button span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  animation: animate2 2s linear infinite;
+  animation-delay: 1s;
+  background: linear-gradient(to bottom, #0c002b, #1779ff);
+}
+.wrapper .tableWrapper > button span:nth-child(3) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  animation: animate3 2s linear infinite;
+  background: linear-gradient(to left, #0c002b, #1779ff);
+}
+.wrapper .tableWrapper > button span:nth-child(4) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  animation: animate4 2s linear infinite;
+  animation-delay: 1s;
+  background: linear-gradient(to top, #0c002b, #1779ff);
 }
 canvas {
   position: absolute;
@@ -193,4 +255,64 @@ canvas {
   left: 0;
   right: 0;
   bottom: 0;
+}
+.tempSpan {
+  position: absolute;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 50%;
+  animation: animateRipples 1s linear infinite;
+}
+@keyframes animateRipples {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.2;
+  }
+  100% {
+    width: 500px;
+    height: 500px;
+    opacity: 0;
+  }
+}
+@keyframes animate {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: -480px;
+  }
+}
+@keyframes animate1 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes animate2 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+@keyframes animate3 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes animate4 {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }

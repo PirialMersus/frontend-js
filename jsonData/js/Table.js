@@ -14,7 +14,7 @@ class Table {
     this.selectedRow = "";
     this.rowAttribute = "";
     this.numberOfCols = 0;
-    this.isFileDownloaded = false;
+    // this.isFileDownloaded = false;
   }
 
   findClick(event) {
@@ -96,9 +96,28 @@ class Table {
   ///////////////////// Render Data to Dom //////////////////////
 
   renderJSON(data) {
-    const buttonsForRender = `<button data-action="addOneRow" id="addOneRowId">Add a new row</button>
-      <button data-action="saveAsJSON" id="saveButton">save as JSON</button>
-      <button data-action="resetFunction" id="reset">Reset</button>`;
+    const buttonsForRender = `
+      <button class="classForEditingButtons2" data-action="addOneRow" id="addOneRowId">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Add a new row
+      </button>
+      <button class="classForEditingButtons2" data-action="saveAsJSON" id="saveButton">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        save as JSON
+      </button>
+      <button class="classForEditingButtons2" data-action="resetFunction" id="reset">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Reset
+      </button>`;
     let dataForRender,
       tableForRender = "";
 
