@@ -14,7 +14,6 @@ class Table {
     this.selectedRow = "";
     this.rowAttribute = "";
     this.numberOfCols = 0;
-    // this.isFileDownloaded = false;
   }
 
   findClick(event) {

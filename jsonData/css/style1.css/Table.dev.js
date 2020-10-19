@@ -24,7 +24,7 @@ function () {
     this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
     this.rowAttribute = "";
-    this.numberOfCols = 0; // this.isFileDownloaded = false;
+    this.numberOfCols = 0;
   }
 
   _createClass(Table, [{
