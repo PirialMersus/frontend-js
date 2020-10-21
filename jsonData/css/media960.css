@@ -21,11 +21,23 @@
   .wrapper #formToInputTableData #dataTable tr td input {
     padding: 2px;
   }
-  .wrapper #formToInputTableData #dataTable tr td .wrapperButtons .iconsGeneralRulls {
+  .wrapper
+    #formToInputTableData
+    #dataTable
+    tr
+    td
+    .wrapperButtons
+    .iconsGeneralRulls {
     width: 18px;
     height: 18px;
   }
-  .wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
+  .wrapper
+    #formToInputTableData
+    #dataTable
+    tr
+    .lastTd
+    .wrapForEditAndDelButtons
+    .editCancelButtonsGeneral {
     visibility: visible;
     opacity: 0.7;
     width: 20px;

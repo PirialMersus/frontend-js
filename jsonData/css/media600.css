@@ -1,9 +1,7 @@
 @media (max-width: 600px) {
   .wrapper {
     box-sizing: border-box;
-    padding: 0px;
     min-width: 400px;
-    width: 100%;
   }
   .wrapper #formToInputTableData #dataTable {
     min-width: 500px;
@@ -28,10 +26,11 @@
     height: 16px;
   }
   .wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
-    visibility: visible;
-    opacity: 0.7;
     width: 18px;
     height: 18px;
+  }
+  .wrapper .tableWrapper {
+    margin-bottom: 30px;
   }
   .wrapper .tableWrapper > button {
     font-size: 0.9em;

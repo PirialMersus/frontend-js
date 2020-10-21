@@ -113,7 +113,13 @@ p {
   right: 5px;
   display: flex;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  .lastTd
+  .wrapForEditAndDelButtons
+  .editCancelButtonsGeneral {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   display: block;
@@ -126,11 +132,23 @@ p {
   transition: all 0.3s ease;
   cursor: pointer;
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .pen {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  .lastTd
+  .wrapForEditAndDelButtons
+  .pen {
   margin-right: 15px;
   background-image: url(../img/pen.svg);
 }
-.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .deleteRowButton {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  .lastTd
+  .wrapForEditAndDelButtons
+  .deleteRowButton {
   background-image: url(../img/delete.svg);
 }
 .wrapper #formToInputTableData #dataTable tr td {
@@ -153,7 +171,13 @@ p {
   display: flex;
   align-items: center;
 }
-.wrapper #formToInputTableData #dataTable tr td .wrapperButtons .iconsGeneralRulls {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  td
+  .wrapperButtons
+  .iconsGeneralRulls {
   background-color: rgba(255, 255, 255, 0);
   display: block;
   width: 25px;
@@ -165,7 +189,13 @@ p {
   border: none;
   cursor: pointer;
 }
-.wrapper #formToInputTableData #dataTable tr td .wrapperButtons .iconsGeneralRulls:hover {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  td
+  .wrapperButtons
+  .iconsGeneralRulls:hover {
   transform: scale(1.9);
 }
 .wrapper #formToInputTableData #dataTable tr td .wrapperButtons .saveIcon {
@@ -177,12 +207,24 @@ p {
 .wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) {
   background-color: rgba(51, 51, 0, 0.2);
 }
-.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr:hover:not(:first-child)
+  .lastTd
+  .wrapForEditAndDelButtons
+  .editCancelButtonsGeneral {
   visibility: visible;
   opacity: 0.7;
   transform: scale(1.5);
 }
-.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral:hover {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr:hover:not(:first-child)
+  .lastTd
+  .wrapForEditAndDelButtons
+  .editCancelButtonsGeneral:hover {
   transform: scale(2);
   opacity: 1;
 }
