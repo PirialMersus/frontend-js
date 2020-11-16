@@ -33,19 +33,18 @@ p {
   min-width: 800px;
   background-color: rgba(200, 196, 214, 0.8);
   text-align: right;
-  overflow: hidden;
 }
-.wrapper .formForEnterJSONFile h1 {
+.wrapper #formForEnterJSONFile h1 {
   text-align: center;
   font-size: 28px;
   margin-bottom: 30px;
 }
-.wrapper .formForEnterJSONFile .formInputJSON {
+.wrapper #formForEnterJSONFile .formInputJSON {
   text-align: center;
   margin-bottom: 30px;
 }
-.wrapper .formForEnterJSONFile .formInputJSON label,
-.wrapper .formForEnterJSONFile .formInputJSON button {
+.wrapper #formForEnterJSONFile .formInputJSON label,
+.wrapper #formForEnterJSONFile .formInputJSON button {
   color: #fff;
   transition: 0.5s;
   position: relative;
@@ -57,25 +56,25 @@ p {
   overflow: hidden;
   cursor: pointer;
 }
-.wrapper .formForEnterJSONFile .formInputJSON label:hover,
-.wrapper .formForEnterJSONFile .formInputJSON button:hover {
+.wrapper #formForEnterJSONFile .formInputJSON label:hover,
+.wrapper #formForEnterJSONFile .formInputJSON button:hover {
   background: #730bec url(pixel2.png);
   background-size: 180px;
   transition-delay: 0.8s;
   animation: animate 0.8s steps(8) forwards;
 }
-.wrapper .formForEnterJSONFile .formInputJSON label:focus,
-.wrapper .formForEnterJSONFile .formInputJSON button:focus {
+.wrapper #formForEnterJSONFile .formInputJSON label:focus,
+.wrapper #formForEnterJSONFile .formInputJSON button:focus {
   border: none;
 }
-.wrapper .formForEnterJSONFile .formInputJSON input {
+.wrapper #formForEnterJSONFile .formInputJSON input {
   position: absolute;
   overflow: hidden;
   opacity: 0;
   width: 0.1px;
   height: 0.1px;
 }
-.wrapper .tableWrapper .dataTable {
+.wrapper #formToInputTableData #dataTable {
   margin: 0 auto;
   margin-bottom: 50px;
   box-sizing: border-box;
@@ -86,35 +85,41 @@ p {
   text-align: left;
   transition: all 2s ease;
 }
-.wrapper .tableWrapper .dataTable caption {
+.wrapper #formToInputTableData #dataTable caption {
   font-size: 26px;
   font-weight: 600;
   padding: 20px;
 }
-.wrapper .tableWrapper .dataTable tr {
+.wrapper #formToInputTableData #dataTable tr {
   transition: all 0.3s ease;
 }
-.wrapper .tableWrapper .dataTable tr.active td {
+.wrapper #formToInputTableData #dataTable tr.active td {
   padding: 2px;
 }
-.wrapper .tableWrapper .dataTable tr th {
+.wrapper #formToInputTableData #dataTable tr th {
   padding: 20px;
   font-size: 20px;
   max-width: 240px;
   text-align: center;
 }
-.wrapper .tableWrapper .dataTable tr .lastTd {
+.wrapper #formToInputTableData #dataTable tr .lastTd {
   display: flex;
   justify-content: space-between;
   height: 100%;
   position: relative;
 }
-.wrapper .tableWrapper .dataTable tr .lastTd .wrapForEditAndDelButtons {
+.wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons {
   position: absolute;
   right: 5px;
   display: flex;
 }
-.wrapper .tableWrapper .dataTable tr .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  .lastTd
+  .wrapForEditAndDelButtons
+  .editCancelButtonsGeneral {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   display: block;
@@ -127,25 +132,37 @@ p {
   transition: all 0.3s ease;
   cursor: pointer;
 }
-.wrapper .tableWrapper .dataTable tr .lastTd .wrapForEditAndDelButtons .pen {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  .lastTd
+  .wrapForEditAndDelButtons
+  .pen {
   margin-right: 15px;
   background-image: url(../img/pen.svg);
 }
-.wrapper .tableWrapper .dataTable tr .lastTd .wrapForEditAndDelButtons .deleteRowButton {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  .lastTd
+  .wrapForEditAndDelButtons
+  .deleteRowButton {
   background-image: url(../img/delete.svg);
 }
-.wrapper .tableWrapper .dataTable tr td {
+.wrapper #formToInputTableData #dataTable tr td {
   padding: 10px;
   position: relative;
   word-wrap: break-word;
   box-sizing: border-box;
 }
-.wrapper .tableWrapper .dataTable tr td input {
+.wrapper #formToInputTableData #dataTable tr td input {
   padding: 6px;
   width: 100%;
   box-sizing: border-box;
 }
-.wrapper .tableWrapper .dataTable tr td .wrapperButtons {
+.wrapper #formToInputTableData #dataTable tr td .wrapperButtons {
   position: absolute;
   z-index: 5;
   right: 0;
@@ -154,7 +171,13 @@ p {
   display: flex;
   align-items: center;
 }
-.wrapper .tableWrapper .dataTable tr td .wrapperButtons .iconsGeneralRulls {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  td
+  .wrapperButtons
+  .iconsGeneralRulls {
   background-color: rgba(255, 255, 255, 0);
   display: block;
   width: 25px;
@@ -166,29 +189,44 @@ p {
   border: none;
   cursor: pointer;
 }
-.wrapper .tableWrapper .dataTable tr td .wrapperButtons .iconsGeneralRulls:hover {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr
+  td
+  .wrapperButtons
+  .iconsGeneralRulls:hover {
   transform: scale(1.9);
 }
-.wrapper .tableWrapper .dataTable tr td .wrapperButtons .saveIcon {
+.wrapper #formToInputTableData #dataTable tr td .wrapperButtons .saveIcon {
   background-image: url(../img/save.svg);
 }
-.wrapper .tableWrapper .dataTable tr td .wrapperButtons .cancelIcon {
+.wrapper #formToInputTableData #dataTable tr td .wrapperButtons .cancelIcon {
   background-image: url(../img/cancel.svg);
 }
-.wrapper .tableWrapper .dataTable tr:hover:not(:first-child) {
+.wrapper #formToInputTableData #dataTable tr:hover:not(:first-child) {
   background-color: rgba(51, 51, 0, 0.2);
 }
-.wrapper .tableWrapper .dataTable tr:hover:not(:first-child) .editCancelButtonsGeneral {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr:hover:not(:first-child)
+  .lastTd
+  .wrapForEditAndDelButtons
+  .editCancelButtonsGeneral {
   visibility: visible;
   opacity: 0.7;
   transform: scale(1.5);
 }
-.wrapper .tableWrapper .dataTable tr:hover:not(:first-child) .editCancelButtonsGeneral:hover {
+.wrapper
+  #formToInputTableData
+  #dataTable
+  tr:hover:not(:first-child)
+  .lastTd
+  .wrapForEditAndDelButtons
+  .editCancelButtonsGeneral:hover {
   transform: scale(2);
   opacity: 1;
-}
-.wrapper .tableWrapper.editModeOn tr .lastTd .wrapForEditAndDelButtons {
-  display: none;
 }
 .wrapper .tableWrapper > button {
   overflow: hidden;
@@ -252,6 +290,13 @@ p {
   animation: animate4 2s linear infinite;
   animation-delay: 1s;
   background: linear-gradient(to top, #0c002b, #1779ff);
+}
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 .tempSpan {
   position: absolute;

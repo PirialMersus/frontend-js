@@ -3,14 +3,24 @@
 class MyLib {
   constructor(elem) {
     this._elem = elem;
-    this.input = document.getElementById("inputFile");
     document.getElementById(
-      "btnForEnterJSONFile"
+      "formForEnterJSONFile"
     ).onclick = this.downloadingJSONFile.bind(this);
+    this.input = document.getElementById("inputFile");
   }
 
-  downloadingJSONFile(e) {
-    e.preventDefault();
+  // findClick(event) {
+  //   let action = event.target.dataset.action;
+  //   if (action) {
+  //     this[action](event);
+  //   }
+  // }
+
+  createAndRenderNewTable(data, newTable) {
+    new Table({ data, newTable });
+  }
+
+  downloadingJSONFile() {
     const file = this.input.files[0];
     const reader = new FileReader();
     reader.onload = () => {
@@ -20,7 +30,7 @@ class MyLib {
 
       this._elem.append(newTable);
 
-      new Table({ data, newTable });
+      this.createAndRenderNewTable(data, newTable);
     };
     reader.readAsText(file);
   }

@@ -3,29 +3,29 @@
     box-sizing: border-box;
     min-width: 400px;
   }
-  .wrapper .tableWrapper .dataTable {
+  .wrapper #formToInputTableData #dataTable {
     min-width: 500px;
   }
-  .wrapper .tableWrapper .dataTable caption {
+  .wrapper #formToInputTableData #dataTable caption {
     font-size: 2.5em;
     padding: 10px;
   }
-  .wrapper .tableWrapper .dataTable tr th {
+  .wrapper #formToInputTableData #dataTable tr th {
     font-size: 0.9em;
     padding: 2px 8px;
   }
-  .wrapper .tableWrapper .dataTable tr td {
+  .wrapper #formToInputTableData #dataTable tr td {
     font-size: 0.9em;
     padding: 5px;
   }
-  .wrapper .tableWrapper .dataTable tr td input {
+  .wrapper #formToInputTableData #dataTable tr td input {
     padding: 2px;
   }
-  .wrapper .tableWrapper .dataTable tr td .wrapperButtons .iconsGeneralRulls {
+  .wrapper #formToInputTableData #dataTable tr td .wrapperButtons .iconsGeneralRulls {
     width: 16px;
     height: 16px;
   }
-  .wrapper .tableWrapper .dataTable tr .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
+  .wrapper #formToInputTableData #dataTable tr .lastTd .wrapForEditAndDelButtons .editCancelButtonsGeneral {
     width: 18px;
     height: 18px;
   }

@@ -14,16 +14,29 @@ function () {
     _classCallCheck(this, MyLib);
 
     this._elem = elem;
+    document.getElementById("formForEnterJSONFile").onclick = this.downloadingJSONFile.bind(this);
     this.input = document.getElementById("inputFile");
-    document.getElementById("btnForEnterJSONFile").onclick = this.downloadingJSONFile.bind(this);
-  }
+  } // findClick(event) {
+  //   let action = event.target.dataset.action;
+  //   if (action) {
+  //     this[action](event);
+  //   }
+  // }
+
 
   _createClass(MyLib, [{
+    key: "createAndRenderNewTable",
+    value: function createAndRenderNewTable(data, newTable) {
+      new Table({
+        data: data,
+        newTable: newTable
+      });
+    }
+  }, {
     key: "downloadingJSONFile",
-    value: function downloadingJSONFile(e) {
+    value: function downloadingJSONFile() {
       var _this = this;
 
-      e.preventDefault();
       var file = this.input.files[0];
       var reader = new FileReader();
 
@@ -34,10 +47,7 @@ function () {
 
         _this._elem.append(newTable);
 
-        new Table({
-          data: data,
-          newTable: newTable
-        });
+        _this.createAndRenderNewTable(data, newTable);
       };
 
       reader.readAsText(file);

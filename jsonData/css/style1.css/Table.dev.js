@@ -19,7 +19,6 @@ function () {
     this.jsonKeys = Object.keys(options.data[0]);
     this.renderJSON(options.data);
     this.dataTable = this.element.querySelector("table");
-    this.mainFormTable = this.element.querySelector("formToWrapTable");
     this.isFormToEditDataOpen = false;
     this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
@@ -33,6 +32,7 @@ function () {
       var action = event.target.dataset.action;
 
       if (action) {
+        console.log(action);
         this[action](event);
       }
     } ///////////////////// Edit and saving row data //////////////////////
@@ -48,53 +48,49 @@ function () {
 
       this.renderJSON(this.data);
       this.isFormToEditDataOpen = false;
+      this.element.classList.remove("editModeOn");
     } ///////////////////// Cancelling editing row data //////////////////////
 
   }, {
     key: "onClickResetInFormEditRow",
-    value: function onClickResetInFormEditRow() {
-      this.selectedRow.innerHTML = this.selectedRowBeforChangingData;
+    value: function onClickResetInFormEditRow(e) {
+      e.preventDefault();
+      this.selectedRow.innerHTML = this.createRoW(this.rowAttribute, this.data);
       this.isFormToEditDataOpen = false;
       this.selectedRow.classList.remove("active");
+      this.element.classList.remove("editModeOn");
     }
   }, {
-    key: "editRow",
-    value: function editRow(event) {
+    key: "showInputsRow",
+    value: function showInputsRow(event) {
       if (this.isFormToEditDataOpen) {
         return;
       }
 
+      this.element.classList.add("editModeOn");
       this.isFormToEditDataOpen = true;
-      var row = "";
       var td = event.target.closest("td");
       this.rowAttribute = td.getAttribute("data-row");
-      this.selectedRowBeforChangingData = td.parentNode.innerHTML;
       this.selectedRow = td.parentNode;
-
-      for (var j = 0; j < this.jsonKeys.length; j++) {
-        if (j === this.jsonKeys.length - 1) {
-          row += "<td><input type=\"text\" name=\"".concat(this.jsonKeys[j], "\" class=\"inputFormEdit\" value=\"").concat(this.data[this.rowAttribute][this.jsonKeys[j]], "\"/> <div class=\"wrapperButtons\">\n                    <button data-action=\"onClickSaveInFormEditRow\" type=\"submit\" class=\"iconsGeneralRulls saveIcon\"></button>\n                    <button data-action=\"onClickResetInFormEditRow\" type=\"reset\" class=\"iconsGeneralRulls cancelIcon\"></button>\n                  </div>\n            </td>");
-        } else {
-          row += "<td><input type=\"text\" name=\"".concat(this.jsonKeys[j], "\" class=\"inputFormEdit\" value=\"").concat(this.data[this.rowAttribute][this.jsonKeys[j]], "\"/></td>");
-        }
-
-        this.numberOfCols = j;
-      }
-
+      var row = this.createInputsRow(this.rowAttribute);
       this.selectedRow.classList.add("active");
       this.selectedRow.innerHTML = row;
     }
   }, {
-    key: "saveAsJSON",
-    value: function saveAsJSON() {
-      if (this.data) {
-        var text = JSON.stringify(this.data);
-        var a = document.createElement("a");
-        a.href = "data:attachment/text," + encodeURI(text);
-        a.target = "_blank";
-        a.download = "filename.json";
-        a.click();
-      } else alert("Сначала загрузите таблицу");
+    key: "createInputsRow",
+    value: function createInputsRow(rowAttribute) {
+      var row = "";
+
+      for (var j = 0; j < this.jsonKeys.length; j++) {
+        if (j === this.jsonKeys.length - 1) {
+          row += "\n              <td><input name=\"".concat(this.jsonKeys[j], "\" class=\"inputFormEdit\" value=\"").concat(this.data[rowAttribute][this.jsonKeys[j]], "\"/>\n                <div class=\"wrapperButtons\">\n                  <button data-action=\"onClickSaveInFormEditRow\" type=\"submit\" class=\"iconsGeneralRulls saveIcon\"></button>\n                  <button data-action=\"onClickResetInFormEditRow\" type=\"reset\" class=\"iconsGeneralRulls cancelIcon\"></button>\n                </div>\n              </td>");
+        } else {
+          row += "<td><input\n                      name=\"".concat(this.jsonKeys[j], "\"\n                      class=\"inputFormEdit\"\n                      value=\"").concat(this.data[rowAttribute][this.jsonKeys[j]], "\"/>\n                </td>");
+        } // this.numberOfCols = j;
+
+      }
+
+      return row;
     } ///////////////////// Render Data to Dom //////////////////////
 
   }, {
@@ -102,40 +98,26 @@ function () {
     value: function renderJSON(data) {
       var _this = this;
 
-      var buttonsForRender = "\n      <button class=\"classForEditingButtons2\" data-action=\"addOneRow\" id=\"addOneRowId\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Add a new row\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"saveAsJSON\" id=\"saveButton\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        save as JSON\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"resetFunction\" id=\"reset\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Reset\n      </button>";
-      var dataForRender,
-          tableForRender = "";
+      var tableHeader = "";
+      var tableRows = "";
+      var buttonsForRender = "\n      <button class=\"classForEditingButtons2\" data-action=\"addOneRow\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Add a new row\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"saveAsJSON\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        save as JSON\n      </button>\n    ";
 
       for (var j = 0; j < this.jsonKeys.length; j++) {
-        tableForRender += "<th data-number>".concat(this.jsonKeys[j], "</th>");
+        tableHeader += "<th>".concat(this.jsonKeys[j], "</th>");
       }
-
-      dataForRender = "<tr>".concat(tableForRender, "</tr>");
-      tableForRender = "";
 
       for (var i = 0; i < data.length; i++) {
-        var tempLine = "";
-
-        for (var _j = 0; _j < this.jsonKeys.length; _j++) {
-          if (_j === this.jsonKeys.length - 1) {
-            tempLine += "<td class=\"lastTd\" data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(data[i][this.jsonKeys[_j]], " <div class=\"wrapForEditAndDelButtons\">\n               <button data-action=\"editRow\" class=\"pen editCancelButtonsGeneral\"></button>\n               <button data-action=\"deleteRow\" class=\"deleteRowButton editCancelButtonsGeneral\"></button>\n              </div>\n            </td>");
-          } else {
-            tempLine += "<td data-row=\"".concat(i, "\" data-col=\"").concat(this.jsonKeys[_j], "\">").concat(data[i][this.jsonKeys[_j]], "</td>");
-          }
-        }
-
-        tableForRender += "<tr>".concat(tempLine, "</tr>");
+        tableRows += this.createRoW(i, data);
       }
 
-      dataForRender = "<form class=\"formToWrapTable\" action=\"#\" id=\"formToInputTableData\">\n          <table  data-action=\"findClickAndEditTable\"\n                  border=\"1\"\n                  id=\"dataTable\">\n            <caption>\n              \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n            </caption>\n            ".concat(dataForRender, "\n            ").concat(tableForRender, "\n          </table>\n        </form>\n        ").concat(buttonsForRender);
-      this.element.innerHTML = dataForRender;
-      document.getElementById("formToInputTableData").addEventListener("submit", function (e) {
+      this.element.innerHTML = "\n      <form class=\"formToWrapTable\" action=\"#\">\n        <table\n                border=\"1\"\n                class=\"dataTable\">\n          <caption>\n            \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n          </caption>\n          <tr>".concat(tableHeader, "</tr>\n           ").concat(tableRows, "\n          </table>\n      </form>\n      ").concat(buttonsForRender);
+      this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("submit", function (e) {
         e.preventDefault();
         e.stopPropagation();
 
         _this.onClickSaveInFormEditRow();
       });
-      document.getElementById("formToInputTableData").addEventListener("reset", function (e) {
+      this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("reset", function (e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -144,15 +126,35 @@ function () {
     } /////////////////////Deleting the row //////////////////////
 
   }, {
+    key: "createRoW",
+    value: function createRoW(i, data) {
+      this.templine = "";
+
+      for (var j = 0; j < this.jsonKeys.length; j++) {
+        if (j === this.jsonKeys.length - 1) {
+          this.templine += "\n      <td class=\"lastTd\" data-row=\"".concat(i, "\"}\">\n        ").concat(data[i][this.jsonKeys[j]], "\n        <div class=\"wrapForEditAndDelButtons\">\n            <button type=\"button\" data-action=\"showInputsRow\" class=\"pen editCancelButtonsGeneral\"></button>\n            <button type=\"button\" data-action=\"deleteRow\" class=\"deleteRowButton editCancelButtonsGeneral\"></button>\n        </div>\n      </td>");
+        } else {
+          this.templine += "<td data-row=\"".concat(i, "\">").concat(data[i][this.jsonKeys[j]], "</td>");
+        }
+      }
+
+      return "<tr>".concat(this.templine, "</tr>");
+    } /////////////////////Deleting the row //////////////////////
+
+  }, {
     key: "deleteRow",
     value: function deleteRow(event) {
       this.data.splice(event.target.closest("td").getAttribute("data-row"), 1);
       this.renderJSON(this.data);
+      this.isFormToEditDataOpen = false;
+      this.element.classList.remove("editModeOn");
     } /////////////////////Adding new row //////////////////////
 
   }, {
     key: "addOneRow",
     value: function addOneRow() {
+      this.element.classList.remove("editModeOn");
+
       if (this.data) {
         this.data.push({});
         var dataLength = this.data.length;
@@ -165,52 +167,6 @@ function () {
       } else alert("download file first");
     } ///////////////////// reset //////////////////////
 
-  }, {
-    key: "resetFunction",
-    value: function resetFunction() {
-      this.element.style.position = "relative";
-      console.log("reset");
-      Array.from(this.element.getElementsByClassName("wrapForEditAndDelButtons")).forEach(function (element) {
-        element.style.display = "none";
-      });
-      html2canvas(this.element).then(function (canvas) {
-        var width = canvas.width;
-        var height = canvas.height;
-        var ctx = canvas.getContext("2d");
-        var idata = ctx.getImageData(0, 0, width, height);
-        var datums = [];
-
-        for (var i = 0; i < 36; i++) {
-          datums.push(ctx.createImageData(width, height));
-        }
-
-        for (var f = 0; f < width; f++) {
-          for (var k = 0; k < height; k++) {
-            for (var l = 0; l < 2; l++) {
-              var n = 4 * (k * width + f);
-              var m = Math.floor(36 * (Math.random() + 2 * f / width) / 3);
-
-              for (var p = 0; p < 4; p++) {
-                datums[m].data[n + p] = idata.data[n + p];
-              }
-            }
-          }
-        }
-
-        datums.forEach(function (imagedata, i) {
-          var cloned = canvas.cloneNode();
-          cloned.style.transition = "all 1.5s ease-out " + 1.5 * i / 36 + "s";
-          cloned.getContext("2d").putImageData(imagedata, 0, 0);
-          document.body.appendChild(cloned);
-          setTimeout(function () {
-            var angle = (Math.random() - 0.5) * 2 * Math.PI;
-            var rotateAngle = 15 * (Math.random() - 0.5);
-            cloned.style.transform = "rotate(" + rotateAngle + "deg) translate(" + 60 * Math.cos(angle) + "px," + 60 * Math.sin(angle) + "px) rotate(" + rotateAngle + "deg)";
-            cloned.style.opacity = 0;
-          });
-        });
-      });
-    }
   }]);
 
   return Table;
