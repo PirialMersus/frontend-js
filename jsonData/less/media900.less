@@ -25,8 +25,9 @@
 
             .wrapperButtons {
               .iconsGeneralRulls {
-                width: 18px;
-                height: 18px;
+                margin-right: 0;
+                width: 40px;
+                height: 40px;
               }
             }
           }
@@ -34,11 +35,19 @@
           .lastTd {
             .wrapForEditAndDelButtons {
               .editCancelButtonsGeneral {
-                // visibility: visible;
-                // opacity: 0;
-                width: 20px;
-                height: 20px;
+                // width: 20px;
+                // height: 20px;
               }
+            }
+          }
+        }
+        tr:hover:not(:first-child) {
+          .editCancelButtonsGeneral {
+            transform: scale(2);
+
+            &:hover {
+              transform: scale(2.5);
+              opacity: 1;
             }
           }
         }
