@@ -97,6 +97,27 @@ p {
 .wrapper .tableWrapper .dataTable tr.active td {
   padding: 2px;
 }
+.wrapper .tableWrapper .dataTable tr .sortIconDiv:after {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  content: attr(data-tooltip);
+}
+.wrapper .tableWrapper .dataTable tr .sortIconDiv:hover::after {
+  opacity: 1;
+  visibility: visible;
+  content: attr(data-tooltip);
+}
+.wrapper .tableWrapper .dataTable tr .sortIconDiv i {
+  cursor: pointer;
+  position: relative;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+.wrapper .tableWrapper .dataTable tr .sortIconDiv i.rotated {
+  transform: rotate(180deg);
+}
 .wrapper .tableWrapper .dataTable tr th {
   padding: 20px;
   font-size: 20px;

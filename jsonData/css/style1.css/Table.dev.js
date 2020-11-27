@@ -103,7 +103,7 @@ function () {
       var buttonsForRender = "\n      <button class=\"classForEditingButtons2\" data-action=\"addOneRow\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Add a new row\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"saveAsJSON\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        save as JSON\n      </button>\n    ";
 
       for (var j = 0; j < this.jsonKeys.length; j++) {
-        tableHeader += "<th>".concat(this.jsonKeys[j], "</th>");
+        tableHeader += "<th>".concat(this.jsonKeys[j], "\n        <div class=\"sortIconDiv\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sort\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </div>\n      </th>");
       }
 
       for (var i = 0; i < data.length; i++) {
@@ -165,6 +165,32 @@ function () {
 
         this.renderJSON(this.data);
       } else alert("download file first");
+    }
+  }, {
+    key: "sort",
+    value: function sort(event) {
+      var iElement = event.target.closest("i");
+      var colAttribute = iElement.getAttribute("data-col");
+
+      if (!iElement.classList.contains("rotated")) {
+        this.data.sort(function (a, b) {
+          var nA = a[colAttribute];
+          var nB = b[colAttribute];
+          if (nA < nB) return -1;else if (nA > nB) return 1;
+          return 0;
+        });
+        this.renderJSON(this.data);
+        this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.add("rotated");
+      } else {
+        this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.remove("rotated");
+        this.data.sort(function (a, b) {
+          var nA = a[colAttribute];
+          var nB = b[colAttribute];
+          if (nA > nB) return -1;else if (nA < nB) return 1;
+          return 0;
+        });
+        this.renderJSON(this.data);
+      }
     } ///////////////////// reset //////////////////////
 
   }]);

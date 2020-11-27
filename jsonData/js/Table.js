@@ -115,7 +115,15 @@ class Table {
     `;
 
     for (let j = 0; j < this.jsonKeys.length; j++) {
-      tableHeader += `<th>${this.jsonKeys[j]}</th>`;
+      tableHeader += `<th>${this.jsonKeys[j]}
+        <div class="sortIconDiv" data-tooltip="Sort">
+          <i
+            data-action="sort"
+            data-col="${this.jsonKeys[j]}"
+            class="fas fa-caret-square-down">
+          </i>
+        </div>
+      </th>`;
     }
 
     for (let i = 0; i < data.length; i++) {
@@ -198,6 +206,37 @@ class Table {
       }
       this.renderJSON(this.data);
     } else alert("download file first");
+  }
+
+  sort(event) {
+    const iElement = event.target.closest("i");
+    const colAttribute = iElement.getAttribute("data-col");
+    if (!iElement.classList.contains("rotated")) {
+      this.data.sort(function (a, b) {
+        let nA = a[colAttribute];
+        let nB = b[colAttribute];
+        if (nA < nB) return -1;
+        else if (nA > nB) return 1;
+        return 0;
+      });
+      this.renderJSON(this.data);
+      this.element
+        .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
+        .classList.add("rotated");
+    } else {
+      this.element
+        .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
+        .classList.remove("rotated");
+
+      this.data.sort(function (a, b) {
+        let nA = a[colAttribute];
+        let nB = b[colAttribute];
+        if (nA > nB) return -1;
+        else if (nA < nB) return 1;
+        return 0;
+      });
+      this.renderJSON(this.data);
+    }
   }
 
   ///////////////////// reset //////////////////////
