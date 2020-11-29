@@ -10,6 +10,8 @@ var Table =
 /*#__PURE__*/
 function () {
   function Table(options) {
+    var _this = this;
+
     _classCallCheck(this, Table);
 
     this.state = {};
@@ -24,9 +26,18 @@ function () {
     this.selectedRow = "";
     this.rowAttribute = "";
     this.numberOfCols = 0;
+    this.inputs = this.element.querySelectorAll("input");
+    this.inputs.forEach(function (element) {
+      element.addEventListener("input", _this.findValue.bind(_this));
+    });
   }
 
   _createClass(Table, [{
+    key: "findValue",
+    value: function findValue(e) {
+      console.log(e.target.value);
+    }
+  }, {
     key: "findClick",
     value: function findClick(event) {
       var action = event.target.dataset.action;
@@ -96,15 +107,17 @@ function () {
   }, {
     key: "renderJSON",
     value: function renderJSON(data) {
-      var _this = this;
+      var _this2 = this;
 
       var tableHeader = "";
       var tableRows = "";
       var buttonsForRender = "\n      <button class=\"classForEditingButtons2\" data-action=\"addOneRow\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Add a new row\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"saveAsJSON\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        save as JSON\n      </button>\n    ";
 
-      for (var j = 0; j < this.jsonKeys.length; j++) {
-        tableHeader += "<th>".concat(this.jsonKeys[j], "\n        <div class=\"sortIconDiv\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sort\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </div>\n      </th>");
-      }
+      if (!this.tableHeader) {
+        for (var j = 0; j < this.jsonKeys.length; j++) {
+          tableHeader += "<th>".concat(this.jsonKeys[j], "\n        <div class=\"sortIconDiv\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sort\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </div>\n        <input placeholder=\"Enter some text\" name=\"name\"/>\n      </th>");
+        }
+      } else tableHeader = this.tableHeader;
 
       for (var i = 0; i < data.length; i++) {
         tableRows += this.createRoW(i, data);
@@ -115,13 +128,13 @@ function () {
         e.preventDefault();
         e.stopPropagation();
 
-        _this.onClickSaveInFormEditRow();
+        _this2.onClickSaveInFormEditRow();
       });
       this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("reset", function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        _this.onClickResetInFormEditRow();
+        _this2.onClickResetInFormEditRow();
       });
     } /////////////////////Deleting the row //////////////////////
 
@@ -182,7 +195,6 @@ function () {
         this.renderJSON(this.data);
         this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.add("rotated");
       } else {
-        this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.remove("rotated");
         this.data.sort(function (a, b) {
           var nA = a[colAttribute];
           var nB = b[colAttribute];
@@ -190,6 +202,7 @@ function () {
           return 0;
         });
         this.renderJSON(this.data);
+        this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.remove("rotated");
       }
     } ///////////////////// reset //////////////////////
 

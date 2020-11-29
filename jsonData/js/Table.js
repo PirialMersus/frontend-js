@@ -13,6 +13,15 @@ class Table {
     this.selectedRow = "";
     this.rowAttribute = "";
     this.numberOfCols = 0;
+
+    this.inputs = this.element.querySelectorAll("input");
+    this.inputs.forEach((element) => {
+      element.addEventListener("input", this.findValue.bind(this));
+    });
+  }
+
+  findValue(e) {
+    console.log(e.target.value);
   }
 
   findClick(event) {
@@ -113,9 +122,9 @@ class Table {
         save as JSON
       </button>
     `;
-
-    for (let j = 0; j < this.jsonKeys.length; j++) {
-      tableHeader += `<th>${this.jsonKeys[j]}
+    if (!this.tableHeader) {
+      for (let j = 0; j < this.jsonKeys.length; j++) {
+        tableHeader += `<th>${this.jsonKeys[j]}
         <div class="sortIconDiv" data-tooltip="Sort">
           <i
             data-action="sort"
@@ -123,8 +132,10 @@ class Table {
             class="fas fa-caret-square-down">
           </i>
         </div>
+        <input placeholder="Enter some text" name="name"/>
       </th>`;
-    }
+      }
+    } else tableHeader = this.tableHeader;
 
     for (let i = 0; i < data.length; i++) {
       tableRows += this.createRoW(i, data);
@@ -224,10 +235,6 @@ class Table {
         .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
         .classList.add("rotated");
     } else {
-      this.element
-        .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
-        .classList.remove("rotated");
-
       this.data.sort(function (a, b) {
         let nA = a[colAttribute];
         let nB = b[colAttribute];
@@ -236,6 +243,9 @@ class Table {
         return 0;
       });
       this.renderJSON(this.data);
+      this.element
+        .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
+        .classList.remove("rotated");
     }
   }
 
