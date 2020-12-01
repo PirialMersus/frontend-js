@@ -21,7 +21,22 @@ class Table {
   }
 
   findValue(e) {
-    console.log(e.target.value);
+    const colAttribute = e.target.closest("input").getAttribute("data-col");
+    let inputValue = e.target.value;
+    const tableBody = this.element.querySelector("tbody");
+    while (tableBody.children.length > 1) {
+      tableBody.removeChild(tableBody.lastChild);
+    }
+    const sortData = this.data.filter((element) => {
+      return element[colAttribute]
+        .toLowerCase()
+        .startsWith(inputValue.toLowerCase());
+    });
+    let sortedRowsForAddingToTable = "";
+    for (let i = 0; i < sortData.length; i++) {
+      sortedRowsForAddingToTable += this.createRoW(i, sortData);
+    }
+    tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
   }
 
   findClick(event) {
@@ -122,20 +137,21 @@ class Table {
         save as JSON
       </button>
     `;
-    if (!this.tableHeader) {
-      for (let j = 0; j < this.jsonKeys.length; j++) {
-        tableHeader += `<th>${this.jsonKeys[j]}
+    for (let j = 0; j < this.jsonKeys.length; j++) {
+      tableHeader += `<th>${this.jsonKeys[j]}
         <div class="sortIconDiv" data-tooltip="Sort">
           <i
-            data-action="sort"
+            data-action="sortAllTable"
             data-col="${this.jsonKeys[j]}"
             class="fas fa-caret-square-down">
           </i>
         </div>
-        <input placeholder="Enter some text" name="name"/>
+        <input
+        data-col="${this.jsonKeys[j]}"
+        placeholder="Enter some text" name="name"
+        />
       </th>`;
-      }
-    } else tableHeader = this.tableHeader;
+    }
 
     for (let i = 0; i < data.length; i++) {
       tableRows += this.createRoW(i, data);
@@ -175,21 +191,21 @@ class Table {
 
   /////////////////////Deleting the row //////////////////////
 
-  createRoW(i, data) {
+  createRoW(numberOfRow, data) {
     this.templine = "";
     for (let j = 0; j < this.jsonKeys.length; j++) {
       if (j === this.jsonKeys.length - 1) {
         this.templine += `
-      <td class="lastTd" data-row="${i}"}">
-        ${data[i][this.jsonKeys[j]]}
+      <td class="lastTd" data-row="${numberOfRow}"}">
+        ${data[numberOfRow][this.jsonKeys[j]]}
         <div class="wrapForEditAndDelButtons">
             <button type="button" data-action="showInputsRow" class="pen editCancelButtonsGeneral"></button>
             <button type="button" data-action="deleteRow" class="deleteRowButton editCancelButtonsGeneral"></button>
         </div>
       </td>`;
       } else {
-        this.templine += `<td data-row="${i}">${
-          data[i][this.jsonKeys[j]]
+        this.templine += `<td data-row="${numberOfRow}">${
+          data[numberOfRow][this.jsonKeys[j]]
         }</td>`;
       }
     }
@@ -219,7 +235,8 @@ class Table {
     } else alert("download file first");
   }
 
-  sort(event) {
+  sortAllTable(event) {
+    this.inputs.forEach((input) => (input.value = ""));
     const iElement = event.target.closest("i");
     const colAttribute = iElement.getAttribute("data-col");
     if (!iElement.classList.contains("rotated")) {
@@ -230,7 +247,17 @@ class Table {
         else if (nA > nB) return 1;
         return 0;
       });
-      this.renderJSON(this.data);
+      ////////////////////
+      const tableBody = this.element.querySelector("tbody");
+      while (tableBody.children.length > 1) {
+        tableBody.removeChild(tableBody.lastChild);
+      }
+      let sortedRowsForAddingToTable = "";
+      for (let i = 0; i < this.data.length; i++) {
+        sortedRowsForAddingToTable += this.createRoW(i, this.data);
+      }
+      tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
+      /////////////////
       this.element
         .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
         .classList.add("rotated");
@@ -242,7 +269,15 @@ class Table {
         else if (nA < nB) return 1;
         return 0;
       });
-      this.renderJSON(this.data);
+      const tableBody = this.element.querySelector("tbody");
+      while (tableBody.children.length > 1) {
+        tableBody.removeChild(tableBody.lastChild);
+      }
+      let sortedRowsForAddingToTable = "";
+      for (let i = 0; i < this.data.length; i++) {
+        sortedRowsForAddingToTable += this.createRoW(i, this.data);
+      }
+      tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
       this.element
         .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
         .classList.remove("rotated");

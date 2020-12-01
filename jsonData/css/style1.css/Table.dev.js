@@ -35,7 +35,24 @@ function () {
   _createClass(Table, [{
     key: "findValue",
     value: function findValue(e) {
-      console.log(e.target.value);
+      var colAttribute = e.target.closest("input").getAttribute("data-col");
+      var inputValue = e.target.value;
+      var tableBody = this.element.querySelector("tbody");
+
+      while (tableBody.children.length > 1) {
+        tableBody.removeChild(tableBody.lastChild);
+      }
+
+      var sortData = this.data.filter(function (element) {
+        return element[colAttribute].toLowerCase().startsWith(inputValue.toLowerCase());
+      });
+      var sortedRowsForAddingToTable = "";
+
+      for (var i = 0; i < sortData.length; i++) {
+        sortedRowsForAddingToTable += this.createRoW(i, sortData);
+      }
+
+      tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
     }
   }, {
     key: "findClick",
@@ -113,11 +130,9 @@ function () {
       var tableRows = "";
       var buttonsForRender = "\n      <button class=\"classForEditingButtons2\" data-action=\"addOneRow\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Add a new row\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"saveAsJSON\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        save as JSON\n      </button>\n    ";
 
-      if (!this.tableHeader) {
-        for (var j = 0; j < this.jsonKeys.length; j++) {
-          tableHeader += "<th>".concat(this.jsonKeys[j], "\n        <div class=\"sortIconDiv\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sort\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </div>\n        <input placeholder=\"Enter some text\" name=\"name\"/>\n      </th>");
-        }
-      } else tableHeader = this.tableHeader;
+      for (var j = 0; j < this.jsonKeys.length; j++) {
+        tableHeader += "<th>".concat(this.jsonKeys[j], "\n        <div class=\"sortIconDiv\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sortAllTable\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </div>\n        <input\n        data-col=\"").concat(this.jsonKeys[j], "\"\n        placeholder=\"Enter some text\" name=\"name\"\n        />\n      </th>");
+      }
 
       for (var i = 0; i < data.length; i++) {
         tableRows += this.createRoW(i, data);
@@ -140,14 +155,14 @@ function () {
 
   }, {
     key: "createRoW",
-    value: function createRoW(i, data) {
+    value: function createRoW(numberOfRow, data) {
       this.templine = "";
 
       for (var j = 0; j < this.jsonKeys.length; j++) {
         if (j === this.jsonKeys.length - 1) {
-          this.templine += "\n      <td class=\"lastTd\" data-row=\"".concat(i, "\"}\">\n        ").concat(data[i][this.jsonKeys[j]], "\n        <div class=\"wrapForEditAndDelButtons\">\n            <button type=\"button\" data-action=\"showInputsRow\" class=\"pen editCancelButtonsGeneral\"></button>\n            <button type=\"button\" data-action=\"deleteRow\" class=\"deleteRowButton editCancelButtonsGeneral\"></button>\n        </div>\n      </td>");
+          this.templine += "\n      <td class=\"lastTd\" data-row=\"".concat(numberOfRow, "\"}\">\n        ").concat(data[numberOfRow][this.jsonKeys[j]], "\n        <div class=\"wrapForEditAndDelButtons\">\n            <button type=\"button\" data-action=\"showInputsRow\" class=\"pen editCancelButtonsGeneral\"></button>\n            <button type=\"button\" data-action=\"deleteRow\" class=\"deleteRowButton editCancelButtonsGeneral\"></button>\n        </div>\n      </td>");
         } else {
-          this.templine += "<td data-row=\"".concat(i, "\">").concat(data[i][this.jsonKeys[j]], "</td>");
+          this.templine += "<td data-row=\"".concat(numberOfRow, "\">").concat(data[numberOfRow][this.jsonKeys[j]], "</td>");
         }
       }
 
@@ -180,8 +195,11 @@ function () {
       } else alert("download file first");
     }
   }, {
-    key: "sort",
-    value: function sort(event) {
+    key: "sortAllTable",
+    value: function sortAllTable(event) {
+      this.inputs.forEach(function (input) {
+        return input.value = "";
+      });
       var iElement = event.target.closest("i");
       var colAttribute = iElement.getAttribute("data-col");
 
@@ -191,8 +209,22 @@ function () {
           var nB = b[colAttribute];
           if (nA < nB) return -1;else if (nA > nB) return 1;
           return 0;
-        });
-        this.renderJSON(this.data);
+        }); ////////////////////
+
+        var tableBody = this.element.querySelector("tbody");
+
+        while (tableBody.children.length > 1) {
+          tableBody.removeChild(tableBody.lastChild);
+        }
+
+        var sortedRowsForAddingToTable = "";
+
+        for (var i = 0; i < this.data.length; i++) {
+          sortedRowsForAddingToTable += this.createRoW(i, this.data);
+        }
+
+        tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable); /////////////////
+
         this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.add("rotated");
       } else {
         this.data.sort(function (a, b) {
@@ -201,7 +233,21 @@ function () {
           if (nA > nB) return -1;else if (nA < nB) return 1;
           return 0;
         });
-        this.renderJSON(this.data);
+
+        var _tableBody = this.element.querySelector("tbody");
+
+        while (_tableBody.children.length > 1) {
+          _tableBody.removeChild(_tableBody.lastChild);
+        }
+
+        var _sortedRowsForAddingToTable = "";
+
+        for (var _i = 0; _i < this.data.length; _i++) {
+          _sortedRowsForAddingToTable += this.createRoW(_i, this.data);
+        }
+
+        _tableBody.insertAdjacentHTML("beforeEnd", _sortedRowsForAddingToTable);
+
         this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.remove("rotated");
       }
     } ///////////////////// reset //////////////////////
