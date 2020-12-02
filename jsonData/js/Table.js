@@ -236,7 +236,7 @@ class Table {
   sortTableByEnteringSymbols(e) {
     const colAttribute = e.target.closest("input").getAttribute("data-col");
     let inputValue = e.target.value;
-    this.sortData = this.data.filter((element) => {
+    let sortData = this.data.filter((element) => {
       return element[colAttribute]
         .toLowerCase()
         .startsWith(inputValue.toLowerCase());

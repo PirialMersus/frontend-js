@@ -192,7 +192,7 @@ function () {
     value: function sortTableByEnteringSymbols(e) {
       var colAttribute = e.target.closest("input").getAttribute("data-col");
       var inputValue = e.target.value;
-      this.sortData = this.data.filter(function (element) {
+      var sortData = this.data.filter(function (element) {
         return element[colAttribute].toLowerCase().startsWith(inputValue.toLowerCase());
       });
       this.renderSortedData(sortData);
