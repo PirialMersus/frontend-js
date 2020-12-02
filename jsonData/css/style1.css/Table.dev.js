@@ -10,8 +10,6 @@ var Table =
 /*#__PURE__*/
 function () {
   function Table(options) {
-    var _this = this;
-
     _classCallCheck(this, Table);
 
     this.state = {};
@@ -26,35 +24,9 @@ function () {
     this.selectedRow = "";
     this.rowAttribute = "";
     this.numberOfCols = 0;
-    this.inputs = this.element.querySelectorAll("input");
-    this.inputs.forEach(function (element) {
-      element.addEventListener("input", _this.findValue.bind(_this));
-    });
   }
 
   _createClass(Table, [{
-    key: "findValue",
-    value: function findValue(e) {
-      var colAttribute = e.target.closest("input").getAttribute("data-col");
-      var inputValue = e.target.value;
-      var tableBody = this.element.querySelector("tbody");
-
-      while (tableBody.children.length > 1) {
-        tableBody.removeChild(tableBody.lastChild);
-      }
-
-      var sortData = this.data.filter(function (element) {
-        return element[colAttribute].toLowerCase().startsWith(inputValue.toLowerCase());
-      });
-      var sortedRowsForAddingToTable = "";
-
-      for (var i = 0; i < sortData.length; i++) {
-        sortedRowsForAddingToTable += this.createRoW(i, sortData);
-      }
-
-      tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
-    }
-  }, {
     key: "findClick",
     value: function findClick(event) {
       var action = event.target.dataset.action;
@@ -124,7 +96,7 @@ function () {
   }, {
     key: "renderJSON",
     value: function renderJSON(data) {
-      var _this2 = this;
+      var _this = this;
 
       var tableHeader = "";
       var tableRows = "";
@@ -143,13 +115,17 @@ function () {
         e.preventDefault();
         e.stopPropagation();
 
-        _this2.onClickSaveInFormEditRow();
+        _this.onClickSaveInFormEditRow();
       });
       this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("reset", function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        _this2.onClickResetInFormEditRow();
+        _this.onClickResetInFormEditRow();
+      });
+      this.inputs = this.element.querySelectorAll("input");
+      this.inputs.forEach(function (element) {
+        element.addEventListener("input", _this.sortTableByEnteringSymbols.bind(_this));
       });
     } /////////////////////Deleting the row //////////////////////
 
@@ -195,6 +171,33 @@ function () {
       } else alert("download file first");
     }
   }, {
+    key: "renderSortedData",
+    value: function renderSortedData(data) {
+      var tableBody = this.element.querySelector("tbody");
+
+      while (tableBody.children.length > 1) {
+        tableBody.removeChild(tableBody.lastChild);
+      }
+
+      var sortedRowsForAddingToTable = "";
+
+      for (var i = 0; i < data.length; i++) {
+        sortedRowsForAddingToTable += this.createRoW(i, data);
+      }
+
+      tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
+    }
+  }, {
+    key: "sortTableByEnteringSymbols",
+    value: function sortTableByEnteringSymbols(e) {
+      var colAttribute = e.target.closest("input").getAttribute("data-col");
+      var inputValue = e.target.value;
+      this.sortData = this.data.filter(function (element) {
+        return element[colAttribute].toLowerCase().startsWith(inputValue.toLowerCase());
+      });
+      this.renderSortedData(sortData);
+    }
+  }, {
     key: "sortAllTable",
     value: function sortAllTable(event) {
       this.inputs.forEach(function (input) {
@@ -211,19 +214,7 @@ function () {
           return 0;
         }); ////////////////////
 
-        var tableBody = this.element.querySelector("tbody");
-
-        while (tableBody.children.length > 1) {
-          tableBody.removeChild(tableBody.lastChild);
-        }
-
-        var sortedRowsForAddingToTable = "";
-
-        for (var i = 0; i < this.data.length; i++) {
-          sortedRowsForAddingToTable += this.createRoW(i, this.data);
-        }
-
-        tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable); /////////////////
+        this.renderSortedData(this.data); /////////////////
 
         this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.add("rotated");
       } else {
@@ -233,21 +224,7 @@ function () {
           if (nA > nB) return -1;else if (nA < nB) return 1;
           return 0;
         });
-
-        var _tableBody = this.element.querySelector("tbody");
-
-        while (_tableBody.children.length > 1) {
-          _tableBody.removeChild(_tableBody.lastChild);
-        }
-
-        var _sortedRowsForAddingToTable = "";
-
-        for (var _i = 0; _i < this.data.length; _i++) {
-          _sortedRowsForAddingToTable += this.createRoW(_i, this.data);
-        }
-
-        _tableBody.insertAdjacentHTML("beforeEnd", _sortedRowsForAddingToTable);
-
+        this.renderSortedData(this.data);
         this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.remove("rotated");
       }
     } ///////////////////// reset //////////////////////

@@ -13,30 +13,6 @@ class Table {
     this.selectedRow = "";
     this.rowAttribute = "";
     this.numberOfCols = 0;
-
-    this.inputs = this.element.querySelectorAll("input");
-    this.inputs.forEach((element) => {
-      element.addEventListener("input", this.findValue.bind(this));
-    });
-  }
-
-  findValue(e) {
-    const colAttribute = e.target.closest("input").getAttribute("data-col");
-    let inputValue = e.target.value;
-    const tableBody = this.element.querySelector("tbody");
-    while (tableBody.children.length > 1) {
-      tableBody.removeChild(tableBody.lastChild);
-    }
-    const sortData = this.data.filter((element) => {
-      return element[colAttribute]
-        .toLowerCase()
-        .startsWith(inputValue.toLowerCase());
-    });
-    let sortedRowsForAddingToTable = "";
-    for (let i = 0; i < sortData.length; i++) {
-      sortedRowsForAddingToTable += this.createRoW(i, sortData);
-    }
-    tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
   }
 
   findClick(event) {
@@ -179,6 +155,7 @@ class Table {
 
         this.onClickSaveInFormEditRow();
       });
+
     this.element
       .getElementsByClassName("formToWrapTable")[0]
       .addEventListener("reset", (e) => {
@@ -187,6 +164,14 @@ class Table {
 
         this.onClickResetInFormEditRow();
       });
+
+    this.inputs = this.element.querySelectorAll("input");
+    this.inputs.forEach((element) => {
+      element.addEventListener(
+        "input",
+        this.sortTableByEnteringSymbols.bind(this)
+      );
+    });
   }
 
   /////////////////////Deleting the row //////////////////////
@@ -235,6 +220,31 @@ class Table {
     } else alert("download file first");
   }
 
+  renderSortedData(data) {
+    const tableBody = this.element.querySelector("tbody");
+
+    while (tableBody.children.length > 1) {
+      tableBody.removeChild(tableBody.lastChild);
+    }
+    let sortedRowsForAddingToTable = "";
+    for (let i = 0; i < data.length; i++) {
+      sortedRowsForAddingToTable += this.createRoW(i, data);
+    }
+    tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
+  }
+
+  sortTableByEnteringSymbols(e) {
+    const colAttribute = e.target.closest("input").getAttribute("data-col");
+    let inputValue = e.target.value;
+    this.sortData = this.data.filter((element) => {
+      return element[colAttribute]
+        .toLowerCase()
+        .startsWith(inputValue.toLowerCase());
+    });
+
+    this.renderSortedData(sortData);
+  }
+
   sortAllTable(event) {
     this.inputs.forEach((input) => (input.value = ""));
     const iElement = event.target.closest("i");
@@ -248,15 +258,7 @@ class Table {
         return 0;
       });
       ////////////////////
-      const tableBody = this.element.querySelector("tbody");
-      while (tableBody.children.length > 1) {
-        tableBody.removeChild(tableBody.lastChild);
-      }
-      let sortedRowsForAddingToTable = "";
-      for (let i = 0; i < this.data.length; i++) {
-        sortedRowsForAddingToTable += this.createRoW(i, this.data);
-      }
-      tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
+      this.renderSortedData(this.data);
       /////////////////
       this.element
         .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
@@ -269,15 +271,9 @@ class Table {
         else if (nA < nB) return 1;
         return 0;
       });
-      const tableBody = this.element.querySelector("tbody");
-      while (tableBody.children.length > 1) {
-        tableBody.removeChild(tableBody.lastChild);
-      }
-      let sortedRowsForAddingToTable = "";
-      for (let i = 0; i < this.data.length; i++) {
-        sortedRowsForAddingToTable += this.createRoW(i, this.data);
-      }
-      tableBody.insertAdjacentHTML("beforeEnd", sortedRowsForAddingToTable);
+
+      this.renderSortedData(this.data);
+
       this.element
         .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
         .classList.remove("rotated");
