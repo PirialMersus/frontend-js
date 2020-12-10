@@ -133,13 +133,14 @@ class Table {
     `;
     for (let j = 0; j < this.jsonKeys.length; j++) {
       tableHeader += `<th>${this.jsonKeys[j]}
-        <div class="sortIconDiv" data-tooltip="Sort">
+      <br>
+        <button class="sortIconBtn" data-tooltip="Sort">
           <i
             data-action="sortAllTable"
             data-col="${this.jsonKeys[j]}"
             class="fas fa-caret-square-down">
           </i>
-        </div>
+        </button>
         <input
         data-col="${this.jsonKeys[j]}"
         placeholder="Enter some text"

@@ -109,9 +109,15 @@ p {
             padding: 2px;
           }
         }
-        .sortIconDiv {
+        .sortIconBtn {
+          position: relative;
+          border: none;
+          background: none;
           &:after {
             position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;

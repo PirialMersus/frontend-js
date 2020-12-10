@@ -126,7 +126,7 @@ function () {
       var buttonsForRender = "\n      <button class=\"classForEditingButtons2\" data-action=\"addOneRow\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Add a new row\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"saveAsJSON\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        save as JSON\n      </button>\n    ";
 
       for (var j = 0; j < this.jsonKeys.length; j++) {
-        tableHeader += "<th>".concat(this.jsonKeys[j], "\n        <div class=\"sortIconDiv\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sortAllTable\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </div>\n        <input\n        data-col=\"").concat(this.jsonKeys[j], "\"\n        placeholder=\"Enter some text\"\n        />\n      </th>");
+        tableHeader += "<th>".concat(this.jsonKeys[j], "\n      <br>\n        <button class=\"sortIconBtn\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sortAllTable\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </button>\n        <input\n        data-col=\"").concat(this.jsonKeys[j], "\"\n        placeholder=\"Enter some text\"\n        />\n      </th>");
       }
 
       for (var i = 0; i < data.length; i++) {

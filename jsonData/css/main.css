@@ -97,25 +97,33 @@ p {
 .wrapper .tableWrapper .dataTable tr.active td {
   padding: 2px;
 }
-.wrapper .tableWrapper .dataTable tr .sortIconDiv:after {
+.wrapper .tableWrapper .dataTable tr .sortIconBtn {
+  position: relative;
+  border: none;
+  background: none;
+}
+.wrapper .tableWrapper .dataTable tr .sortIconBtn:after {
   position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
   content: attr(data-tooltip);
 }
-.wrapper .tableWrapper .dataTable tr .sortIconDiv:hover::after {
+.wrapper .tableWrapper .dataTable tr .sortIconBtn:hover::after {
   opacity: 1;
   visibility: visible;
   content: attr(data-tooltip);
 }
-.wrapper .tableWrapper .dataTable tr .sortIconDiv i {
+.wrapper .tableWrapper .dataTable tr .sortIconBtn i {
   cursor: pointer;
   position: relative;
   font-size: 20px;
   transition: all 0.3s ease;
 }
-.wrapper .tableWrapper .dataTable tr .sortIconDiv i.rotated {
+.wrapper .tableWrapper .dataTable tr .sortIconBtn i.rotated {
   transform: rotate(180deg);
 }
 .wrapper .tableWrapper .dataTable tr th {
