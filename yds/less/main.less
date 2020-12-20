@@ -7,6 +7,7 @@ body {
   padding: 0;
   font-family: "Tahoma";
 }
+
 h1,
 h2,
 h3,
@@ -29,18 +30,22 @@ p {
   box-shadow: none;
   border: none;
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 img {
   display: block;
   max-width: 100%;
   height: auto;
 }
+
 body {
   background-color: #f3f3f3;
 }
+
 .nav_bar {
   display: none;
 }
@@ -62,6 +67,7 @@ body {
   visibility: hidden;
   transform: translateY(-100%);
   transition: all 0.6s ease;
+
   &.active {
     opacity: 1;
     visibility: visible;
@@ -78,15 +84,17 @@ body {
       color: #fff;
       font-size: 16px;
       text-shadow: 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000,
-        0px 0px 5px #000;
+      0px 0px 5px #000;
       margin-right: 20px;
     }
+
     > img {
       display: inline-block;
       width: 30px;
       cursor: pointer;
     }
   }
+
   .container {
     h3 {
       text-align: center;
@@ -96,21 +104,24 @@ body {
       margin-top: 100px;
       margin-bottom: 50px;
       text-shadow: 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000,
-        0px 0px 5px #000;
+      0px 0px 5px #000;
     }
+
     form {
       .labels {
         display: flex;
         justify-content: space-between;
         margin-bottom: 30px;
+
         label {
           > p {
             font-size: 16px;
             color: #fff;
             margin-bottom: 5px;
             text-shadow: 0px 0px 5px #000, 0px 0px 5px #000, 0px 0px 5px #000,
-              0px 0px 5px #000;
+            0px 0px 5px #000;
           }
+
           > input {
             box-sizing: border-box;
             line-height: 36px;
@@ -124,6 +135,7 @@ body {
             font-size: 16px;
             width: 360px;
           }
+
           textarea {
             font-size: 16px;
             padding-top: 1px;
@@ -138,6 +150,7 @@ body {
           }
         }
       }
+
       .form_btn_wrp {
         display: flex;
         align-items: center;
@@ -157,6 +170,7 @@ body {
           transition: all 0.6s ease;
           padding-top: 2px;
           padding-bottom: 2px;
+
           &:hover {
             &:after {
               content: "";
@@ -169,6 +183,7 @@ body {
               transform: translateX(100%);
             }
           }
+
           &:after {
             transition: all 0.6s ease;
             content: "";
@@ -180,12 +195,14 @@ body {
             background-color: @btns_color;
             z-index: 4;
           }
+
           p {
             position: relative;
             color: #ffffff;
             line-height: 36px;
             z-index: 5;
             font-size: 16px;
+
             &:after {
               content: "→";
               position: absolute;
@@ -213,6 +230,7 @@ body {
   justify-content: space-between;
   border-bottom: 1px solid rgb(95, 90, 90);
   background-color: rgba(0, 0, 0, 0.4);
+
   &.scroll {
     background-color: #000000;
     border-bottom: 1px solid #000;
@@ -224,10 +242,12 @@ body {
     height: 60px;
     cursor: pointer;
     animation: logo_appear 1.5s ease;
+
     &:hover {
       transform: translateY(80px) rotate(360deg) scale(5);
     }
   }
+
   ul {
     li {
       display: inline-block;
@@ -236,18 +256,22 @@ body {
       a {
         transition: all 0.3s ease;
         color: #ffffff;
+
         &:hover {
           color: @btns_color;
         }
       }
     }
+
     li:last-child {
       margin-right: 0px;
     }
   }
+
   .btn_consultation {
     > p {
       position: relative;
+
       &:before {
         content: "";
         position: absolute;
@@ -261,9 +285,11 @@ body {
       }
     }
   }
+
   .click_menu_wrp {
     display: none;
   }
+
   .om {
     display: none;
   }
@@ -281,6 +307,7 @@ body {
   position: relative;
   z-index: 4;
   transition: all 0.6s ease;
+
   &:hover {
     &:after {
       content: "";
@@ -293,6 +320,7 @@ body {
       transform: translateX(100%);
     }
   }
+
   &:after {
     transition: all 0.6s ease;
     content: "";
@@ -304,6 +332,7 @@ body {
     background-color: @btns_color;
     z-index: 4;
   }
+
   p {
     position: relative;
     color: #ffffff;
@@ -319,34 +348,41 @@ body {
     margin-top: 50px;
     margin-bottom: 50px;
     overflow: auto;
+
     .wellcome_text {
       max-width: 34%;
       float: left;
+
       h2 {
         font-weight: 700;
         font-size: 40px;
         margin-bottom: 20px;
+
         &:after {
           content: "//";
           color: @btns_color;
           letter-spacing: -12px;
         }
+
         span {
           color: @btns_color;
         }
       }
+
       .wellcome_text_p {
         max-width: 95%;
         font-size: 16px;
         color: #898a8c;
         margin-bottom: 115px;
       }
+
       .btn_consultation {
         p {
           line-height: 40px;
         }
       }
     }
+
     .wellcome_img {
       float: right;
       max-width: 60%;
@@ -359,6 +395,7 @@ body {
   max-width: 40%;
   padding: 120px 0;
 }
+
 .our_services {
   background: none no-repeat scroll right top transparent;
   background-image: url(../img/img-homepage-2.jpg);
@@ -374,6 +411,7 @@ body {
           margin-bottom: 50px;
           font-size: 36px;
           line-height: 1.2;
+
           &:after {
             content: "//";
             color: @btns_color;
@@ -381,6 +419,7 @@ body {
             font-size: 36px;
           }
         }
+
         .read_more {
           color: @btns_color;
           margin-left: 20px;
@@ -389,6 +428,7 @@ body {
           text-decoration: underline;
           padding-right: 10px;
           position: relative;
+
           &:after {
             content: "";
             position: absolute;
@@ -407,6 +447,7 @@ body {
 
           .our_services_link_wrp {
             position: relative;
+
             &:hover {
               .our_services_link {
                 background-color: @btns_color;
@@ -414,14 +455,17 @@ body {
                 .p_number {
                   color: #fff;
                 }
+
                 .p_text {
                   color: #fff;
                 }
               }
+
               .our_services_inner_link {
                 transform: translateX(100%);
               }
             }
+
             .our_services_link {
               position: relative;
               z-index: 100;
@@ -437,12 +481,14 @@ body {
                 padding-left: 15px;
                 padding-right: 15px;
               }
+
               .p_text {
                 display: inline-block;
                 color: #bdbdbd;
                 font-size: 18px;
               }
             }
+
             .our_services_inner_link {
               transition: all 0.4s ease;
               position: absolute;
@@ -469,25 +515,30 @@ body {
   margin-top: 50px;
   margin-bottom: 50px;
   overflow: auto;
+
   .our_projects_text {
     max-width: 34%;
     float: left;
+
     h2 {
       font-weight: 700;
       font-size: 40px;
       margin-bottom: 20px;
+
       &:after {
         content: "//";
         color: @btns_color;
         letter-spacing: -12px;
       }
     }
+
     .btn_consultation {
       p {
         line-height: 40px;
       }
     }
   }
+
   .our_projects_img {
     float: right;
     max-width: 60%;
@@ -513,11 +564,13 @@ footer {
         height: 120px;
         margin-bottom: 5px;
       }
+
       p {
         color: rgb(149, 136, 136);
         font-size: 12px;
       }
     }
+
     .nav_footer {
       > ul {
         > li {
@@ -526,11 +579,13 @@ footer {
           > a {
             transition: all 0.3s ease;
             color: #ffffff;
+
             &:hover {
               color: @btns_color;
             }
           }
         }
+
         li:last-child {
           margin-bottom: 0px;
         }
@@ -552,6 +607,7 @@ footer {
             color: rgb(149, 136, 136);
             font-size: 12px;
           }
+
           > img {
             position: absolute;
             left: -40px;
@@ -561,6 +617,7 @@ footer {
         }
       }
     }
+
     .phone_mail_wrap {
       overflow: auto;
 
@@ -574,10 +631,12 @@ footer {
           display: inline-block;
           transition: all 0.3s ease;
           cursor: pointer;
+
           &:hover {
             color: @btns_color;
           }
         }
+
         .slash {
           font-size: 38px;
           font-weight: 700;
@@ -586,20 +645,24 @@ footer {
           color: @btns_color;
         }
       }
+
       .mail {
         font-size: 20px;
         line-height: 1.2;
         color: @btns_color;
         margin-bottom: 30px;
       }
+
       .copyright_plus_insta {
         p {
           display: none;
           color: rgb(149, 136, 136);
           font-size: 12px;
         }
+
         a {
           float: right;
+
           img {
             width: 40px;
           }

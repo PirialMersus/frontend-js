@@ -6,37 +6,69 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+// function Table(options) {
+//   this.element = options.newTable;
+//     this.element.onclick = this.findClick.bind(this);
+//     this.data = options.data;
+//     this.jsonKeys = Object.keys(options.data[0]);
+//     this.renderJSON(options.data);
+//     this.isFormToEditDataOpen = false;
+//     this.selectedRow = "";
+//     this.rowAttribute = "";
+//     this.sortData = [];
+//     this.tempNumbersOfElementsToDelete = [];
+// };
+// Table.prototype.qwe = function(event, el) {
+//   let action;
+//   if (el) {
+//     action = el.dataset.action;
+//   } else {
+//     action = event.target.dataset.action;
+//   }
+//   if (action) {
+//     this[action](event);
+//   } else {
+//     // find paren node
+//     findClick(null /* parent node */);
+//   }
+// }
 var Table =
 /*#__PURE__*/
 function () {
   function Table(options) {
     _classCallCheck(this, Table);
 
-    this.state = {};
     this.element = options.newTable;
     this.element.onclick = this.findClick.bind(this);
     this.data = options.data;
     this.jsonKeys = Object.keys(options.data[0]);
     this.renderJSON(options.data);
-    this.dataTable = this.element.querySelector("table");
     this.isFormToEditDataOpen = false;
-    this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
     this.rowAttribute = "";
-    this.numberOfCols = 0;
     this.sortData = [];
-    this.arrayOfSortedItems = [];
     this.tempNumbersOfElementsToDelete = [];
   }
 
   _createClass(Table, [{
     key: "findClick",
-    value: function findClick(event) {
-      var action = event.target.dataset.action;
+    value: function findClick(event, el) {
+      var action;
+
+      if (el) {
+        action = el.dataset.action;
+      } else {
+        action = event.target.dataset.action;
+      }
 
       if (action) {
         this[action](event);
       }
+      /* else {
+      // find paren node
+      findClick(null, parent_node);
+      } */
+
     } ///////////////////// Edit and saving row data //////////////////////
 
   }, {
@@ -62,6 +94,11 @@ function () {
       this.isFormToEditDataOpen = false;
       this.element.classList.remove("editModeOn");
     } ///////////////////// Cancelling editing row data //////////////////////
+
+    /**
+     * JS docs
+     * @param {Event} e Ивент кнопки
+     */
 
   }, {
     key: "onClickResetInFormEditRow",
@@ -92,12 +129,8 @@ function () {
       this.elementNumber = td.getAttribute("data-element_number");
       this.selectedRow = td.parentNode;
       this.selectedRow.classList.add("active");
-
-      if (this.elementNumber !== "undefined") {
-        this.selectedRow.innerHTML = this.createInputsRow(this.elementNumber);
-      } else {
-        this.selectedRow.innerHTML = this.createInputsRow(this.rowAttribute);
-      }
+      var elementNumber = this.elementNumber || this.rowAttribute;
+      this.selectedRow.innerHTML = this.createInputsRow(elementNumber);
     }
   }, {
     key: "createInputsRow",
@@ -133,10 +166,12 @@ function () {
         tableRows += this.createRoW(i, data);
       }
 
-      this.element.innerHTML = "\n      <form class=\"formToWrapTable\" action=\"#\">\n        <table\n                border=\"1\"\n                class=\"dataTable\">\n          <caption>\n            \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n          </caption>\n          <tr>".concat(tableHeader, "</tr>\n           ").concat(tableRows, "\n          </table>\n      </form>\n      ").concat(buttonsForRender);
+      this.element.innerHTML = "\n      <form class=\"formToWrapTable\" action=\"#\">\n        <table\n                border=\"1\"\n                class=\"dataTable\">\n          <caption>\n            \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n          </caption>\n          <tr>".concat(tableHeader, "</tr>\n           ").concat(tableRows, "\n          </table>\n      </form>\n      ").concat(buttonsForRender); // TODO: вынести в конструктор?
+
       this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("submit", function (e) {
         e.preventDefault();
         e.stopPropagation();
+        console.log("submit!");
 
         _this.onClickSaveInFormEditRow();
       });
@@ -175,7 +210,7 @@ function () {
     key: "deleteRow",
     value: function deleteRow(event) {
       this.rowAttribute = event.target.closest("td").getAttribute("data-row");
-      this.elementNumber = event.target.closest("td").getAttribute("data-element_number");
+      this.elementNumber = event.target.closest("td").getAttribute("data-element_number"); // FIXME: иправить!!!
 
       if (this.elementNumber !== "undefined") {
         this.tempNumbersOfElementsToDelete.push(Number(this.elementNumber));
@@ -183,7 +218,6 @@ function () {
         this.renderSortedData(this.sortData);
       } else {
         this.data.splice(this.rowAttribute, 1);
-        this.renderJSON(this.data);
       }
 
       this.isFormToEditDataOpen = false;

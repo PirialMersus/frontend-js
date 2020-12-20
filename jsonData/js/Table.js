@@ -1,28 +1,62 @@
+// function Table(options) {
+//   this.element = options.newTable;
+//     this.element.onclick = this.findClick.bind(this);
+//     this.data = options.data;
+//     this.jsonKeys = Object.keys(options.data[0]);
+//     this.renderJSON(options.data);
+//     this.isFormToEditDataOpen = false;
+//     this.selectedRow = "";
+//     this.rowAttribute = "";
+//     this.sortData = [];
+//     this.tempNumbersOfElementsToDelete = [];
+// };
+
+// Table.prototype.qwe = function(event, el) {
+//   let action;
+
+//   if (el) {
+//     action = el.dataset.action;
+//   } else {
+//     action = event.target.dataset.action;
+//   }
+
+//   if (action) {
+//     this[action](event);
+//   } else {
+//     // find paren node
+//     findClick(null /* parent node */);
+//   }
+// }
+
 class Table {
   constructor(options) {
-    this.state = {};
-
     this.element = options.newTable;
     this.element.onclick = this.findClick.bind(this);
     this.data = options.data;
     this.jsonKeys = Object.keys(options.data[0]);
     this.renderJSON(options.data);
-    this.dataTable = this.element.querySelector("table");
     this.isFormToEditDataOpen = false;
-    this.selectedRowBeforChangingData = "";
     this.selectedRow = "";
     this.rowAttribute = "";
-    this.numberOfCols = 0;
     this.sortData = [];
-    this.arrayOfSortedItems = [];
     this.tempNumbersOfElementsToDelete = [];
   }
 
-  findClick(event) {
-    let action = event.target.dataset.action;
+  findClick(event, el) {
+    let action;
+
+    if (el) {
+      action = el.dataset.action;
+    } else {
+      action = event.target.dataset.action;
+    }
+
     if (action) {
       this[action](event);
-    }
+    } /* else {
+      // find paren node
+      findClick(null, parent_node);
+    } */
   }
 
   ///////////////////// Edit and saving row data //////////////////////
@@ -47,6 +81,10 @@ class Table {
 
   ///////////////////// Cancelling editing row data //////////////////////
 
+  /**
+   * JS docs
+   * @param {Event} e Ивент кнопки
+   */
   onClickResetInFormEditRow(e) {
     e.preventDefault();
     if (this.elementNumber !== "undefined") {
@@ -74,11 +112,10 @@ class Table {
     this.selectedRow = td.parentNode;
 
     this.selectedRow.classList.add("active");
-    if (this.elementNumber !== "undefined") {
-      this.selectedRow.innerHTML = this.createInputsRow(this.elementNumber);
-    } else {
-      this.selectedRow.innerHTML = this.createInputsRow(this.rowAttribute);
-    }
+
+    const elementNumber = this.elementNumber || this.rowAttribute;
+
+    this.selectedRow.innerHTML = this.createInputsRow(elementNumber);
   }
 
   createInputsRow(rowAttribute) {
@@ -166,11 +203,14 @@ class Table {
       </form>
       ${buttonsForRender}`;
 
+    // TODO: вынести в конструктор?
     this.element
       .getElementsByClassName("formToWrapTable")[0]
       .addEventListener("submit", (e) => {
         e.preventDefault();
         e.stopPropagation();
+
+        console.log("submit!");
 
         this.onClickSaveInFormEditRow();
       });
@@ -231,13 +271,14 @@ class Table {
     this.elementNumber = event.target
       .closest("td")
       .getAttribute("data-element_number");
+
+    // FIXME: иправить!!!
     if (this.elementNumber !== "undefined") {
       this.tempNumbersOfElementsToDelete.push(Number(this.elementNumber));
       this.sortData.splice(this.rowAttribute, 1);
       this.renderSortedData(this.sortData);
     } else {
       this.data.splice(this.rowAttribute, 1);
-      this.renderJSON(this.data);
     }
     this.isFormToEditDataOpen = false;
     this.element.classList.remove("editModeOn");
