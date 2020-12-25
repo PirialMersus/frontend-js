@@ -32,6 +32,7 @@ class Table {
   constructor(options) {
     this.element = options.newTable;
     this.element.onclick = this.findClick.bind(this);
+
     this.data = options.data;
     this.jsonKeys = Object.keys(options.data[0]);
     this.renderJSON(options.data);
@@ -40,32 +41,65 @@ class Table {
     this.rowAttribute = "";
     this.sortData = [];
     this.tempNumbersOfElementsToDelete = [];
+    this.table = this.element.querySelector("table");
+    this.tableBody = this.element.querySelector("tbody");
+
+    this.element
+      .getElementsByClassName("formToWrapTable")[0]
+      .addEventListener("submit", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        console.log("submit");
+
+        this.onClickSaveInFormEditRow();
+      });
+
+    this.element
+      .getElementsByClassName("formToWrapTable")[0]
+      .addEventListener("reset", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        console.log("reset");
+
+        this.onClickResetInFormEditRow();
+      });
   }
 
   findClick(event, el) {
     let action;
 
-    if (el) {
-      action = el.dataset.action;
-    } else {
-      action = event.target.dataset.action;
-    }
+    // if (el) {
+    //   action = el.dataset.action;
+    // } else {
+    //   action = event.target.dataset.action;
+    // }
 
-    if (action) {
-      this[action](event);
-    } /* else {
-      // find paren node
-      findClick(null, parent_node);
+    // if (action) {
+    //   this[action](event);
+    // }
+
+    /* else {
+      // find parent node
+      findClick(null, event.target.parentNode);
     } */
+    if (event.target.closest("[data-action]")) {
+      action = event.target.closest("[data-action]").dataset.action;
+      this[action](event);
+    }
+    // debugger;
   }
 
   ///////////////////// Edit and saving row data //////////////////////
 
   onClickSaveInFormEditRow() {
     const inputs = this.element.getElementsByClassName("inputFormEdit");
-    if (this.elementNumber !== "undefined") {
+    if (this.elementNumber !== "notSorted") {
       for (let i = 0; i < this.jsonKeys.length; i++) {
-        this.data[this.elementNumber][this.jsonKeys[i]] = inputs[i].value;
+        this.data[Number(this.elementNumber)][this.jsonKeys[i]] =
+          inputs[i].value;
+
         this.sortData[this.rowAttribute][this.jsonKeys[i]] = inputs[i].value;
       }
       this.renderSortedData(this.sortData);
@@ -87,7 +121,7 @@ class Table {
    */
   onClickResetInFormEditRow(e) {
     e.preventDefault();
-    if (this.elementNumber !== "undefined") {
+    if (this.elementNumber !== "notSorted") {
       this.renderSortedData(this.sortData);
     } else {
       this.renderJSON(this.data);
@@ -104,16 +138,20 @@ class Table {
     }
     this.element.classList.add("editModeOn");
     this.isFormToEditDataOpen = true;
+    let elementNumber;
 
     const td = event.target.closest("td");
     this.rowAttribute = td.getAttribute("data-row");
-    this.elementNumber = td.getAttribute("data-element_number");
+    this.elementNumber = td.getAttribute("data-elementnumber");
 
     this.selectedRow = td.parentNode;
 
     this.selectedRow.classList.add("active");
-
-    const elementNumber = this.elementNumber || this.rowAttribute;
+    if (this.elementNumber === "notSorted") {
+      elementNumber = Number(this.rowAttribute);
+    } else {
+      elementNumber = Number(this.elementNumber);
+    }
 
     this.selectedRow.innerHTML = this.createInputsRow(elementNumber);
   }
@@ -147,7 +185,7 @@ class Table {
   ///////////////////// Render Data to Dom //////////////////////
 
   renderJSON(data) {
-    this.elementNumber = undefined;
+    this.elementNumber = "notSorted";
 
     let tableHeader = "";
     let tableRows = "";
@@ -171,7 +209,7 @@ class Table {
     for (let j = 0; j < this.jsonKeys.length; j++) {
       tableHeader += `<th>${this.jsonKeys[j]}
       <br>
-        <button class="sortIconBtn" data-tooltip="Sort">
+        <button class="sortIconBtn" type="button" data-tooltip="Sort">
           <i
             data-action="sortAllTable"
             data-col="${this.jsonKeys[j]}"
@@ -203,27 +241,6 @@ class Table {
       </form>
       ${buttonsForRender}`;
 
-    // TODO: вынести в конструктор?
-    this.element
-      .getElementsByClassName("formToWrapTable")[0]
-      .addEventListener("submit", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        console.log("submit!");
-
-        this.onClickSaveInFormEditRow();
-      });
-
-    this.element
-      .getElementsByClassName("formToWrapTable")[0]
-      .addEventListener("reset", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        this.onClickResetInFormEditRow();
-      });
-
     this.inputs = this.element.querySelectorAll("input");
     this.inputs.forEach((element) => {
       element.addEventListener("blur", () => {
@@ -236,7 +253,7 @@ class Table {
     });
   }
 
-  /////////////////////Deleting the row //////////////////////
+  /////////////////////Creating the row //////////////////////
 
   createRoW(numberOfRow, data) {
     this.templine = "";
@@ -245,7 +262,11 @@ class Table {
         this.templine += `
       <td class="lastTd"
         data-row="${numberOfRow}"
-        data-element_number="${data[numberOfRow].elementNumber}"}">
+        data-elementnumber="${
+          data[numberOfRow].elementNumber
+            ? data[numberOfRow].elementNumber
+            : "notSorted"
+        }">
           ${data[numberOfRow][this.jsonKeys[j]]}
           <div class="wrapForEditAndDelButtons">
             <button type="button" data-action="showInputsRow" class="pen editCancelButtonsGeneral"></button>
@@ -256,7 +277,11 @@ class Table {
         this.templine += `
         <td
           data-row="${numberOfRow}"
-          data-elementNumber="${data[numberOfRow].elementNumber}">
+          data-elementNumber="${
+            data[numberOfRow].elementNumber
+              ? data[numberOfRow].elementNumber
+              : "notSorted"
+          }">
           ${data[numberOfRow][this.jsonKeys[j]]}
         </td>`;
       }
@@ -270,15 +295,16 @@ class Table {
     this.rowAttribute = event.target.closest("td").getAttribute("data-row");
     this.elementNumber = event.target
       .closest("td")
-      .getAttribute("data-element_number");
+      .getAttribute("data-elementnumber");
 
     // FIXME: иправить!!!
-    if (this.elementNumber !== "undefined") {
+    if (this.elementNumber !== "notSorted") {
       this.tempNumbersOfElementsToDelete.push(Number(this.elementNumber));
       this.sortData.splice(this.rowAttribute, 1);
       this.renderSortedData(this.sortData);
     } else {
       this.data.splice(this.rowAttribute, 1);
+      this.renderSortedData(this.data);
     }
     this.isFormToEditDataOpen = false;
     this.element.classList.remove("editModeOn");
@@ -294,12 +320,12 @@ class Table {
       for (let i = 0; i < this.jsonKeys.length; i++) {
         this.data[dataLength - 1][this.jsonKeys[i]] = "...click edit button...";
       }
-      this.renderJSON(this.data);
+      this.renderSortedData(this.data);
     } else alert("download file first");
   }
 
   renderSortedData(data) {
-    const tableBody = this.element.querySelector("tbody");
+    const tableBody = this.tableBody;
 
     while (tableBody.children.length > 1) {
       tableBody.removeChild(tableBody.lastChild);
@@ -312,16 +338,16 @@ class Table {
   }
 
   sortTableByEnteringSymbols(e) {
+    this.deletingItemsFromData();
     const colAttribute = e.target.closest("input").getAttribute("data-col");
     let inputValue = e.target.value;
-
     this.sortData = this.data
       .map((e) => Object.assign({}, e))
       .filter((element, index) => {
         if (
-          element[colAttribute]
+          String(element[colAttribute])
             .toLowerCase()
-            .startsWith(inputValue.toLowerCase())
+            .includes(inputValue.toLowerCase())
         ) {
           element.elementNumber = index;
           return element;
@@ -345,14 +371,20 @@ class Table {
 
   sortAllTable(event) {
     this.deletingItemsFromData();
-    this.elementNumber = undefined;
+    this.elementNumber = "notSorted";
 
     const iElement = event.target.closest("i");
     const colAttribute = iElement.getAttribute("data-col");
+    let wasSortDataChangedByThisMethod = false;
+
+    if (!this.sortData.length) {
+      this.sortData = this.data.map((e) => Object.assign({}, e));
+      wasSortDataChangedByThisMethod = true;
+    }
 
     let typeOfCol = "number";
-    for (let i = 0; i < this.data.length; i++) {
-      const elementForTypeChecking = this.data[i][colAttribute];
+    for (let i = 0; i < this.sortData.length; i++) {
+      const elementForTypeChecking = this.sortData[i][colAttribute];
       if (isNaN(elementForTypeChecking)) {
         typeOfCol = "string";
       }
@@ -360,31 +392,31 @@ class Table {
 
     if (!iElement.classList.contains("rotated")) {
       if (typeOfCol === "number") {
-        this.data.sort(function (a, b) {
+        this.sortData.sort(function (a, b) {
           return Number(a[colAttribute]) - Number(b[colAttribute]);
         });
       } else {
-        this.data.sort(function (a, b) {
-          let nA = a[colAttribute];
-          let nB = b[colAttribute];
+        this.sortData.sort(function (a, b) {
+          let nA = String(a[colAttribute]);
+          let nB = String(b[colAttribute]);
           if (nA < nB) return -1;
           else if (nA > nB) return 1;
           return 0;
         });
       }
       ////////////////////
-      this.renderSortedData(this.data);
+      this.renderSortedData(this.sortData);
       /////////////////
       this.element
         .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
         .classList.add("rotated");
     } else {
       if (typeOfCol === "number") {
-        this.data.sort(function (a, b) {
+        this.sortData.sort(function (a, b) {
           return Number(b[colAttribute]) - Number(a[colAttribute]);
         });
       } else {
-        this.data.sort(function (a, b) {
+        this.sortData.sort(function (a, b) {
           let nA = a[colAttribute];
           let nB = b[colAttribute];
           if (nA > nB) return -1;
@@ -393,13 +425,19 @@ class Table {
         });
       }
 
-      this.renderSortedData(this.data);
-      // this.sortData = this.data;
+      this.renderSortedData(this.sortData);
 
       this.element
         .querySelectorAll(`[data-col="${colAttribute}"]`)[0]
         .classList.remove("rotated");
     }
+
+    if (wasSortDataChangedByThisMethod) {
+      this.sortData.length = 0;
+    }
+
+    console.log(this.data);
+    console.log(this.sortData);
   }
 
   saveAsJSON() {
@@ -416,5 +454,69 @@ class Table {
     } else alert("Сначала загрузите таблицу");
   }
 
-  ///////////////////// reset //////////////////////
+  ///////////////////// autoheight //////////////////////
+  drawinAnInfiniteList() {
+    //CHANGE THESE IF YOU WANT
+    let hideScrollBar = true;
+    const table = this.table;
+    let numberOfItems = this.data.length;
+    //
+
+    let view = null;
+
+    //get the height of a single item
+    const itemHeight = (() => {
+      //generate a fake item
+      const tempRow = this.createRoW(0, this.data);
+      this.tableBody.appendChild(tempRow);
+
+      //get its height and remove it
+      const output = tempRow.offsetHeight;
+      this.tableBody.removeChild(tempRow);
+      return output;
+    })();
+
+    //displays a suitable number of items
+    function refreshWindow() {
+      //remove old view
+      if (view !== null) this.table.removeChild(view);
+      //create new view
+      view = this.table.appendChild(document.createElement("div"));
+
+      let firstItem = Math.floor(table.scrollTop / itemHeight);
+      let lastItem = firstItem + Math.ceil(table.offsetHeight / itemHeight) + 1;
+      if (lastItem + 1 >= items.length) lastItem = items.length - 1;
+
+      //position view in users face
+      view.id = "view";
+      view.style.top = firstItem * itemHeight + "px";
+
+      let div;
+      //add the items
+      for (let index = firstItem; index <= lastItem; ++index) {
+        div = document.createElement("div");
+        div.innerHTML = items[index];
+        div.className = "listItem";
+        view.appendChild(div);
+      }
+      console.log("viewing items " + firstItem + " to " + lastItem);
+    }
+
+    refreshWindow();
+
+    document.getElementById("heightForcer").style.height =
+      items.length * itemHeight + "px";
+    if (hideScrollBar) {
+      //work around for non-chrome browsers, hides the scrollbar
+      table.style.width = table.offsetWidth * 2 - view.offsetWidth + "px";
+    }
+
+    function delayingHandler() {
+      //wait for the scroll to finish
+      setTimeout(refreshWindow, 10);
+    }
+    if (table.addEventListener)
+      table.addEventListener("scroll", delayingHandler, false);
+    else table.attachEvent("onscroll", delayingHandler);
+  }
 }

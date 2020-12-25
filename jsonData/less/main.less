@@ -148,13 +148,12 @@ p {
         }
 
         .lastTd {
-          display: flex;
-          justify-content: space-between;
-          height: 100%;
           position: relative;
 
           .wrapForEditAndDelButtons {
             position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
             right: 5px;
             display: flex;
 
@@ -190,7 +189,8 @@ p {
           box-sizing: border-box;
 
           input {
-            padding: 6px;
+            // font-size: 14px;
+            padding: 7px;
             width: 100%;
             box-sizing: border-box;
           }

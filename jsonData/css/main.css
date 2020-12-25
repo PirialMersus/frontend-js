@@ -133,13 +133,12 @@ p {
   text-align: center;
 }
 .wrapper .tableWrapper .dataTable tr .lastTd {
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
   position: relative;
 }
 .wrapper .tableWrapper .dataTable tr .lastTd .wrapForEditAndDelButtons {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   right: 5px;
   display: flex;
 }
@@ -170,7 +169,7 @@ p {
   box-sizing: border-box;
 }
 .wrapper .tableWrapper .dataTable tr td input {
-  padding: 6px;
+  padding: 7px;
   width: 100%;
   box-sizing: border-box;
 }

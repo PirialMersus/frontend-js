@@ -36,6 +36,8 @@ var Table =
 /*#__PURE__*/
 function () {
   function Table(options) {
+    var _this = this;
+
     _classCallCheck(this, Table);
 
     this.element = options.newTable;
@@ -48,26 +50,45 @@ function () {
     this.rowAttribute = "";
     this.sortData = [];
     this.tempNumbersOfElementsToDelete = [];
+    this.table = this.element.querySelector("table");
+    this.tableBody = this.element.querySelector("tbody");
+    this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("submit", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log("submit");
+
+      _this.onClickSaveInFormEditRow();
+    });
+    this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("reset", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log("reset");
+
+      _this.onClickResetInFormEditRow();
+    });
   }
 
   _createClass(Table, [{
     key: "findClick",
     value: function findClick(event, el) {
-      var action;
+      var action; // if (el) {
+      //   action = el.dataset.action;
+      // } else {
+      //   action = event.target.dataset.action;
+      // }
+      // if (action) {
+      //   this[action](event);
+      // }
 
-      if (el) {
-        action = el.dataset.action;
-      } else {
-        action = event.target.dataset.action;
-      }
-
-      if (action) {
-        this[action](event);
-      }
       /* else {
-      // find paren node
-      findClick(null, parent_node);
+        // find parent node
+        findClick(null, event.target.parentNode);
       } */
+
+      if (event.target.closest("[data-action]")) {
+        action = event.target.closest("[data-action]").dataset.action;
+        this[action](event);
+      } // debugger;
 
     } ///////////////////// Edit and saving row data //////////////////////
 
@@ -76,9 +97,9 @@ function () {
     value: function onClickSaveInFormEditRow() {
       var inputs = this.element.getElementsByClassName("inputFormEdit");
 
-      if (this.elementNumber !== "undefined") {
+      if (this.elementNumber !== "notSorted") {
         for (var i = 0; i < this.jsonKeys.length; i++) {
-          this.data[this.elementNumber][this.jsonKeys[i]] = inputs[i].value;
+          this.data[Number(this.elementNumber)][this.jsonKeys[i]] = inputs[i].value;
           this.sortData[this.rowAttribute][this.jsonKeys[i]] = inputs[i].value;
         }
 
@@ -105,7 +126,7 @@ function () {
     value: function onClickResetInFormEditRow(e) {
       e.preventDefault();
 
-      if (this.elementNumber !== "undefined") {
+      if (this.elementNumber !== "notSorted") {
         this.renderSortedData(this.sortData);
       } else {
         this.renderJSON(this.data);
@@ -124,12 +145,19 @@ function () {
 
       this.element.classList.add("editModeOn");
       this.isFormToEditDataOpen = true;
+      var elementNumber;
       var td = event.target.closest("td");
       this.rowAttribute = td.getAttribute("data-row");
-      this.elementNumber = td.getAttribute("data-element_number");
+      this.elementNumber = td.getAttribute("data-elementnumber");
       this.selectedRow = td.parentNode;
       this.selectedRow.classList.add("active");
-      var elementNumber = this.elementNumber || this.rowAttribute;
+
+      if (this.elementNumber === "notSorted") {
+        elementNumber = Number(this.rowAttribute);
+      } else {
+        elementNumber = Number(this.elementNumber);
+      }
+
       this.selectedRow.innerHTML = this.createInputsRow(elementNumber);
     }
   }, {
@@ -151,44 +179,30 @@ function () {
   }, {
     key: "renderJSON",
     value: function renderJSON(data) {
-      var _this = this;
+      var _this2 = this;
 
-      this.elementNumber = undefined;
+      this.elementNumber = "notSorted";
       var tableHeader = "";
       var tableRows = "";
       var buttonsForRender = "\n      <button class=\"classForEditingButtons2\" data-action=\"addOneRow\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        Add a new row\n      </button>\n      <button class=\"classForEditingButtons2\" data-action=\"saveAsJSON\">\n        <span></span>\n        <span></span>\n        <span></span>\n        <span></span>\n        save as JSON\n      </button>\n    ";
 
       for (var j = 0; j < this.jsonKeys.length; j++) {
-        tableHeader += "<th>".concat(this.jsonKeys[j], "\n      <br>\n        <button class=\"sortIconBtn\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sortAllTable\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </button>\n        <input\n        data-col=\"").concat(this.jsonKeys[j], "\"\n        placeholder=\"Enter some text\"\n        />\n      </th>");
+        tableHeader += "<th>".concat(this.jsonKeys[j], "\n      <br>\n        <button class=\"sortIconBtn\" type=\"button\" data-tooltip=\"Sort\">\n          <i\n            data-action=\"sortAllTable\"\n            data-col=\"").concat(this.jsonKeys[j], "\"\n            class=\"fas fa-caret-square-down\">\n          </i>\n        </button>\n        <input\n        data-col=\"").concat(this.jsonKeys[j], "\"\n        placeholder=\"Enter some text\"\n        />\n      </th>");
       }
 
       for (var i = 0; i < data.length; i++) {
         tableRows += this.createRoW(i, data);
       }
 
-      this.element.innerHTML = "\n      <form class=\"formToWrapTable\" action=\"#\">\n        <table\n                border=\"1\"\n                class=\"dataTable\">\n          <caption>\n            \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n          </caption>\n          <tr>".concat(tableHeader, "</tr>\n           ").concat(tableRows, "\n          </table>\n      </form>\n      ").concat(buttonsForRender); // TODO: вынести в конструктор?
-
-      this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("submit", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("submit!");
-
-        _this.onClickSaveInFormEditRow();
-      });
-      this.element.getElementsByClassName("formToWrapTable")[0].addEventListener("reset", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        _this.onClickResetInFormEditRow();
-      });
+      this.element.innerHTML = "\n      <form class=\"formToWrapTable\" action=\"#\">\n        <table\n                border=\"1\"\n                class=\"dataTable\">\n          <caption>\n            \u0414\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 \u0444\u0430\u0439\u043B\u0430\n          </caption>\n          <tr>".concat(tableHeader, "</tr>\n           ").concat(tableRows, "\n          </table>\n      </form>\n      ").concat(buttonsForRender);
       this.inputs = this.element.querySelectorAll("input");
       this.inputs.forEach(function (element) {
         element.addEventListener("blur", function () {
           element.value = "";
         });
-        element.addEventListener("input", _this.sortTableByEnteringSymbols.bind(_this));
+        element.addEventListener("input", _this2.sortTableByEnteringSymbols.bind(_this2));
       });
-    } /////////////////////Deleting the row //////////////////////
+    } /////////////////////Creating the row //////////////////////
 
   }, {
     key: "createRoW",
@@ -197,9 +211,9 @@ function () {
 
       for (var j = 0; j < this.jsonKeys.length; j++) {
         if (j === this.jsonKeys.length - 1) {
-          this.templine += "\n      <td class=\"lastTd\"\n        data-row=\"".concat(numberOfRow, "\"\n        data-element_number=\"").concat(data[numberOfRow].elementNumber, "\"}\">\n          ").concat(data[numberOfRow][this.jsonKeys[j]], "\n          <div class=\"wrapForEditAndDelButtons\">\n            <button type=\"button\" data-action=\"showInputsRow\" class=\"pen editCancelButtonsGeneral\"></button>\n            <button type=\"button\" data-action=\"deleteRow\" class=\"deleteRowButton editCancelButtonsGeneral\"></button>\n          </div>\n      </td>");
+          this.templine += "\n      <td class=\"lastTd\"\n        data-row=\"".concat(numberOfRow, "\"\n        data-elementnumber=\"").concat(data[numberOfRow].elementNumber ? data[numberOfRow].elementNumber : "notSorted", "\">\n          ").concat(data[numberOfRow][this.jsonKeys[j]], "\n          <div class=\"wrapForEditAndDelButtons\">\n            <button type=\"button\" data-action=\"showInputsRow\" class=\"pen editCancelButtonsGeneral\"></button>\n            <button type=\"button\" data-action=\"deleteRow\" class=\"deleteRowButton editCancelButtonsGeneral\"></button>\n          </div>\n      </td>");
         } else {
-          this.templine += "\n        <td\n          data-row=\"".concat(numberOfRow, "\"\n          data-elementNumber=\"").concat(data[numberOfRow].elementNumber, "\">\n          ").concat(data[numberOfRow][this.jsonKeys[j]], "\n        </td>");
+          this.templine += "\n        <td\n          data-row=\"".concat(numberOfRow, "\"\n          data-elementNumber=\"").concat(data[numberOfRow].elementNumber ? data[numberOfRow].elementNumber : "notSorted", "\">\n          ").concat(data[numberOfRow][this.jsonKeys[j]], "\n        </td>");
         }
       }
 
@@ -210,14 +224,15 @@ function () {
     key: "deleteRow",
     value: function deleteRow(event) {
       this.rowAttribute = event.target.closest("td").getAttribute("data-row");
-      this.elementNumber = event.target.closest("td").getAttribute("data-element_number"); // FIXME: иправить!!!
+      this.elementNumber = event.target.closest("td").getAttribute("data-elementnumber"); // FIXME: иправить!!!
 
-      if (this.elementNumber !== "undefined") {
+      if (this.elementNumber !== "notSorted") {
         this.tempNumbersOfElementsToDelete.push(Number(this.elementNumber));
         this.sortData.splice(this.rowAttribute, 1);
         this.renderSortedData(this.sortData);
       } else {
         this.data.splice(this.rowAttribute, 1);
+        this.renderSortedData(this.data);
       }
 
       this.isFormToEditDataOpen = false;
@@ -237,13 +252,13 @@ function () {
           this.data[dataLength - 1][this.jsonKeys[i]] = "...click edit button...";
         }
 
-        this.renderJSON(this.data);
+        this.renderSortedData(this.data);
       } else alert("download file first");
     }
   }, {
     key: "renderSortedData",
     value: function renderSortedData(data) {
-      var tableBody = this.element.querySelector("tbody");
+      var tableBody = this.tableBody;
 
       while (tableBody.children.length > 1) {
         tableBody.removeChild(tableBody.lastChild);
@@ -260,12 +275,13 @@ function () {
   }, {
     key: "sortTableByEnteringSymbols",
     value: function sortTableByEnteringSymbols(e) {
+      this.deletingItemsFromData();
       var colAttribute = e.target.closest("input").getAttribute("data-col");
       var inputValue = e.target.value;
       this.sortData = this.data.map(function (e) {
         return Object.assign({}, e);
       }).filter(function (element, index) {
-        if (element[colAttribute].toLowerCase().startsWith(inputValue.toLowerCase())) {
+        if (String(element[colAttribute]).toLowerCase().includes(inputValue.toLowerCase())) {
           element.elementNumber = index;
           return element;
         }
@@ -291,13 +307,22 @@ function () {
     key: "sortAllTable",
     value: function sortAllTable(event) {
       this.deletingItemsFromData();
-      this.elementNumber = undefined;
+      this.elementNumber = "notSorted";
       var iElement = event.target.closest("i");
       var colAttribute = iElement.getAttribute("data-col");
+      var wasSortDataChangedByThisMethod = false;
+
+      if (!this.sortData.length) {
+        this.sortData = this.data.map(function (e) {
+          return Object.assign({}, e);
+        });
+        wasSortDataChangedByThisMethod = true;
+      }
+
       var typeOfCol = "number";
 
-      for (var i = 0; i < this.data.length; i++) {
-        var elementForTypeChecking = this.data[i][colAttribute];
+      for (var i = 0; i < this.sortData.length; i++) {
+        var elementForTypeChecking = this.sortData[i][colAttribute];
 
         if (isNaN(elementForTypeChecking)) {
           typeOfCol = "string";
@@ -306,29 +331,29 @@ function () {
 
       if (!iElement.classList.contains("rotated")) {
         if (typeOfCol === "number") {
-          this.data.sort(function (a, b) {
+          this.sortData.sort(function (a, b) {
             return Number(a[colAttribute]) - Number(b[colAttribute]);
           });
         } else {
-          this.data.sort(function (a, b) {
-            var nA = a[colAttribute];
-            var nB = b[colAttribute];
+          this.sortData.sort(function (a, b) {
+            var nA = String(a[colAttribute]);
+            var nB = String(b[colAttribute]);
             if (nA < nB) return -1;else if (nA > nB) return 1;
             return 0;
           });
         } ////////////////////
 
 
-        this.renderSortedData(this.data); /////////////////
+        this.renderSortedData(this.sortData); /////////////////
 
         this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.add("rotated");
       } else {
         if (typeOfCol === "number") {
-          this.data.sort(function (a, b) {
+          this.sortData.sort(function (a, b) {
             return Number(b[colAttribute]) - Number(a[colAttribute]);
           });
         } else {
-          this.data.sort(function (a, b) {
+          this.sortData.sort(function (a, b) {
             var nA = a[colAttribute];
             var nB = b[colAttribute];
             if (nA > nB) return -1;else if (nA < nB) return 1;
@@ -336,10 +361,16 @@ function () {
           });
         }
 
-        this.renderSortedData(this.data); // this.sortData = this.data;
-
+        this.renderSortedData(this.sortData);
         this.element.querySelectorAll("[data-col=\"".concat(colAttribute, "\"]"))[0].classList.remove("rotated");
       }
+
+      if (wasSortDataChangedByThisMethod) {
+        this.sortData.length = 0;
+      }
+
+      console.log(this.data);
+      console.log(this.sortData);
     }
   }, {
     key: "saveAsJSON",
@@ -354,8 +385,73 @@ function () {
         a.download = "filename.json";
         a.click();
       } else alert("Сначала загрузите таблицу");
-    } ///////////////////// reset //////////////////////
+    } ///////////////////// autoheight //////////////////////
 
+  }, {
+    key: "drawinAnInfiniteList",
+    value: function drawinAnInfiniteList() {
+      var _this3 = this;
+
+      //CHANGE THESE IF YOU WANT
+      var hideScrollBar = true;
+      var table = this.table;
+      var numberOfItems = this.data.length; //
+
+      var view = null; //get the height of a single item
+
+      var itemHeight = function () {
+        //generate a fake item
+        var tempRow = _this3.createRoW(0, _this3.data);
+
+        _this3.tableBody.appendChild(tempRow); //get its height and remove it
+
+
+        var output = tempRow.offsetHeight;
+
+        _this3.tableBody.removeChild(tempRow);
+
+        return output;
+      }(); //displays a suitable number of items
+
+
+      function refreshWindow() {
+        //remove old view
+        if (view !== null) this.table.removeChild(view); //create new view
+
+        view = this.table.appendChild(document.createElement("div"));
+        var firstItem = Math.floor(table.scrollTop / itemHeight);
+        var lastItem = firstItem + Math.ceil(table.offsetHeight / itemHeight) + 1;
+        if (lastItem + 1 >= items.length) lastItem = items.length - 1; //position view in users face
+
+        view.id = "view";
+        view.style.top = firstItem * itemHeight + "px";
+        var div; //add the items
+
+        for (var index = firstItem; index <= lastItem; ++index) {
+          div = document.createElement("div");
+          div.innerHTML = items[index];
+          div.className = "listItem";
+          view.appendChild(div);
+        }
+
+        console.log("viewing items " + firstItem + " to " + lastItem);
+      }
+
+      refreshWindow();
+      document.getElementById("heightForcer").style.height = items.length * itemHeight + "px";
+
+      if (hideScrollBar) {
+        //work around for non-chrome browsers, hides the scrollbar
+        table.style.width = table.offsetWidth * 2 - view.offsetWidth + "px";
+      }
+
+      function delayingHandler() {
+        //wait for the scroll to finish
+        setTimeout(refreshWindow, 10);
+      }
+
+      if (table.addEventListener) table.addEventListener("scroll", delayingHandler, false);else table.attachEvent("onscroll", delayingHandler);
+    }
   }]);
 
   return Table;
